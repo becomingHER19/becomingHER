@@ -65,17 +65,17 @@
 <body>
   <h1>Enter HER Space 💌</h1>
   <form id="herForm">
-    <label for="name">What's your name, dreamer?</label>
+    <label for="name">Your name</label>
     <input type="text" id="name" required />
 
     <label for="ambition">Who are you becoming?</label>
     <input type="text" id="ambition" required />
 
-    <label for="passion">What sets your soul on fire?</label>
-    <textarea id="passion" rows="3" required></textarea>
+    <label for="reason">Why do you want to grow?</label>
+    <textarea id="reason" rows="3" required></textarea>
 
-    <label for="email">Wanna stay in touch? (Optional)</label>
-    <input type="email" id="email" />
+    <label for="email">Email ID</label>
+    <input type="email" id="email" required />
 
     <button type="submit">Let me in</button>
     <div class="message" id="message"></div>
@@ -86,9 +86,9 @@
       e.preventDefault();
       const name = document.getElementById("name").value;
       const ambition = document.getElementById("ambition").value;
-      const passion = document.getElementById("passion").value;
+      const reason = document.getElementById("reason").value;
       document.getElementById("message").innerHTML = 
-        `Welcome, ${name}. You're becoming ${ambition}, powered by your fire for ${passion}. HER era just got stronger. 💖`;
+        `Welcome, ${name}. You’re becoming ${ambition} — because you believe in ${reason.toLowerCase()}. Your HER era starts now. 💖`;
     });
   </script>
 </body>
