@@ -25,7 +25,7 @@
       flex-wrap: wrap;
       justify-content: center;
       margin: 50px auto;
-      max-width: 1100px;
+      max-width: 1200px;
     }
 
     .mood {
@@ -110,33 +110,45 @@
   <h1>How are you feeling today, bbg? 💖</h1>
 
   <div class="mood-container">
-    <div class="mood" onclick="selectMood('Joy')" style="background-color: #fff89a;">
-      <img src="https://i.imgur.com/sQOTyyx.png" alt="Joy">
+    <div class="mood" onclick="selectMood('Joy')">
+      <img src="https://i.ibb.co/NKGqFfW/joy.png" alt="Joy">
       <div class="mood-label">Joy</div>
     </div>
-    <div class="mood" onclick="selectMood('Sadness')" style="background-color: #a8c6ff;">
-      <img src="https://i.imgur.com/G3QtFKA.png" alt="Sadness">
+    <div class="mood" onclick="selectMood('Sadness')">
+      <img src="https://i.ibb.co/gdRw3QW/sadness.png" alt="Sadness">
       <div class="mood-label">Sadness</div>
     </div>
-    <div class="mood" onclick="selectMood('Anger')" style="background-color: #ff9999;">
-      <img src="https://i.imgur.com/pMDUuRJ.png" alt="Anger">
+    <div class="mood" onclick="selectMood('Anger')">
+      <img src="https://i.ibb.co/Dk5vC7x/anger.png" alt="Anger">
       <div class="mood-label">Anger</div>
     </div>
-    <div class="mood" onclick="selectMood('Fear')" style="background-color: #dabaff;">
-      <img src="https://i.imgur.com/3PZ3H96.png" alt="Fear">
+    <div class="mood" onclick="selectMood('Fear')">
+      <img src="https://i.ibb.co/k4fyWLg/fear.png" alt="Fear">
       <div class="mood-label">Fear</div>
     </div>
-    <div class="mood" onclick="selectMood('Disgust')" style="background-color: #c4f7b2;">
-      <img src="https://i.imgur.com/y2MCTYB.png" alt="Disgust">
+    <div class="mood" onclick="selectMood('Disgust')">
+      <img src="https://i.ibb.co/MNzkvjD/disgust.png" alt="Disgust">
       <div class="mood-label">Disgust</div>
     </div>
-    <div class="mood" onclick="selectMood('Anxiety')" style="background-color: #f6d1ff;">
-      <img src="https://i.imgur.com/zCgBNL6.png" alt="Anxiety">
+    <div class="mood" onclick="selectMood('Anxiety')">
+      <img src="https://i.ibb.co/J3xk3pM/anxiety.png" alt="Anxiety">
       <div class="mood-label">Anxiety</div>
     </div>
-    <div class="mood" onclick="selectMood('Embarrassment')" style="background-color: #ffe4d6;">
-      <img src="https://i.imgur.com/9y2kxmr.png" alt="Embarrassment">
+    <div class="mood" onclick="selectMood('Embarrassment')">
+      <img src="https://i.ibb.co/WDzMQWy/embarrassment.png" alt="Embarrassment">
       <div class="mood-label">Embarrassment</div>
+    </div>
+    <div class="mood" onclick="selectMood('Laziness')">
+      <img src="https://i.ibb.co/98t4Ldj/laziness.png" alt="Laziness">
+      <div class="mood-label">Laziness</div>
+    </div>
+    <div class="mood" onclick="selectMood('Procrastination')">
+      <img src="https://i.ibb.co/x5RZdc4/procrastination.png" alt="Procrastination">
+      <div class="mood-label">Procrastination</div>
+    </div>
+    <div class="mood" onclick="selectMood('Nostalgia')">
+      <img src="https://i.ibb.co/0jPmPWG/nostalgia.png" alt="Nostalgia">
+      <div class="mood-label">Nostalgia</div>
     </div>
   </div>
 
@@ -178,7 +190,6 @@
       window.location.href = "memories.html";
     }
 
-    // 🩷 Flirty notification if mood not updated today
     window.onload = () => {
       const moods = JSON.parse(localStorage.getItem("moodEntries") || "[]");
       const today = new Date().toLocaleDateString();
