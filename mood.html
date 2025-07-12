@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HER Mood Tracker | Inside Out Edition</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #fff0f5, #ffe0ec);
+      font-family: 'Georgia', serif;
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 2.5rem;
+      color: #b13e76;
+    }
+
+    .mood-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 50px auto;
+      max-width: 1000px;
+    }
+
+    .mood {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 20px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .mood:hover {
+      transform: scale(1.1);
+    }
+
+    .mood img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.95;
+    }
+
+    .mood-label {
+      position: absolute;
+      bottom: 5px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      color: #333;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: #fff0f7;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    textarea {
+      width: 90%;
+      height: 120px;
+      margin-top: 15px;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #d94c7a;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>How are you feeling today, bbg? 💖</h1>
+
+  <div class="mood-container">
+    <div class="mood" onclick="selectMood('Joy')" style="background-color: #fff89a;">
+      <img src="joy.png" alt="Joy">
+      <div class="mood-label">Joy</div>
+    </div>
+    <div class="mood" onclick="selectMood('Sadness')" style="background-color: #a8c6ff;">
+      <img src="sadness.png" alt="Sadness">
+      <div class="mood-label">Sadness</div>
+    </div>
+    <div class="mood" onclick="selectMood('Anger')" style="background-color: #ff9999;">
+      <img src="anger.png" alt="Anger">
+      <div class="mood-label">Anger</div>
+    </div>
+    <div class="mood" onclick="selectMood('Fear')" style="background-color: #dabaff;">
+      <img src="fear.png" alt="Fear">
+      <div class="mood-label">Fear</div>
+    </div>
+    <div class="mood" onclick="selectMood('Disgust')" style="background-color: #c4f7b2;">
+      <img src="disgust.png" alt="Disgust">
+      <div class="mood-label">Disgust</div>
+    </div>
+  </div>
+
+  <div id="popup">
+    <div class="popup-content">
+      <h2 id="popupEmotion">Your Mood</h2>
+      <textarea id="moodNote" placeholder="Why are you feeling this way today?"></textarea>
+      <br>
+      <button onclick="saveMood()">Save Mood</button>
+    </div>
+  </div>
+
+  <script>
+    let selectedMood = "";
+
+    function selectMood(mood) {
+      selectedMood = mood;
+      document.getElementById("popupEmotion").textContent = `You're feeling ${mood}`;
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function saveMood() {
+      const note = document.getElementById("moodNote").value.trim();
+      if (!note) {
+        alert("Please add your mood note!");
+        return;
+      }
+
+      const entry = {
+        mood: selectedMood,
+        note: note,
+        date: new Date().toLocaleString()
+      };
+
+      const moods = JSON.parse(localStorage.getItem("moodEntries") || "[]");
+      moods.push(entry);
+      localStorage.setItem("moodEntries", JSON.stringify(moods));
+
+      window.location.href = "memories.html";
+    }
+
+    // 🩷 Flirty notification if mood not updated today
+    window.onload = () => {
+      const moods = JSON.parse(localStorage.getItem("moodEntries") || "[]");
+      const today = new Date().toLocaleDateString();
+      const found = moods.find(m => new Date(m.date).toLocaleDateString() === today);
+      if (!found) {
+        setTimeout(() => {
+          alert("bbg… your emotions need you 🫶 update your mood now 💅");
+        }, 2000);
+      }
+    }
+  </script>
+</body>
+</html>
