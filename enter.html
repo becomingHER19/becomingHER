@@ -89,6 +89,9 @@
       const reason = document.getElementById("reason").value;
       document.getElementById("message").innerHTML = 
         `Welcome, ${name}. You’re becoming ${ambition} — because you believe in ${reason.toLowerCase()}. Your HER era starts now. 💖`;
+      setTimeout(() => {
+  window.location.href = "dashboard.html";
+}, 2000); // waits 2 seconds before redirect
     });
   </script>
 </body>
