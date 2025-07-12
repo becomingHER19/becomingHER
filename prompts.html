@@ -2,96 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HER Journaling Prompts</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat&display=swap" rel="stylesheet">
+  <title>Choose a Prompt | becomingHER</title>
   <style>
     body {
-      margin: 0;
-      padding: 40px 20px;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(to right, #fdf0f3, #fff9f5);
+      font-family: 'Georgia', serif;
+      background-color: #fff0f5;
       color: #2a2a2a;
+      padding: 40px;
+      text-align: center;
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
-      text-align: center;
       font-size: 2.5rem;
-      margin-bottom: 20px;
       color: #b25c8d;
+      margin-bottom: 30px;
     }
 
-    .prompt-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .prompt-card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 18px;
-      border: 1px solid #f4dce2;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-      transition: transform 0.2s ease;
+    .prompt {
+      margin: 15px auto;
+      padding: 15px 25px;
+      border: 1px solid #e4c3d3;
+      border-radius: 15px;
+      background: white;
+      width: 70%;
       cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
 
-    .prompt-card:hover {
-      transform: scale(1.03);
-    }
-
-    a {
-      text-decoration: none;
-      color: #2a2a2a;
+    .prompt:hover {
+      background-color: #ffe4ec;
+      transform: scale(1.02);
     }
   </style>
 </head>
 <body>
 
-  <h1>✨ Choose a Prompt to Reflect</h1>
+  <h1>💌 Choose a journaling prompt</h1>
 
-  <div class="prompt-grid">
-    <a href="journal.html?prompt=What%20would%20your%20younger%20self%20be%20proud%20of%20today%3F">
-      <div class="prompt-card">What would your younger self be proud of today?</div>
-    </a>
-    <a href="journal.html?prompt=What%20parts%20of%20you%20need%20more%20love%3F">
-      <div class="prompt-card">What parts of you need more love?</div>
-    </a>
-    <a href="journal.html?prompt=What%27s%20one%20thing%20you%20need%20to%20hear%20right%20now%3F">
-      <div class="prompt-card">What's one thing you need to hear right now?</div>
-    </a>
-    <a href="journal.html?prompt=What%27s%20your%20favorite%20version%20of%20yourself%3F%20Describe%20her.">
-      <div class="prompt-card">What's your favorite version of yourself? Describe her.</div>
-    </a>
-    <a href="journal.html?prompt=What%20are%20you%20grateful%20for%20that%20you%20often%20overlook%3F">
-      <div class="prompt-card">What are you grateful for that you often overlook?</div>
-    </a>
-    <a href="journal.html?prompt=What%20are%20you%20healing%20from%20right%20now%3F">
-      <div class="prompt-card">What are you healing from right now?</div>
-    </a>
-    <a href="journal.html?prompt=What%20sets%20your%20soul%20on%20fire%3F">
-      <div class="prompt-card">What sets your soul on fire?</div>
-    </a>
-    <a href="journal.html?prompt=What%20are%20you%20avoiding%20that%20you%20know%20you%20need%20to%20face%3F">
-      <div class="prompt-card">What are you avoiding that you know you need to face?</div>
-    </a>
-    <a href="journal.html?prompt=How%20do%20you%20want%20to%20feel%20by%20the%20end%20of%20this%20month%3F">
-      <div class="prompt-card">How do you want to feel by the end of this month?</div>
-    </a>
-    <a href="journal.html?prompt=What%27s%20your%20greatest%20fear%20and%20what%27s%20beneath%20it%3F">
-      <div class="prompt-card">What's your greatest fear and what's beneath it?</div>
-    </a>
-    <a href="journal.html?prompt=What%27s%20a%20truth%20you%27re%20learning%20to%20accept%3F">
-      <div class="prompt-card">What's a truth you're learning to accept?</div>
-    </a>
-    <a href="journal.html?prompt=What%20would%20make%20you%20feel%20proud%20of%20yourself%20this%20week%3F">
-      <div class="prompt-card">What would make you feel proud of yourself this week?</div>
-    </a>
+  <div class="prompt" onclick="openPrompt(`What’s something you’ve always wanted to say but never did?`)">
+    What’s something you’ve always wanted to say but never did?
   </div>
+
+  <div class="prompt" onclick="openPrompt(`Who are you when no one is watching?`)">
+    Who are you when no one is watching?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`What do you need to hear right now?`)">
+    What do you need to hear right now?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`What parts of your younger self are you still healing?`)">
+    What parts of your younger self are you still healing?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`Describe your favorite version of yourself. Who is she?`)">
+    Describe your favorite version of yourself. Who is she?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`What are you avoiding that you know you need to face?`)">
+    What are you avoiding that you know you need to face?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`What would make you feel proud by the end of this week?`)">
+    What would make you feel proud by the end of this week?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`What sets your soul on fire — truly?`)">
+    What sets your soul on fire — truly?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`What would your younger self be proud of today?`)">
+    What would your younger self be proud of today?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`What truth are you learning to accept right now?`)">
+    What truth are you learning to accept right now?
+  </div>
+
+  <div class="prompt" onclick="openPrompt(`What does healing look like for you personally?`)">
+    What does healing look like for you personally?
+  </div>
+
+  <script>
+    function openPrompt(prompt) {
+      const encoded = encodeURIComponent(prompt);
+      window.location.href = `answer.html?question=${encoded}`;
+    }
+  </script>
 
 </body>
 </html>
