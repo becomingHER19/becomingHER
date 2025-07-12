@@ -3,22 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HER Mood Tracker | Inside Out Inspired</title>
+  <title>HER Mood Tracker | Inside Out Vibe</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top center, #d6e4f0, #a4b9e5, #6e80c5);
-      font-family: 'Georgia', serif;
+      background: radial-gradient(circle at center, #2e3a59, #121726);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
       text-align: center;
-      color: #333;
+      overflow-x: hidden;
     }
 
     h1 {
       margin-top: 40px;
-      font-size: 2.7rem;
-      color: #fff;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+      font-size: 2.8rem;
+      color: #ffffff;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .quote-box {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #cfcfcf;
+      font-style: italic;
     }
 
     .mood-container {
@@ -26,59 +37,51 @@
       flex-wrap: wrap;
       justify-content: center;
       margin: 60px auto;
-      max-width: 1200px;
+      max-width: 1100px;
+      gap: 30px;
     }
 
-    .mood {
-      width: 130px;
-      height: 130px;
+    .orb {
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      margin: 20px;
       position: relative;
-      cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2rem;
+      font-size: 1.1rem;
       font-weight: bold;
-      color: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 0 8px rgba(0,0,0,0.3);
     }
 
-    .mood:hover {
+    .orb:hover {
       transform: scale(1.08);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
     }
+
+    .joy { background: radial-gradient(circle, #fcea70, #f5c542); color: #000; box-shadow: 0 0 15px #f7d74c; }
+    .sadness { background: radial-gradient(circle, #78a8ff, #3c6dd5); box-shadow: 0 0 15px #5f8eff; }
+    .anger { background: radial-gradient(circle, #ff6464, #c02626); box-shadow: 0 0 15px #ff5252; }
+    .fear { background: radial-gradient(circle, #cbb3ff, #6e62c4); box-shadow: 0 0 15px #b799ff; }
+    .disgust { background: radial-gradient(circle, #9effa8, #5cc178); box-shadow: 0 0 15px #84ef96; }
+    .anxiety { background: radial-gradient(circle, #cccbe6, #5a5a7a); box-shadow: 0 0 15px #a9a9c9; }
+    .nostalgia { background: radial-gradient(circle, #ffd1dc, #f7a4b8); box-shadow: 0 0 15px #fbbccc; }
 
     .label {
       position: absolute;
-      bottom: -25px;
+      bottom: -28px;
+      font-size: 0.9rem;
+      color: #ddd;
       width: 100%;
-      color: white;
-      font-weight: 600;
-      text-shadow: 1px 1px 2px #00000050;
     }
-
-    /* Mood Colors */
-    .joy { background: radial-gradient(circle, #f9d976, #f39f54); }
-    .sadness { background: radial-gradient(circle, #7eb3ff, #4a6fa5); }
-    .anger { background: radial-gradient(circle, #ff6e6e, #c9182b); }
-    .fear { background: radial-gradient(circle, #a8a4f0, #5f5ba5); }
-    .disgust { background: radial-gradient(circle, #98e079, #4ca64c); }
-    .anxiety { background: radial-gradient(circle, #c1b3ff, #7e6acf); }
-    .embarrassment { background: radial-gradient(circle, #f9a8c0, #d16c92); }
-    .laziness { background: radial-gradient(circle, #dadada, #a1a1a1); }
-    .procrastination { background: radial-gradient(circle, #e2c5ff, #a881c7); }
-    .nostalgia { background: radial-gradient(circle, #ffd9c0, #f7a98e); }
 
     #popup {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.6);
       justify-content: center;
       align-items: center;
@@ -86,61 +89,85 @@
     }
 
     .popup-content {
-      background: #fff0f7;
-      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
       border-radius: 15px;
-      text-align: center;
+      padding: 30px;
       width: 90%;
       max-width: 500px;
+      color: #fff;
     }
 
     textarea {
-      width: 90%;
+      width: 100%;
       height: 120px;
-      margin-top: 15px;
       border-radius: 8px;
-      padding: 10px;
+      padding: 12px;
       font-size: 1rem;
-      border: 1px solid #ccc;
+      margin-top: 15px;
+      border: none;
       resize: none;
+      background-color: rgba(255,255,255,0.1);
+      color: #fff;
     }
 
     button {
       margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #d94c7a;
+      padding: 10px 22px;
+      background-color: #f5c542;
       border: none;
       border-radius: 6px;
-      color: white;
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 1rem;
+    }
+
+    .floating-bubble {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      animation: float 15s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 0.2; }
+      50% { transform: translateY(-80px) translateX(30px); opacity: 0.4; }
+      100% { transform: translateY(0) translateX(0); opacity: 0.2; }
     }
   </style>
 </head>
 <body>
-  <h1>Welcome Inside... What's your vibe today? 🌈</h1>
+  <h1>Inside HER Mind... Choose Your Mood 💭</h1>
+  <div class="quote-box" id="quote">✨ Every feeling has something to say ✨</div>
 
   <div class="mood-container">
-    <div class="mood joy" onclick="selectMood('Joy')">😊<div class="label">Joy</div></div>
-    <div class="mood sadness" onclick="selectMood('Sadness')">😢<div class="label">Sadness</div></div>
-    <div class="mood anger" onclick="selectMood('Anger')">🔥<div class="label">Anger</div></div>
-    <div class="mood fear" onclick="selectMood('Fear')">😨<div class="label">Fear</div></div>
-    <div class="mood disgust" onclick="selectMood('Disgust')">💅<div class="label">Disgust</div></div>
-    <div class="mood anxiety" onclick="selectMood('Anxiety')">🌫️<div class="label">Anxiety</div></div>
-    <div class="mood embarrassment" onclick="selectMood('Embarrassment')">🫣<div class="label">Embarrassment</div></div>
-    <div class="mood laziness" onclick="selectMood('Laziness')">😴<div class="label">Laziness</div></div>
-    <div class="mood procrastination" onclick="selectMood('Procrastination')">🙈<div class="label">Procrastination</div></div>
-    <div class="mood nostalgia" onclick="selectMood('Nostalgia')">🌸<div class="label">Nostalgia</div></div>
+    <div class="orb joy" onclick="selectMood('Joy')">Joy<div class="label">Joy</div></div>
+    <div class="orb sadness" onclick="selectMood('Sadness')">Sadness<div class="label">Sadness</div></div>
+    <div class="orb anger" onclick="selectMood('Anger')">Anger<div class="label">Anger</div></div>
+    <div class="orb fear" onclick="selectMood('Fear')">Fear<div class="label">Fear</div></div>
+    <div class="orb disgust" onclick="selectMood('Disgust')">Disgust<div class="label">Disgust</div></div>
+    <div class="orb anxiety" onclick="selectMood('Anxiety')">Anxiety<div class="label">Anxiety</div></div>
+    <div class="orb nostalgia" onclick="selectMood('Nostalgia')">Nostalgia<div class="label">Nostalgia</div></div>
   </div>
 
+  <!-- Mood popup -->
   <div id="popup">
     <div class="popup-content">
       <h2 id="popupEmotion">Your Mood</h2>
-      <textarea id="moodNote" placeholder="Tell me more about what you're feeling today..."></textarea>
+      <textarea id="moodNote" placeholder="Write what's going on inside..."></textarea>
       <br>
-      <button onclick="saveMood()">Save Mood</button>
+      <button onclick="saveMood()">Save Entry</button>
     </div>
   </div>
+
+  <!-- Floating Orbs Background -->
+  <div class="floating-bubble" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+  <div class="floating-bubble" style="top: 70%; left: 90%; animation-delay: 2s;"></div>
+  <div class="floating-bubble" style="top: 30%; left: 60%; animation-delay: 4s;"></div>
+  <div class="floating-bubble" style="top: 50%; left: 20%; animation-delay: 6s;"></div>
 
   <script>
     let selectedMood = "";
@@ -149,12 +176,24 @@
       selectedMood = mood;
       document.getElementById("popupEmotion").textContent = `You're feeling ${mood}`;
       document.getElementById("popup").style.display = "flex";
+
+      const quotes = {
+        "Joy": "Let joy anchor your spirit today 🌞",
+        "Sadness": "Even clouds are part of the sky ☁️",
+        "Anger": "Your fire means you care 🔥",
+        "Fear": "Courage isn’t the absence of fear 💜",
+        "Disgust": "Boundaries are beautiful 💅",
+        "Anxiety": "You’re allowed to pause 🌫️",
+        "Nostalgia": "You’ve grown so much 💌"
+      };
+
+      document.getElementById("quote").textContent = quotes[mood] || "✨ Every feeling has something to say ✨";
     }
 
     function saveMood() {
       const note = document.getElementById("moodNote").value.trim();
       if (!note) {
-        alert("Don't leave your mood hanging, bbg 💌");
+        alert("Let it out, babe. Your feelings deserve space 💬");
         return;
       }
 
@@ -177,7 +216,7 @@
       const found = moods.find(m => new Date(m.date).toLocaleDateString() === today);
       if (!found) {
         setTimeout(() => {
-          alert("bbg… don’t ghost your feelings 🫶 update your mood today 💅");
+          alert("Psst… you forgot to check in today 🧠 tap your mood bbg 💖");
         }, 2000);
       }
     }
