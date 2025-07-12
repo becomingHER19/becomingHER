@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HER Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #fdf0f3, #fff9f5);
+      color: #1f1f1f;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .quote {
+      text-align: center;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #b57291;
+      margin-bottom: 40px;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tile {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid #f2d7dd;
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .tile:hover {
+      transform: scale(1.03);
+    }
+
+    .tile h2 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #b25c8d;
+    }
+
+    .tile p {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+
+    .tile a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      background: #000;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to HER Universe 💫</h1>
+  <p class="quote">“Your softest self is still powerful.”</p>
+
+  <div class="dashboard">
+    <div class="tile">
+      <h2>🪞 Journaling Prompts</h2>
+      <p>Answer powerful questions for self-discovery & reflection.</p>
+      <a href="#">Write now</a>
+    </div>
+
+    <div class="tile">
+      <h2>📖 Glow-Up Blog</h2>
+      <p>Read HER posts on healing, confidence & routines that work.</p>
+      <a href="#">Read blog</a>
+    </div>
+
+    <div class="tile">
+      <h2>📝 Share Your Journey</h2>
+      <p>Your story matters. Inspire others with your path.</p>
+      <a href="#">Submit yours</a>
+    </div>
+
+    <div class="tile">
+      <h2>❓ Ask HER</h2>
+      <p>Feeling stuck? Drop a question & get soft, smart answers.</p>
+      <a href="#">Ask now</a>
+    </div>
+
+    <div class="tile">
+      <h2>🧘 Mood Tracker</h2>
+      <p>How are you feeling today? Click & reflect.</p>
+      <a href="#">Track mood</a>
+    </div>
+
+    <div class="tile">
+      <h2>📊 HER Score</h2>
+      <p>Gamify growth! HER Score increases as you show up for yourself.</p>
+      <a href="#">Coming soon</a>
+    </div>
+  </div>
+
+  <footer>Built with courage & caffeine ☕ by becomingHER</footer>
+</body>
+</html>
