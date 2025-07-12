@@ -11,110 +11,191 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #141e30, #243b55);
       font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at center, #1b2330, #0e1016);
       color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 250, 204, 0.05), transparent),
+                  radial-gradient(circle at 70% 60%, rgba(204, 255, 238, 0.04), transparent),
+                  radial-gradient(circle at 50% 90%, rgba(255, 204, 229, 0.06), transparent);
+      z-index: 0;
+      pointer-events: none;
     }
 
     h1 {
       text-align: center;
-      margin-top: 40px;
-      font-size: 2.6rem;
-      color: #fceff9;
+      margin: 30px 20px 10px;
+      font-size: 2.5rem;
+      color: #ffd369;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      position: relative;
+      z-index: 1;
     }
 
-    .entry-container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
+    .memory-space {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-    }
-
-    .entry {
-      background: rgba(255, 255, 255, 0.05);
-      border-left: 5px solid #f5c542;
-      padding: 20px;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 460px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      gap: 30px;
+      padding: 40px 20px;
       position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(4px);
-      animation: fadeInUp 0.8s ease both;
+      z-index: 1;
     }
 
-    .entry:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    .orb {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      position: relative;
+      background: #f5c542;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: floatIn 1s ease, drift 4s ease-in-out infinite;
+      font-size: 1.5rem;
     }
 
-    .entry h3 {
-      margin-top: 0;
+    .orb:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .orb.joy { background: #fcea70; }
+    .orb.sadness { background: #78a8ff; }
+    .orb.anger { background: #ff6464; }
+    .orb.fear { background: #cbb3ff; }
+    .orb.disgust { background: #9effa8; }
+    .orb.anxiety { background: #a2a2d0; }
+    .orb.nostalgia { background: #ffd1dc; }
+    .orb.laziness { background: #d6d6d6; }
+    .orb.procrastination { background: #ffddc1; }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 30px;
+      color: #fff;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: 0 0 15px rgba(255,255,255,0.15);
+    }
+
+    .popup-content h3 {
       color: #ffd369;
-      font-size: 1.4rem;
+      margin-top: 0;
     }
 
-    .entry .date {
+    .popup-content .date {
       font-size: 0.9rem;
-      color: #bbb;
+      color: #ccc;
       margin-bottom: 10px;
     }
 
-    .entry p {
-      color: #eee;
-      line-height: 1.6;
-      margin-bottom: 0;
+    .popup-content button {
+      margin-top: 15px;
+      background-color: #ffd369;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    @keyframes fadeInUp {
+    @keyframes floatIn {
       from {
+        transform: translateY(40px);
         opacity: 0;
-        transform: translateY(30px);
       }
       to {
-        opacity: 1;
         transform: translateY(0);
+        opacity: 1;
       }
     }
 
-    .no-entries {
-      text-align: center;
-      margin-top: 80px;
-      font-size: 1.2rem;
-      color: #ccc;
+    @keyframes drift {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>📔 HER Memory Vault</h1>
-  <div class="entry-container" id="entries"></div>
-  <div class="no-entries" id="noEntries">No saved memories yet, babe. Let your mind speak 🫶</div>
+  <h1>HER Memory Vault 🧠✨</h1>
+  <div class="memory-space" id="vault"></div>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h3 id="popupMood"></h3>
+      <div class="date" id="popupDate"></div>
+      <p id="popupNote"></p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
 
   <script>
-    const entryContainer = document.getElementById("entries");
-    const noEntries = document.getElementById("noEntries");
-    const entries = JSON.parse(localStorage.getItem("moodEntries") || "[]");
+    const entries = JSON.parse(localStorage.getItem("moodEntries") || "[]").reverse();
+    const vault = document.getElementById("vault");
 
-    if (entries.length === 0) {
-      noEntries.style.display = "block";
-    } else {
-      noEntries.style.display = "none";
-      entries.reverse().forEach(entry => {
-        const card = document.createElement("div");
-        card.className = "entry";
-        card.innerHTML = `
-          <h3>${entry.mood}</h3>
-          <div class="date">${entry.date}</div>
-          <p>${entry.note}</p>
-        `;
-        entryContainer.appendChild(card);
-      });
+    const popup = document.getElementById("popup");
+    const popupMood = document.getElementById("popupMood");
+    const popupDate = document.getElementById("popupDate");
+    const popupNote = document.getElementById("popupNote");
+
+    const icons = {
+      joy: '😊',
+      sadness: '😢',
+      anger: '😠',
+      fear: '😨',
+      disgust: '😖',
+      anxiety: '😟',
+      nostalgia: '🥹',
+      laziness: '😴',
+      procrastination: '🌀'
+    };
+
+    function showPopup(entry) {
+      popupMood.textContent = icons[entry.mood.toLowerCase()] + ' ' + entry.mood;
+      popupDate.textContent = entry.date;
+      popupNote.textContent = entry.note;
+      popup.style.display = "flex";
     }
+
+    function closePopup() {
+      popup.style.display = "none";
+    }
+
+    entries.forEach(entry => {
+      const orb = document.createElement("div");
+      orb.className = `orb ${entry.mood.toLowerCase()}`;
+      orb.textContent = icons[entry.mood.toLowerCase()] || '🫧';
+      orb.onclick = () => showPopup(entry);
+      vault.appendChild(orb);
+    });
   </script>
 </body>
 </html>
