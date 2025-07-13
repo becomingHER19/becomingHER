@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HER Journey Vault</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px 20px;
+      font-family: 'Poppins', sans-serif;
+      background: #fffaf6;
+      color: #444;
+    }
+
+    h1 {
+      text-align: center;
+      color: #c278b2;
+      margin-bottom: 30px;
+    }
+
+    .journey-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .journey-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .journey-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #a85e96;
+    }
+
+    .date {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .snippet {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✨ Shared Journeys ✨</h1>
+  <div class="journey-grid" id="journeyContainer"></div>
+
+  <script>
+    const journeys = JSON.parse(localStorage.getItem("userJourneys") || "[]").reverse();
+    const container = document.getElementById("journeyContainer");
+
+    journeys.forEach(journey => {
+      const card = document.createElement("div");
+      card.className = "journey-card";
+
+      const title = document.createElement("div");
+      title.className = "title";
+      title.textContent = journey.title;
+
+      const date = document.createElement("div");
+      date.className = "date";
+      date.textContent = journey.date;
+
+      const snippet = document.createElement("div");
+      snippet.className = "snippet";
+      snippet.textContent = journey.story.length > 160 
+        ? journey.story.slice(0, 160) + "..." 
+        : journey.story;
+
+      card.appendChild(title);
+      card.appendChild(date);
+      card.appendChild(snippet);
+
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
