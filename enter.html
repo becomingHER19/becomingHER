@@ -12,8 +12,8 @@
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #1f1c2c, #928dab);
-      color: #fff;
+      background: linear-gradient(to bottom right, #fdf6f0, #f9e6e6);
+      color: #4b2e2e;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,11 +21,11 @@
       overflow: hidden;
     }
     .container {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(15px);
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 25px rgba(150, 100, 100, 0.15);
       max-width: 420px;
       width: 90%;
       text-align: center;
@@ -33,12 +33,12 @@
     h1 {
       margin-bottom: 10px;
       font-size: 2rem;
-      color: #ffd369;
+      color: #cc7a7a;
     }
     p {
       font-size: 1rem;
       margin-bottom: 25px;
-      color: #eee;
+      color: #6a4e4e;
     }
     input {
       width: 100%;
@@ -47,15 +47,16 @@
       border: none;
       border-radius: 10px;
       font-size: 1rem;
-      background: #ffffff0d;
-      color: #fff;
+      background: #fff0f0;
+      color: #4b2e2e;
       outline: none;
+      border: 1px solid #e4cfcf;
     }
     button {
       width: 100%;
       padding: 12px;
-      background: #ffd369;
-      color: #1f1c2c;
+      background: #f8c8c8;
+      color: #4b2e2e;
       font-weight: bold;
       border: none;
       border-radius: 10px;
@@ -65,7 +66,7 @@
       margin-top: 20px;
     }
     button:hover {
-      background: #ffe498;
+      background: #fbdede;
     }
   </style>
 </head>
@@ -76,36 +77,36 @@
     <input type="text" id="name" placeholder="Your Name, Dreamer..." />
     <input type="email" id="email" placeholder="Your Email for HER updates 💌" />
     <input type="password" id="passcode" placeholder="Create a Secret Passcode 🔐" />
-    <input type="text" id="passion" placeholder="why do you want to grow" />
+    <input type="text" id="passion" placeholder="What fuels your soul?" />
     <input type="text" id="ambition" placeholder="Your biggest ambition?" />
-    <button onclick="saveUserInfo()">Let Me In</button>
+    <button id="letmein">Let Me In</button>
   </div>
 
   <script>
-    // Redirect if user already logged in
-    if (localStorage.getItem(\"herName\") && localStorage.getItem(\"herPasscode\")) {
-      window.location.href = \"dashboard.html\";
+    // ✅ If already logged in, skip this page
+    if (localStorage.getItem("herName") && localStorage.getItem("herPasscode")) {
+      window.location.href = "dashboard.html";
     }
 
-    function saveUserInfo() {
-      const name = document.getElementById(\"name\").value.trim();
-      const email = document.getElementById(\"email\").value.trim();
-      const passcode = document.getElementById(\"passcode\").value.trim();
-      const passion = document.getElementById(\"passion\").value.trim();
-      const ambition = document.getElementById(\"ambition\").value.trim();
+    // ✅ On button click, store data and redirect
+    document.getElementById("letmein").addEventListener("click", function () {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const passcode = document.getElementById("passcode").value.trim();
+      const passion = document.getElementById("passion").value.trim();
+      const ambition = document.getElementById("ambition").value.trim();
 
       if (name && email && passcode && passion && ambition) {
-        localStorage.setItem(\"herName\", name);
-        localStorage.setItem(\"herEmail\", email);
-        localStorage.setItem(\"herPasscode\", passcode);
-        localStorage.setItem(\"herPassion\", passion);
-        localStorage.setItem(\"herAmbition\", ambition);
-
-        window.location.href = \"dashboard.html\";
+        localStorage.setItem("herName", name);
+        localStorage.setItem("herEmail", email);
+        localStorage.setItem("herPasscode", passcode);
+        localStorage.setItem("herPassion", passion);
+        localStorage.setItem("herAmbition", ambition);
+        window.location.href = "dashboard.html";
       } else {
-        alert(\"Please fill in all fields, HER 💌\");
+        alert("Fill every box, babe ✨ You’re almost there.");
       }
-    }
+    });
   </script>
 </body>
 </html>
