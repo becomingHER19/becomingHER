@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ask HER</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fff6fa, #f9f1ff);
+      color: #444;
+    }
+
+    h1 {
+      text-align: center;
+      color: #c278b2;
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      text-align: center;
+      font-size: 1rem;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+    }
+
+    .chatbot {
+      width: 320px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      height: fit-content;
+    }
+
+    .chatbot h3 {
+      color: #a85e96;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .chat-response {
+      background-color: #f5e6f7;
+      padding: 12px;
+      border-radius: 12px;
+      color: #5a4a5e;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      animation: fadeIn 0.4s ease-in;
+    }
+
+    .ask-box {
+      width: 350px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .ask-box textarea {
+      width: 100%;
+      height: 140px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.95rem;
+      resize: none;
+      margin-bottom: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .ask-box button {
+      padding: 10px 18px;
+      background-color: #c278b2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .ask-box button:hover {
+      background-color: #a65e90;
+    }
+
+    .confirmation {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 12px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Talk to HER 💌</h1>
+  <p class="intro">Need clarity, comfort, or just a safe space to vent? HER is here for you.</p>
+
+  <div class="container">
+    <div class="chatbot">
+      <h3>✨ HER Chatbot</h3>
+      <div class="chat-response" id="botMessage"></div>
+    </div>
+
+    <div class="ask-box">
+      <textarea id="userQuestion" placeholder="Type your question, worry, or story..."></textarea>
+      <button onclick="submitQuestion()">Send to HER</button>
+      <div class="confirmation" id="confirmMsg"></div>
+    </div>
+  </div>
+
+  <script>
+    const messages = [
+      "HER Reminder: Your feelings are valid, even if you can't explain them.",
+      "HER Tip: Take a deep breath and ask yourself, ‘What do I need right now?’",
+      "HER Thought: It's okay to not be okay. You are not a burden.",
+      "HER Insight: The hardest days often become the strongest chapters.",
+      "HER Suggestion: Journaling heals more than you think. Try it tonight ✨"
+    ];
+
+    function showRandomMessage() {
+      const botMessage = document.getElementById("botMessage");
+      const random = messages[Math.floor(Math.random() * messages.length)];
+      botMessage.textContent = random;
+    }
+
+    function submitQuestion() {
+      const input = document.getElementById("userQuestion").value.trim();
+      const confirmMsg = document.getElementById("confirmMsg");
+
+      if (!input) {
+        confirmMsg.textContent = "Please type something first ✨";
+        return;
+      }
+
+      let stored = JSON.parse(localStorage.getItem("userQuestions") || "[]");
+      stored.push({
+        question: input,
+        date: new Date().toLocaleString()
+      });
+      localStorage.setItem("userQuestions", JSON.stringify(stored));
+
+      confirmMsg.textContent = "Your question has been sent to HER. Expect a reply in 24–48 hrs 💌";
+      document.getElementById("userQuestion").value = "";
+    }
+
+    showRandomMessage();
+  </script>
+</body>
+</html>
