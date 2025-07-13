@@ -1,95 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Share Your Journey</title>
+  <meta charset="UTF-8">
+  <title>Share Your Journey | HER</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
-      margin: 0;
+      background: #fdf6f0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #fef9f4, #fceeee);
-      color: #4b3b3b;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin: 0;
       padding: 40px 20px;
+      color: #333;
     }
+
     .container {
-      width: 100%;
-      max-width: 850px;
-      background: #ffffffee;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
+
     h1 {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 20px;
-      color: #d98880;
+      color: #c278b2;
+      font-size: 2rem;
+      margin-bottom: 10px;
     }
-    p.subtitle {
-      text-align: center;
+
+    .subtitle {
+      color: #888;
       font-size: 1rem;
-      color: #7d6363;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
-    textarea, input[type="text"] {
+
+    input, textarea {
       width: 100%;
-      padding: 14px;
-      margin-bottom: 20px;
-      font-size: 1rem;
-      border: 1px solid #f3d7d7;
-      border-radius: 10px;
-      background: #fff9f7;
-      resize: vertical;
-      color: #4b3b3b;
-    }
-    button {
-      width: 100%;
-      background-color: #f3b6b6;
-      color: #fff;
-      border: none;
       padding: 15px;
-      font-size: 1rem;
+      margin: 10px 0 20px;
       border-radius: 10px;
-      font-weight: bold;
+      border: 1px solid #ddd;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #c278b2;
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
       cursor: pointer;
       transition: background 0.3s ease;
     }
+
     button:hover {
-      background-color: #e9a2a2;
+      background: #a85e96;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
     <h1>Share Your Journey</h1>
-    <p class="subtitle">This is your space — to heal, to reflect, to inspire. Share your heart, HER-style 💗</p>
+    <p class="subtitle">This is your space — to heal, to reflect, to inspire. Share your heart, HER-style 💖</p>
     <input type="text" id="journeyTitle" placeholder="Give your journey a title...">
-    <textarea id="journeyText" rows="12" placeholder="Write your story here... be raw, real and kind to yourself ✨"></textarea>
-    <button onclick="share.html">Publish Journey</button>
+    <textarea id="journeyText" rows="12" placeholder="Write your story here... be real, raw, and kind to yourself ✨"></textarea>
+    <button onclick="submitJourney()">Publish Journey</button>
   </div>
 
   <script>
     function submitJourney() {
-      const title = document.getElementById('journeyTitle').value.trim();
-      const story = document.getElementById('journeyText').value.trim();
+      const title = document.getElementById("journeyTitle").value.trim();
+      const story = document.getElementById("journeyText").value.trim();
 
       if (title && story) {
-        const saved = JSON.parse(localStorage.getItem('userJourneys') || '[]');
+        const saved = JSON.parse(localStorage.getItem("userJourneys") || "[]");
         saved.push({ title, story, date: new Date().toLocaleDateString() });
-        localStorage.setItem('userJourneys', JSON.stringify(saved));
-        alert('✨ Your journey is safe in HER vault.');
-        window.location.href = 'journeys.html'; // Create this page to view all published stories
+        localStorage.setItem("userJourneys", JSON.stringify(saved));
+        alert("✨ Your Journey is safe in HER vault.");
+        window.location.href = "share.html"; // Redirect to share.html
       } else {
-        alert('Please write both a title and your journey 🕊️');
+        alert("Please write both a title and your journey ✍️");
       }
     }
   </script>
+
 </body>
 </html>
