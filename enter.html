@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Enter HER Space</title>
   <style>
     * {
@@ -20,30 +20,26 @@
       height: 100vh;
       overflow: hidden;
     }
-
     .container {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(15px);
       padding: 40px;
       border-radius: 20px;
       box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-      max-width: 400px;
+      max-width: 420px;
       width: 90%;
       text-align: center;
     }
-
     h1 {
       margin-bottom: 10px;
       font-size: 2rem;
       color: #ffd369;
     }
-
     p {
       font-size: 1rem;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       color: #eee;
     }
-
     input {
       width: 100%;
       padding: 12px;
@@ -55,7 +51,6 @@
       color: #fff;
       outline: none;
     }
-
     button {
       width: 100%;
       padding: 12px;
@@ -69,7 +64,6 @@
       transition: background 0.3s ease;
       margin-top: 20px;
     }
-
     button:hover {
       background: #ffe498;
     }
@@ -78,32 +72,38 @@
 <body>
   <div class="container">
     <h1>Welcome to HER Space</h1>
-    <p>This is your soft place to land, bloom & become ✨</p>
-    <input type="text" id="name" placeholder="Your Name, Dreamer...">
-    <input type="text" id="passion" placeholder="What fuels your soul?">
-    <input type="text" id="ambition" placeholder="Your biggest ambition?">
+    <p>Your soft space to land, bloom & become ✨</p>
+    <input type="text" id="name" placeholder="Your Name, Dreamer..." />
+    <input type="email" id="email" placeholder="Your Email for HER updates 💌" />
+    <input type="password" id="passcode" placeholder="Create a Secret Passcode 🔐" />
+    <input type="text" id="passion" placeholder="why do you want to grow" />
+    <input type="text" id="ambition" placeholder="Your biggest ambition?" />
     <button onclick="saveUserInfo()">Let Me In</button>
   </div>
 
   <script>
-    // Redirect if user is already logged in
-    if (localStorage.getItem("herName")) {
-      window.location.href = "dashboard.html";
+    // Redirect if user already logged in
+    if (localStorage.getItem(\"herName\") && localStorage.getItem(\"herPasscode\")) {
+      window.location.href = \"dashboard.html\";
     }
 
     function saveUserInfo() {
-      const name = document.getElementById("name").value.trim();
-      const passion = document.getElementById("passion").value.trim();
-      const ambition = document.getElementById("ambition").value.trim();
+      const name = document.getElementById(\"name\").value.trim();
+      const email = document.getElementById(\"email\").value.trim();
+      const passcode = document.getElementById(\"passcode\").value.trim();
+      const passion = document.getElementById(\"passion\").value.trim();
+      const ambition = document.getElementById(\"ambition\").value.trim();
 
-      if (name && passion && ambition) {
-        localStorage.setItem("herName", name);
-        localStorage.setItem("herPassion", passion);
-        localStorage.setItem("herAmbition", ambition);
+      if (name && email && passcode && passion && ambition) {
+        localStorage.setItem(\"herName\", name);
+        localStorage.setItem(\"herEmail\", email);
+        localStorage.setItem(\"herPasscode\", passcode);
+        localStorage.setItem(\"herPassion\", passion);
+        localStorage.setItem(\"herAmbition\", ambition);
 
-        window.location.href = "dashboard.html";
+        window.location.href = \"dashboard.html\";
       } else {
-        alert("Babe, complete all fields ✨");
+        alert(\"Please fill in all fields, HER 💌\");
       }
     }
   </script>
