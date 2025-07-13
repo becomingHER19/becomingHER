@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HER Admin Panel</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Poppins', sans-serif;
+      background: #fff7f9;
+      color: #444;
+    }
+
+    h1 {
+      text-align: center;
+      color: #c278b2;
+      margin-bottom: 20px;
+    }
+
+    .login-box, .dashboard {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    button {
+      margin-top: 15px;
+      background-color: #c278b2;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .question {
+      background: #f9f2f7;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .question p {
+      margin: 4px 0;
+    }
+
+    .reply-box {
+      margin-top: 10px;
+    }
+
+    .reply-box textarea {
+      width: 100%;
+      height: 80px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      resize: none;
+      font-family: 'Poppins';
+    }
+
+    .reply-box button {
+      margin-top: 8px;
+      padding: 8px 14px;
+      background-color: #a65e90;
+    }
+
+    .replied {
+      background-color: #e0ffe4;
+      border-left: 4px solid #47b963;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #2e6633;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome CEO ✨</h1>
+
+  <div class="login-box" id="loginBox">
+    <p>Enter your secret HER admin passcode:</p>
+    <input type="password" id="adminPass" placeholder="e.g. pinkqueen@her" />
+    <button onclick="validateAdmin()">Log In</button>
+    <p id="loginError" style="color:red; font-size:0.9rem;"></p>
+  </div>
+
+  <div class="dashboard" id="dashboard" style="display:none;">
+    <h2>User Questions 💌</h2>
+    <div id="questionsList"></div>
+  </div>
+
+  <script>
+    const ADMIN_PASS = "pinkqueen@her"; // you can change this pass
+
+    function validateAdmin() {
+      const input = document.getElementById("adminPass").value;
+      if (input === ADMIN_PASS) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        loadQuestions();
+      } else {
+        document.getElementById("loginError").textContent = "Wrong passcode 💔";
+      }
+    }
+
+    function loadQuestions() {
+      const list = document.getElementById("questionsList");
+      const data = JSON.parse(localStorage.getItem("userQuestions") || "[]");
+      const replies = JSON.parse(localStorage.getItem("herReplies") || "{}");
+
+      list.innerHTML = "";
+
+      if (data.length === 0) {
+        list.innerHTML = "<p>No one has asked anything yet 💔</p>";
+        return;
+      }
+
+      data.reverse().forEach((q, idx) => {
+        const box = document.createElement("div");
+        box.className = "question";
+
+        const msg = document.createElement("p");
+        msg.innerHTML = `<strong>Q:</strong> ${q.question}`;
+
+        const date = document.createElement("p");
+        date.innerHTML = `<small>${q.date}</small>`;
+
+        box.appendChild(msg);
+        box.appendChild(date);
+
+        const replyId = `reply-${idx}`;
+        if (replies[q.question]) {
+          const replied = document.createElement("div");
+          replied.className = "replied";
+          replied.textContent = "Your reply: " + replies[q.question];
+          box.appendChild(replied);
+        } else {
+          const replyBox = document.createElement("div");
+          replyBox.className = "reply-box";
+          replyBox.innerHTML = `
+            <textarea id="${replyId}" placeholder="Write your reply..."></textarea>
+            <button onclick="saveReply('${q.question}', '${replyId}')">Reply</button>
+          `;
+          box.appendChild(replyBox);
+        }
+
+        list.appendChild(box);
+      });
+    }
+
+    function saveReply(question, textareaId) {
+      const replyText = document.getElementById(textareaId).value.trim();
+      if (!replyText) return;
+
+      let replies = JSON.parse(localStorage.getItem("herReplies") || "{}");
+      replies[question] = replyText;
+      localStorage.setItem("herReplies", JSON.stringify(replies));
+      loadQuestions();
+    }
+  </script>
+
+</body>
+</html>
