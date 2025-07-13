@@ -2,40 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>HER Journey Vault</title>
+  <title>HER Shared Journeys</title>
   <style>
     body {
       margin: 0;
-      padding: 30px 20px;
+      padding: 40px 20px;
       font-family: 'Poppins', sans-serif;
-      background: #fffaf6;
+      background: linear-gradient(to bottom right, #fff6f9, #f7f0ff);
       color: #444;
     }
 
     h1 {
       text-align: center;
       color: #c278b2;
+      margin-bottom: 8px;
+      font-size: 2.2rem;
+    }
+
+    .quote {
+      text-align: center;
+      color: #888;
+      font-size: 0.95rem;
       margin-bottom: 30px;
+      font-style: italic;
     }
 
     .journey-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 25px;
       justify-content: center;
     }
 
     .journey-card {
-      background: #fff;
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
       padding: 20px;
       width: 300px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.2s ease;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+      position: relative;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.5s ease;
+      backdrop-filter: blur(5px);
     }
 
     .journey-card:hover {
       transform: translateY(-4px);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
     }
 
     .title {
@@ -43,6 +56,11 @@
       font-weight: bold;
       margin-bottom: 8px;
       color: #a85e96;
+      transition: color 0.3s ease;
+    }
+
+    .title:hover {
+      color: #d383bc;
     }
 
     .date {
@@ -56,41 +74,110 @@
       color: #555;
       line-height: 1.4;
     }
+
+    .delete-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: #ffe0e0;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #c44;
+      transition: background 0.3s ease;
+    }
+
+    .delete-btn:hover {
+      background-color: #ffc5c5;
+    }
+
+    .no-entries {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-top: 60px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
 
-  <h1>✨ Shared Journeys ✨</h1>
+  <h1>✨ HER Shared Journeys ✨</h1>
+  <p class="quote">“Every story matters — even the messy ones.”</p>
+
   <div class="journey-grid" id="journeyContainer"></div>
+  <p class="no-entries" id="emptyMsg" style="display: none;">No journeys yet... ready to be the first? 🌸</p>
 
   <script>
-    const journeys = JSON.parse(localStorage.getItem("userJourneys") || "[]").reverse();
+    let journeys = JSON.parse(localStorage.getItem("userJourneys") || "[]").reverse();
     const container = document.getElementById("journeyContainer");
+    const emptyMsg = document.getElementById("emptyMsg");
 
-    journeys.forEach(journey => {
-      const card = document.createElement("div");
-      card.className = "journey-card";
+    function displayJourneys() {
+      container.innerHTML = "";
 
-      const title = document.createElement("div");
-      title.className = "title";
-      title.textContent = journey.title;
+      if (journeys.length === 0) {
+        emptyMsg.style.display = "block";
+        return;
+      } else {
+        emptyMsg.style.display = "none";
+      }
 
-      const date = document.createElement("div");
-      date.className = "date";
-      date.textContent = journey.date;
+      journeys.forEach((journey, index) => {
+        const card = document.createElement("div");
+        card.className = "journey-card";
 
-      const snippet = document.createElement("div");
-      snippet.className = "snippet";
-      snippet.textContent = journey.story.length > 160 
-        ? journey.story.slice(0, 160) + "..." 
-        : journey.story;
+        const title = document.createElement("div");
+        title.className = "title";
+        title.textContent = journey.title;
 
-      card.appendChild(title);
-      card.appendChild(date);
-      card.appendChild(snippet);
+        const date = document.createElement("div");
+        date.className = "date";
+        date.textContent = journey.date;
 
-      container.appendChild(card);
-    });
+        const snippet = document.createElement("div");
+        snippet.className = "snippet";
+        snippet.textContent = journey.story.length > 180 
+          ? journey.story.slice(0, 180) + "..." 
+          : journey.story;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.textContent = "Delete";
+        deleteBtn.onclick = () => {
+          const confirmDelete = confirm("Are you sure you want to delete this journey?");
+          if (confirmDelete) {
+            const originalIndex = journeys.length - 1 - index;
+            const fullList = JSON.parse(localStorage.getItem("userJourneys") || "[]");
+            fullList.splice(originalIndex, 1);
+            localStorage.setItem("userJourneys", JSON.stringify(fullList));
+            journeys = fullList.reverse();
+            displayJourneys();
+          }
+        };
+
+        card.appendChild(title);
+        card.appendChild(date);
+        card.appendChild(snippet);
+        card.appendChild(deleteBtn);
+        container.appendChild(card);
+      });
+    }
+
+    displayJourneys();
   </script>
 
 </body>
