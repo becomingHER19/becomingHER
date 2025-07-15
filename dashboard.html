@@ -2,135 +2,163 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HER Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(to right, #fdf0f3, #fff9f5);
-      color: #1f1f1f;
-      min-height: 100vh;
-      padding: 40px 20px;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fdf9f6;
+      display: flex;
+      color: #333;
     }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      text-align: center;
-      margin-bottom: 10px;
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #eee;
+      padding: 30px 20px;
+      height: 100vh;
+      position: fixed;
     }
 
-    .quote {
-      text-align: center;
-      font-style: italic;
-      font-size: 1.2rem;
-      color: #b57291;
+    .sidebar h2 {
+      font-size: 1.5rem;
+      color: #c278b2;
       margin-bottom: 40px;
     }
 
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .tile {
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid #f2d7dd;
-      border-radius: 16px;
-      padding: 25px;
-      text-align: center;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease;
-    }
-
-    .tile:hover {
-      transform: scale(1.03);
-    }
-
-    .tile h2 {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-      color: #b25c8d;
-    }
-
-    .tile p {
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-    }
-
-    .tile a {
-      display: inline-block;
-      margin-top: 10px;
+    .sidebar a {
+      display: block;
       text-decoration: none;
-      background: #000;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 20px;
+      font-weight: 500;
     }
 
-    footer {
-      text-align: center;
-      margin-top: 60px;
-      color: #aaa;
-      font-size: 0.85rem;
+    .sidebar a:hover {
+      color: #c278b2;
     }
+
+    .main {
+      margin-left: 260px;
+      padding: 40px;
+      flex: 1;
+    }
+
+    .quote {
+      background: #fff0f5;
+      padding: 20px;
+      border-left: 6px solid #c278b2;
+      border-radius: 10px;
+      font-style: italic;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      color: #555;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      color: #c278b2;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      border: 1px solid #f3f3f3;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      color: #c278b2;
+      margin-bottom: 12px;
+    }
+
+    .coming-soon {
+      font-size: 0.9rem;
+      color: #999;
+      margin-top: 5px;
+    }
+
   </style>
 </head>
 <body>
+  <div class="sidebar">
+    <h2>becomingHER</h2>
+    <a href="#">🏠 Dashboard</a>
+    <a href="journaling-hub.html">📝 Journaling Prompts</a>
+    <a href="glowup-blog.html">✨ Glow-Up Blog</a>
+    <a href="share.html">📖 Share Your Journey</a>
+    <a href="ask-her.html">💬 Ask HER</a>
+    <a href="mood.html">🌈 Mood Tracker</a>
+    <a href="#">📊 HER Score <span class="coming-soon">(coming soon)</span></a>
+    <a href="#">⚙️ Settings</a>
+  </div>
 
-  <h1>Welcome to HER Universe 💫</h1>
-  <p class="quote">“Your softest self is still powerful.”</p>
-
-  <div class="dashboard">
-    <div class="tile">
-      <h2>🪞 Journaling Prompts</h2>
-      <p>Answer powerful questions for self-discovery & reflection.</p>
-      <a href="prompts.html">Write now</a>
+  <div class="main">
+    <div class="quote" id="quote">
+      “You are becoming exactly who you are meant to be.”
     </div>
 
-    <div class="tile">
-      <h2>📖 Glow-Up Blog</h2>
-      <p>Read HER posts on healing, confidence & routines that work.</p>
-      <a href="blog.html">Read blog</a>
-    </div>
+    <h1>Welcome back, Beautiful 🩷</h1>
 
-    <div class="tile">
-      <h2>📝 Share Your Journey</h2>
-      <p>Your story matters. Inspire others with your path.</p>
-      <a href="journeys.html">Submit yours</a>
-    </div>
+    <div class="cards">
+      <div class="card" onclick="location.href='.html'">
+        <h3>📝 Journaling Prompts</h3>
+        <p>Write your thoughts, heal your soul.</p>
+      </div>
 
-    <div class="tile">
-      <h2>❓ Ask HER</h2>
-      <p>Feeling stuck? Drop a question & get soft, smart answers.</p>
-      <a href="ask.html">Ask now</a>
-    </div>
+      <div class="card" onclick="location.href='glowup-blog.html'">
+        <h3>✨ Glow-Up Blog</h3>
+        <p>Read tips & my journey to becoming HER.</p>
+      </div>
 
-    <div class="tile">
-      <h2>🧘 Mood Tracker</h2>
-      <p>How are you feeling today? Click & reflect.</p>
-      <a href="mood.html">Track mood</a>
-    </div>
+      <div class="card" onclick="location.href='share.html'">
+        <h3>📖 Share Your Journey</h3>
+        <p>Your story deserves to be heard.</p>
+      </div>
 
-    <div class="tile">
-      <h2>📊 HER Score</h2>
-      <p>Gamify growth! HER Score increases as you show up for yourself.</p>
-      <a href="#">Coming soon</a>
+      <div class="card" onclick="location.href='ask.html'">
+        <h3>💬 Ask HER</h3>
+        <p>Feeling lost? I'm listening.</p>
+      </div>
+
+      <div class="card" onclick="location.href='mood.html'">
+        <h3>🌈 Mood Tracker</h3>
+        <p>Track how you feel. Every emotion matters.</p>
+      </div>
+
+      <div class="card">
+        <h3>📊 HER Score</h3>
+        <p class="coming-soon">Coming soon – track your glow-up like a boss.</p>
+      </div>
     </div>
   </div>
 
-  <footer>Built with courage & caffeine ☕ by becomingHER</footer>
+  <script>
+    const quotes = [
+      "You are becoming exactly who you are meant to be.",
+      "Softness is not weakness. It is power, wrapped in grace.",
+      "You survived 100% of your worst days. That’s iconic.",
+      "There’s magic in healing. And darling, you’re glowing.",
+      "Being HER is not a goal—it’s a lifestyle.",
+      "Everything you're becoming is already inside you."
+    ];
+    document.getElementById("quote").textContent = quotes[Math.floor(Math.random() * quotes.length)];
+  </script>
 </body>
 </html>
