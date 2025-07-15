@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journaling Hub | becomingHER</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fef9f5;
+      color: #333;
+    }
+
+    header {
+      padding: 30px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    header h1 {
+      color: #c278b2;
+      font-size: 2rem;
+    }
+
+    .container {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      border: 1px solid #f3f3f3;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h2 {
+      color: #c278b2;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #777;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Choose Your Journaling Space</h1>
+  </header>
+
+  <div class="container">
+    <div class="grid">
+      <div class="card" onclick="location.href='self-growth-prompts.html'">
+        <h2>🌱 Self Growth</h2>
+        <p>Unpack your dreams and become HER, one entry at a time.</p>
+      </div>
+
+      <div class="card" onclick="location.href='anxiety-prompts.html'">
+        <h2>💙 Anxiety</h2>
+        <p>Ease your thoughts. Plus, ask HER directly if you need to talk.</p>
+      </div>
+
+      <div class="card" onclick="location.href='gratitude-prompts.html'">
+        <h2>🧡 Gratitude</h2>
+        <p>Rewire your mind to focus on everything that’s beautiful.</p>
+      </div>
+
+      <div class="card" onclick="location.href='manifestation-prompts.html'">
+        <h2>💫 Manifestation</h2>
+        <p>Script the life you desire. Start with one aligned entry.</p>
+      </div>
+
+      <div class="card" onclick="location.href='reflection-prompts.html'">
+        <h2>🪞 Self Reflection</h2>
+        <p>Understand who you are and evolve from the inside out.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    made with love by becomingHER ☁️
+  </div>
+</body>
+</html>
