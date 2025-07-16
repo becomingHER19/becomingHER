@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HER Self-Growth Studio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #fef6f0, #f2e8dc);
+      color: #3d2c29;
+    }
+    header {
+      padding: 40px 20px 10px;
+      text-align: center;
+      background-color: #fff8f0;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      color: #cb7a63;
+    }
+    .quote {
+      font-style: italic;
+      font-size: 1.2rem;
+      margin: 10px 0 30px;
+    }
+    .section {
+      max-width: 850px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      margin-top: 20px;
+    }
+    h2 {
+      color: #a14f3f;
+      margin-bottom: 10px;
+    }
+    .prompt-box {
+      margin: 20px 0;
+    }
+    .prompt-box button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      background-color: #f6c0a0;
+      border: none;
+      color: #3d2c29;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .answer-area {
+      display: none;
+      margin-top: 10px;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    .tracker {
+      margin-top: 40px;
+    }
+    .habit-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .habit-input input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .habit-input button {
+      background-color: #a14f3f;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .habit-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .habit-list li {
+      background-color: #f2dcd2;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .notify {
+      margin-top: 20px;
+      color: #cb7a63;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HER Self-Growth Studio 🌱</h1>
+    <p class="quote">"Self-growth isn't always pretty, but it's always worth it."</p>
+  </header>
+
+  <div class="section">
+    <h2>Why Self-Growth Matters</h2>
+    <p>
+      Studies in positive psychology suggest that those who consistently reflect and work on personal growth experience higher levels of achievement, mental clarity, and emotional resilience. Self-growth creates neural pathways in the brain that improve focus and productivity.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Self-Growth Journal Prompts</h2>
+    <div class="prompt-box">
+      <button onclick="showPrompt(0)">What habits are holding me back from becoming the best version of myself?</button>
+      <div class="answer-area" id="answer0">
+        <textarea rows="4" placeholder="Write your thoughts here..."></textarea>
+      </div>
+      <button onclick="showPrompt(1)">Who is the future me I want to become?</button>
+      <div class="answer-area" id="answer1">
+        <textarea rows="4" placeholder="Speak it into reality..."></textarea>
+      </div>
+      <button onclick="showPrompt(2)">What’s one small thing I can do today to improve myself?</button>
+      <div class="answer-area" id="answer2">
+        <textarea rows="4" placeholder="One step at a time 💫"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="section tracker">
+    <h2>✨ HER Habit Tracker</h2>
+    <div class="habit-input">
+      <input type="text" id="habitInput" placeholder="Enter a new habit...">
+      <button onclick="addHabit()">Add Habit</button>
+    </div>
+    <ul class="habit-list" id="habitList"></ul>
+    <div class="notify">👀 Haven’t updated today? We’re watching you, bbg 💅</div>
+  </div>
+
+  <script>
+    function showPrompt(index) {
+      const area = document.getElementById(`answer${index}`);
+      area.style.display = area.style.display === "block" ? "none" : "block";
+    }
+
+    const habitList = document.getElementById("habitList");
+
+    function addHabit() {
+      const input = document.getElementById("habitInput");
+      if (input.value.trim() !== "") {
+        const li = document.createElement("li");
+        li.innerHTML = `${input.value} <button onclick="markDone(this)">✅</button>`;
+        habitList.appendChild(li);
+        input.value = "";
+      }
+    }
+
+    function markDone(btn) {
+      btn.parentElement.style.backgroundColor = "#d2f2c2";
+      btn.remove();
+    }
+  </script>
+</body>
+</html>
