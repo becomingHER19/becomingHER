@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HER Calm Space</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #fdf6f0, #fdeeee);
+      color: #4a4a4a;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: #d19191;
+    }
+
+    header p {
+      color: #7d7d7d;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .prompt-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .prompt {
+      background: #fff8f5;
+      padding: 1.2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-left: 4px solid #f4baba;
+    }
+
+    .prompt:hover {
+      background-color: #fcefee;
+    }
+
+    .response-box {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 1px solid #e2cfcf;
+      resize: vertical;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #f4baba;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      margin-top: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .submitted-message {
+      display: none;
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      color: #ab6e6e;
+    }
+
+    .tips-section {
+      background-color: #fff0f0;
+      padding: 1.5rem;
+      border-radius: 20px;
+      margin: 2rem auto;
+      max-width: 720px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .tips-section h3 {
+      margin-top: 0;
+      color: #c18d8d;
+    }
+
+    .tips-section ul {
+      padding-left: 1.2rem;
+    }
+
+    .tips-section li {
+      margin-bottom: 0.6rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HER Calm Space 🌸</h1>
+    <p>Gentle space to breathe, reflect, and gently ease your thoughts.</p>
+  </header>
+
+  <section class="prompt-container">
+    <div class="prompt" onclick="togglePrompt(this)">
+      What is something that made you feel overwhelmed lately?
+      <div class="response-box">
+        <textarea rows="4" placeholder="Write your heart out..."></textarea>
+        <button onclick="submitResponse(this)">Send to HER</button>
+      </div>
+    </div>
+
+    <div class="prompt" onclick="togglePrompt(this)">
+      If you could write a letter to your inner self right now, what would it say?
+      <div class="response-box">
+        <textarea rows="4" placeholder="Go ahead, it’s safe here..."></textarea>
+        <button onclick="submitResponse(this)">Send to HER</button>
+      </div>
+    </div>
+
+    <div class="prompt" onclick="togglePrompt(this)">
+      List 3 things that always help you feel slightly better.
+      <div class="response-box">
+        <textarea rows="4" placeholder="Even the tiniest moments count."></textarea>
+        <button onclick="submitResponse(this)">Send to HER</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="submitted-message" id="submitMessage">
+    💌 Thank you for sharing. HER is proud of you.
+  </div>
+
+  <section class="tips-section">
+    <h3>Gentle Reminders from HER 💗</h3>
+    <ul>
+      <li>Your thoughts are valid. Always.</li>
+      <li>Take deep breaths — in for 4, hold for 4, out for 6.</li>
+      <li>You don't have to do everything right now.</li>
+      <li>Drink water and move gently — it helps more than you know.</li>
+      <li>You’re not alone. HER is here, always listening.</li>
+    </ul>
+  </section>
+
+  <script>
+    function togglePrompt(element) {
+      const box = element.querySelector('.response-box');
+      const allBoxes = document.querySelectorAll('.response-box');
+      allBoxes.forEach(b => {
+        if (b !== box) b.style.display = 'none';
+      });
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function submitResponse(button) {
+      const textarea = button.previousElementSibling;
+      const value = textarea.value.trim();
+      if (value.length > 0) {
+        textarea.value = "";
+        document.getElementById('submitMessage').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('submitMessage').style.display = 'none';
+        }, 4000);
+      } else {
+        alert("Please write something first ✨");
+      }
+    }
+  </script>
+</body>
+</html>
