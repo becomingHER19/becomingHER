@@ -1,181 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HER Calm Space</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HER Calm Space ✨</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to bottom right, #fdf6f0, #fdeeee);
       color: #4a4a4a;
     }
 
-    header {
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.6rem;
       text-align: center;
-      padding: 2rem 1rem 1rem;
+      color: #e88e9c;
     }
 
-    header h1 {
-      font-size: 2.2rem;
-      color: #d19191;
+    .quote {
+      font-style: italic;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.1rem;
     }
 
-    header p {
-      color: #7d7d7d;
-      margin-top: 0.5rem;
-      font-size: 1rem;
-    }
-
-    .prompt-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 1rem;
+    .prompt-section {
+      margin-top: 40px;
     }
 
     .prompt {
-      background: #fff8f5;
-      padding: 1.2rem;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      background: #fff0f3;
+      border: 1px solid #fddde6;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border-left: 4px solid #f4baba;
+      transition: background 0.3s ease;
     }
 
     .prompt:hover {
-      background-color: #fcefee;
+      background: #ffeef2;
     }
 
     .response-box {
       display: none;
-      margin-top: 1rem;
+      margin-top: 10px;
     }
 
     textarea {
       width: 100%;
-      padding: 0.8rem;
+      padding: 10px;
       border-radius: 10px;
-      border: 1px solid #e2cfcf;
+      border: 1px solid #ddd;
+      font-family: inherit;
       resize: vertical;
-      font-size: 1rem;
     }
 
     button {
-      background-color: #f4baba;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      margin-top: 0.8rem;
+      margin-top: 10px;
+      background-color: #f8b6c2;
       border: none;
+      padding: 10px 18px;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: bold;
     }
 
-    .submitted-message {
-      display: none;
+    .thanks-message {
       text-align: center;
-      margin-top: 2rem;
-      font-size: 1.1rem;
-      color: #ab6e6e;
+      font-size: 1.2rem;
+      margin-top: 30px;
+      color: #777;
+      display: none;
     }
 
-    .tips-section {
-      background-color: #fff0f0;
-      padding: 1.5rem;
-      border-radius: 20px;
-      margin: 2rem auto;
-      max-width: 720px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    .tips {
+      margin-top: 50px;
+      background-color: #fff5f7;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px dashed #ffc1d3;
     }
 
-    .tips-section h3 {
-      margin-top: 0;
-      color: #c18d8d;
+    .tips h3 {
+      color: #e88e9c;
+      margin-bottom: 10px;
     }
 
-    .tips-section ul {
-      padding-left: 1.2rem;
-    }
-
-    .tips-section li {
-      margin-bottom: 0.6rem;
+    .tips ul {
+      list-style: disc;
+      padding-left: 20px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>HER Calm Space 🌸</h1>
-    <p>Gentle space to breathe, reflect, and gently ease your thoughts.</p>
-  </header>
+  <div class="container">
+    <h1>HER Calm Space 🧘‍♀️</h1>
+    <p class="quote">“You’ve survived 100% of your hardest days. That’s powerful.”</p>
 
-  <section class="prompt-container">
-    <div class="prompt" onclick="togglePrompt(this)">
-      What is something that made you feel overwhelmed lately?
-      <div class="response-box">
-        <textarea rows="4" placeholder="Write your heart out..."></textarea>
-        <button onclick="submitResponse(this)">Send to HER</button>
+    <div class="prompt-section">
+      <div class="prompt" onclick="toggleBox(1)">🌸 What's one thing you wish others understood about you?</div>
+      <div class="response-box" id="box1">
+        <textarea rows="5" placeholder="Write your heart out..."></textarea>
+        <button onclick="showThanks(this)">Send to HER</button>
+      </div>
+
+      <div class="prompt" onclick="toggleBox(2)">🌷 Write a letter to your past self. What does she need to hear?</div>
+      <div class="response-box" id="box2">
+        <textarea rows="5" placeholder="Be kind, be honest..."></textarea>
+        <button onclick="showThanks(this)">Send to HER</button>
+      </div>
+
+      <div class="prompt" onclick="toggleBox(3)">🌼 What helps you feel calm when your mind feels loud?</div>
+      <div class="response-box" id="box3">
+        <textarea rows="5" placeholder="Let it all out..."></textarea>
+        <button onclick="showThanks(this)">Send to HER</button>
       </div>
     </div>
 
-    <div class="prompt" onclick="togglePrompt(this)">
-      If you could write a letter to your inner self right now, what would it say?
-      <div class="response-box">
-        <textarea rows="4" placeholder="Go ahead, it’s safe here..."></textarea>
-        <button onclick="submitResponse(this)">Send to HER</button>
-      </div>
-    </div>
+    <div class="thanks-message" id="thanks">💖 Your words are safe here. HER sees you, always.</div>
 
-    <div class="prompt" onclick="togglePrompt(this)">
-      List 3 things that always help you feel slightly better.
-      <div class="response-box">
-        <textarea rows="4" placeholder="Even the tiniest moments count."></textarea>
-        <button onclick="submitResponse(this)">Send to HER</button>
-      </div>
+    <div class="tips">
+      <h3>Soft Self-Soothe Tips 🌙</h3>
+      <ul>
+        <li>Try 4-7-8 breathing when you're feeling overwhelmed.</li>
+        <li>Drink cold water or hold an ice cube to ground yourself gently.</li>
+        <li>Journal what you’re grateful for—even if it’s just your breath.</li>
+        <li>Say: "I am safe. I am healing. I am enough." on repeat.</li>
+      </ul>
     </div>
-  </section>
-
-  <div class="submitted-message" id="submitMessage">
-    💌 Thank you for sharing. HER is proud of you.
   </div>
 
-  <section class="tips-section">
-    <h3>Gentle Reminders from HER 💗</h3>
-    <ul>
-      <li>Your thoughts are valid. Always.</li>
-      <li>Take deep breaths — in for 4, hold for 4, out for 6.</li>
-      <li>You don't have to do everything right now.</li>
-      <li>Drink water and move gently — it helps more than you know.</li>
-      <li>You’re not alone. HER is here, always listening.</li>
-    </ul>
-  </section>
-
   <script>
-    function togglePrompt(element) {
-      const box = element.querySelector('.response-box');
-      const allBoxes = document.querySelectorAll('.response-box');
-      allBoxes.forEach(b => {
-        if (b !== box) b.style.display = 'none';
-      });
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    function toggleBox(id) {
+      document.querySelectorAll('.response-box').forEach(box => box.style.display = 'none');
+      document.getElementById('box' + id).style.display = 'block';
     }
 
-    function submitResponse(button) {
-      const textarea = button.previousElementSibling;
-      const value = textarea.value.trim();
-      if (value.length > 0) {
-        textarea.value = "";
-        document.getElementById('submitMessage').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('submitMessage').style.display = 'none';
-        }, 4000);
-      } else {
-        alert("Please write something first ✨");
-      }
+    function showThanks(button) {
+      button.disabled = true;
+      document.getElementById('thanks').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('thanks').style.display = 'none';
+        button.previousElementSibling.value = '';
+        button.disabled = false;
+        button.parentElement.style.display = 'none';
+      }, 3000);
     }
   </script>
 </body>
