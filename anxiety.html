@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #f0f6ff, #d7eaff);
+      background: linear-gradient(to bottom right, #d8eefe, #eff7fd);
       color: #333;
     }
 
@@ -17,7 +17,7 @@
       max-width: 800px;
       margin: 2rem auto;
       padding: 2rem;
-      background: white;
+      background: #f2f8ff;
       border-radius: 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
@@ -41,7 +41,7 @@
     }
 
     .prompt-box {
-      background: #f4f8ff;
+      background: #e4f1ff;
       padding: 1rem;
       margin-bottom: 1rem;
       border-left: 4px solid #89b6f7;
@@ -51,7 +51,7 @@
     }
 
     .prompt-box:hover {
-      background: #e9f0ff;
+      background: #d9ebff;
     }
 
     .answer-box {
@@ -80,10 +80,10 @@
 
     .form-section {
       margin-top: 2rem;
-      background: #fefeff;
+      background: #dceeff;
       padding: 1.5rem;
       border-radius: 15px;
-      box-shadow: 0 0 10px rgba(100, 100, 255, 0.05);
+      box-shadow: 0 0 10px rgba(100, 100, 255, 0.08);
     }
 
     .form-section form {
@@ -93,6 +93,17 @@
 
     .form-section input, .form-section textarea {
       margin-bottom: 1rem;
+    }
+
+    .thank-you {
+      display: none;
+      text-align: center;
+      background-color: #cbe7ff;
+      color: #2c486b;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 10px;
+      font-weight: 500;
     }
 
     .why-section {
@@ -114,6 +125,8 @@
     <h2>A Gentle Read to Begin With</h2>
     <div class="article">
       Feeling overwhelmed is human—but staying there isn’t your destiny. When we write, we untangle thoughts. Studies show journaling reduces cortisol (your stress hormone), and boosts mood regulation. This space is where you pause, feel, and begin healing. 🌱
+      <br><br>
+      Neuroscientific studies have shown that expressive writing activates the medial prefrontal cortex, which helps regulate emotional response. Translation? Writing = Processing. Even five minutes of honest writing per day has been shown to improve clarity, lower anxiety, and boost immune function.
     </div>
 
     <h2>Journaling Prompts ✍️</h2>
@@ -137,18 +150,31 @@
       <textarea rows="4" placeholder="Visualize it. Feel it."></textarea>
     </div>
 
+    <div class="prompt-box" onclick="toggleAnswer('prompt5')">What can you control today, even if it's small?</div>
+    <div class="answer-box" id="prompt5">
+      <textarea rows="4" placeholder="One tiny step matters."></textarea>
+    </div>
+
+    <div class="prompt-box" onclick="toggleAnswer('prompt6')">What do you wish someone would tell you right now?</div>
+    <div class="answer-box" id="prompt6">
+      <textarea rows="4" placeholder="Write it as if you're comforting yourself."></textarea>
+    </div>
+
     <div class="form-section">
       <h2>Talk to HER 💌</h2>
-      <form action="https://formspree.io/f/mnnzqowp" method="POST">
+      <form id="herForm" action="https://formspree.io/f/mnnzqowp" method="POST">
         <input type="text" name="name" placeholder="Your Name (optional)">
         <textarea name="message" rows="5" placeholder="Write anything you want HER to know..."></textarea>
         <button type="submit">Send to HER</button>
       </form>
+      <div class="thank-you" id="thankYouMessage">
+        💌 Message sent. HER sees you. You're not alone.
+      </div>
     </div>
 
     <div class="why-section">
       <h3>Why this space exists 💙</h3>
-      <p>This isn't just a journaling corner. It's where your healing begins. Where you breathe slower. Where you begin again. HER is here to remind you: you're powerful, loved, and never alone.
+      <p>This isn't just a journaling corner. It's where your healing begins. Where you breathe slower. Where you begin again. HER is here to remind you: you're powerful, loved, and never alone. This space is designed with real psychology, neuroscience, and girl power in mind. Everything a future Stanford girl would create 😌🧠🌸
       </p>
     </div>
   </div>
@@ -160,15 +186,33 @@
     }
 
     const quotes = [
-      "You are not your thoughts."
-      ,"The storm will pass."
-      ,"You’ve survived 100% of your worst days."
-      ,"You’re allowed to rest."
-      ,"One small step is still progress."
-      ,"You’re not alone in this."
-      ,"Gentleness is strength too."
+      "You are not your thoughts.",
+      "The storm will pass.",
+      "You’ve survived 100% of your worst days.",
+      "You’re allowed to rest.",
+      "One small step is still progress.",
+      "You’re not alone in this.",
+      "Gentleness is strength too.",
+      "Your feelings are valid."
     ];
     document.getElementById("quoteDisplay").innerText = quotes[Math.floor(Math.random() * quotes.length)];
+
+    document.getElementById("herForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const form = e.target;
+      fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(() => {
+        form.style.display = "none";
+        document.getElementById("thankYouMessage").style.display = "block";
+      }).catch(() => {
+        alert("Something went wrong. Try again later.");
+      });
+    });
   </script>
 </body>
 
