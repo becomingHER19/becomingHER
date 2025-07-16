@@ -1,219 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HER Calm Space | Anxiety Relief</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HER Calm Space</title>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #d8eefe, #eff7fd);
-      color: #333;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 2rem auto;
+      background: linear-gradient(to right, #b0d4f1, #d6eaf8);
+      color: #003049;
       padding: 2rem;
-      background: #f2f8ff;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
-
-    h1, h2 {
+    h1 {
       text-align: center;
-      color: #3a6073;
-    }
-
-    .quote {
-      font-style: italic;
-      font-size: 1.1rem;
-      margin: 1rem 0;
-      text-align: center;
-    }
-
-    .article {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-
-    .prompt-box {
-      background: #e4f1ff;
-      padding: 1rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
-      border-left: 4px solid #89b6f7;
-      border-radius: 10px;
+      color: #00254d;
+    }
+    .quote {
+      text-align: center;
+      font-style: italic;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #264653;
+    }
+    .section {
+      background-color: #e3f2fd;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .prompt {
+      margin: 1rem 0;
       cursor: pointer;
-      transition: 0.3s ease;
+      padding: 0.75rem;
+      background-color: #bbdefb;
+      border-radius: 8px;
+      transition: 0.3s;
     }
-
-    .prompt-box:hover {
-      background: #d9ebff;
+    .prompt:hover {
+      background-color: #90caf9;
     }
-
-    .answer-box {
+    .textarea-box {
       display: none;
       margin-top: 1rem;
     }
-
     textarea {
       width: 100%;
+      height: 120px;
       padding: 1rem;
+      border: none;
       border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
       resize: vertical;
     }
-
-    button {
-      background: #7aa9f9;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
+    .submit-message {
       margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #1b4332;
     }
-
-    .form-section {
-      margin-top: 2rem;
-      background: #dceeff;
-      padding: 1.5rem;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(100, 100, 255, 0.08);
-    }
-
-    .form-section form {
+    .form-box form {
       display: flex;
       flex-direction: column;
+      gap: 1rem;
     }
-
-    .form-section input, .form-section textarea {
-      margin-bottom: 1rem;
+    .form-box input, .form-box textarea {
+      padding: 0.8rem;
+      border: 1px solid #90caf9;
+      border-radius: 8px;
     }
-
-    .thank-you {
-      display: none;
-      text-align: center;
-      background-color: #cbe7ff;
-      color: #2c486b;
-      padding: 1rem;
-      margin-top: 1rem;
-      border-radius: 10px;
+    .form-box button {
+      background-color: #1565c0;
+      color: white;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .quiz label {
+      display: block;
+      margin-bottom: 0.5rem;
       font-weight: 500;
     }
-
-    .why-section {
-      font-size: 0.9rem;
-      color: #444;
-      background: #eaf3ff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin-top: 2rem;
+    .quiz input[type="radio"] {
+      margin-right: 0.5rem;
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h1>HER Calm Space 🦋</h1>
-    <p class="quote" id="quoteDisplay">“Sometimes, the most productive thing you can do is relax.”</p>
+  <h1>HER Calm Space</h1>
+  <div class="quote" id="quoteDisplay"></div>
 
-    <h2>A Gentle Read to Begin With</h2>
-    <div class="article">
-      Feeling overwhelmed is human—but staying there isn’t your destiny. When we write, we untangle thoughts. Studies show journaling reduces cortisol (your stress hormone), and boosts mood regulation. This space is where you pause, feel, and begin healing. 🌱
-      <br><br>
-      Neuroscientific studies have shown that expressive writing activates the medial prefrontal cortex, which helps regulate emotional response. Translation? Writing = Processing. Even five minutes of honest writing per day has been shown to improve clarity, lower anxiety, and boost immune function.
+  <div class="section">
+    <h2>Write It Out</h2>
+    <div class="prompt" onclick="togglePrompt(0)">What’s really on your mind today?</div>
+    <div class="textarea-box" id="answer0">
+      <textarea placeholder="Let it all out here..."></textarea>
     </div>
 
-    <h2>Journaling Prompts ✍️</h2>
-    <div class="prompt-box" onclick="toggleAnswer('prompt1')">What are you most worried about lately?</div>
-    <div class="answer-box" id="prompt1">
-      <textarea rows="4" placeholder="Let it out here... HER-style."></textarea>
+    <div class="prompt" onclick="togglePrompt(1)">When did you last feel peace and why?</div>
+    <div class="textarea-box" id="answer1">
+      <textarea placeholder="Reflect freely..."></textarea>
     </div>
 
-    <div class="prompt-box" onclick="toggleAnswer('prompt2')">If your anxiety had a voice, what would it say?</div>
-    <div class="answer-box" id="prompt2">
-      <textarea rows="4" placeholder="Type your thoughts gently..."></textarea>
+    <div class="prompt" onclick="togglePrompt(2)">What feels heavy right now?</div>
+    <div class="textarea-box" id="answer2">
+      <textarea placeholder="It's okay to not be okay."></textarea>
     </div>
 
-    <div class="prompt-box" onclick="toggleAnswer('prompt3')">What advice would the calmest version of you give you now?</div>
-    <div class="answer-box" id="prompt3">
-      <textarea rows="4" placeholder="Be your own support..."></textarea>
+    <div class="prompt" onclick="togglePrompt(3)">What does support look like for you today?</div>
+    <div class="textarea-box" id="answer3">
+      <textarea placeholder="No judgment, just thoughts."></textarea>
     </div>
 
-    <div class="prompt-box" onclick="toggleAnswer('prompt4')">Where do you feel most safe and at peace?</div>
-    <div class="answer-box" id="prompt4">
-      <textarea rows="4" placeholder="Visualize it. Feel it."></textarea>
+    <div class="prompt" onclick="togglePrompt(4)">What’s something you wish someone told you right now?</div>
+    <div class="textarea-box" id="answer4">
+      <textarea placeholder="Write to heal."></textarea>
     </div>
 
-    <div class="prompt-box" onclick="toggleAnswer('prompt5')">What can you control today, even if it's small?</div>
-    <div class="answer-box" id="prompt5">
-      <textarea rows="4" placeholder="One tiny step matters."></textarea>
-    </div>
-
-    <div class="prompt-box" onclick="toggleAnswer('prompt6')">What do you wish someone would tell you right now?</div>
-    <div class="answer-box" id="prompt6">
-      <textarea rows="4" placeholder="Write it as if you're comforting yourself."></textarea>
-    </div>
-
-    <div class="form-section">
-      <h2>Talk to HER 💌</h2>
-      <form id="herForm" action="https://formspree.io/f/mnnzqowp" method="POST">
-        <input type="text" name="name" placeholder="Your Name (optional)">
-        <textarea name="message" rows="5" placeholder="Write anything you want HER to know..."></textarea>
-        <button type="submit">Send to HER</button>
-      </form>
-      <div class="thank-you" id="thankYouMessage">
-        💌 Message sent. HER sees you. You're not alone.
-      </div>
-    </div>
-
-    <div class="why-section">
-      <h3>Why this space exists 💙</h3>
-      <p>This isn't just a journaling corner. It's where your healing begins. Where you breathe slower. Where you begin again. HER is here to remind you: you're powerful, loved, and never alone. This space is designed with real psychology, neuroscience, and girl power in mind. Everything a future Stanford girl would create 😌🧠🌸
-      </p>
+    <div class="prompt" onclick="togglePrompt(5)">Name one thing you did well today.</div>
+    <div class="textarea-box" id="answer5">
+      <textarea placeholder="Even small wins count!"></textarea>
     </div>
   </div>
 
+  <div class="section form-box">
+    <h2>Talk to HER</h2>
+    <form action="https://formspree.io/f/mnnzqowp" method="POST">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <textarea name="message" placeholder="Write to HER here..." required></textarea>
+      <button type="submit">Send to HER</button>
+    </form>
+    <div class="submit-message">💌 You’ll get HER love soon.</div>
+  </div>
+
+  <div class="section">
+    <h2>How Anxious Are You Feeling?</h2>
+    <form class="quiz" onsubmit="return showResult(event)">
+      <label>1. Feeling nervous, anxious, or on edge?
+        <br><input type="radio" name="q1" value="0"> Not at all
+        <input type="radio" name="q1" value="1"> Several days
+        <input type="radio" name="q1" value="2"> More than half the days
+        <input type="radio" name="q1" value="3"> Nearly every day
+      </label>
+      <label>2. Trouble relaxing?
+        <br><input type="radio" name="q2" value="0"> Not at all
+        <input type="radio" name="q2" value="1"> Several days
+        <input type="radio" name="q2" value="2"> More than half the days
+        <input type="radio" name="q2" value="3"> Nearly every day
+      </label>
+      <label>3. Feeling afraid something awful might happen?
+        <br><input type="radio" name="q3" value="0"> Not at all
+        <input type="radio" name="q3" value="1"> Several days
+        <input type="radio" name="q3" value="2"> More than half the days
+        <input type="radio" name="q3" value="3"> Nearly every day
+      </label>
+      <button type="submit">Check My Score</button>
+    </form>
+    <div id="result" class="submit-message"></div>
+  </div>
+
+  <div class="section">
+    <h2>About This Space</h2>
+    <p>This page isn’t therapy — but it’s a safe, soft place. Every word here is rooted in compassion and backed by psychology. You’re not broken. You’re human. And HER is here to walk beside you.</p>
+  </div>
+
   <script>
-    function toggleAnswer(id) {
-      const box = document.getElementById(id);
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    const quotes = [
+      "Take a deep breath, love. You’re doing better than you think.",
+      "You don’t have to be fearless, just brave enough to try.",
+      "Healing isn’t linear, but you’re moving. That matters.",
+      "Peace begins with permission — to pause, to feel, to be."
+    ];
+    document.getElementById("quoteDisplay").textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+    function togglePrompt(index) {
+      const box = document.getElementById("answer" + index);
+      box.style.display = box.style.display === "block" ? "none" : "block";
     }
 
-    const quotes = [
-      "You are not your thoughts.",
-      "The storm will pass.",
-      "You’ve survived 100% of your worst days.",
-      "You’re allowed to rest.",
-      "One small step is still progress.",
-      "You’re not alone in this.",
-      "Gentleness is strength too.",
-      "Your feelings are valid."
-    ];
-    document.getElementById("quoteDisplay").innerText = quotes[Math.floor(Math.random() * quotes.length)];
-
-    document.getElementById("herForm").addEventListener("submit", function (e) {
+    function showResult(e) {
       e.preventDefault();
-      const form = e.target;
-      fetch(form.action, {
-        method: form.method,
-        body: new FormData(form),
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(() => {
-        form.style.display = "none";
-        document.getElementById("thankYouMessage").style.display = "block";
-      }).catch(() => {
-        alert("Something went wrong. Try again later.");
-      });
-    });
+      let total = 0;
+      for (let i = 1; i <= 3; i++) {
+        const val = document.querySelector(`input[name=q${i}]:checked`);
+        if (!val) return alert("Please answer all questions");
+        total += parseInt(val.value);
+      }
+      let result = "";
+      if (total <= 3) result = "💙 Low anxiety. Keep caring for yourself.";
+      else if (total <= 6) result = "🌿 Mild anxiety. Gentle reminders help.";
+      else if (total <= 9) result = "🌧️ Moderate anxiety. You deserve space to heal.";
+      else result = "🌪️ Severe anxiety. HER recommends talking to someone safe.";
+      document.getElementById("result").textContent = result;
+    }
   </script>
 </body>
-
 </html>
