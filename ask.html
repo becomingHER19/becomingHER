@@ -1,90 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Ask HER</title>
-  <style>
-    body {
-      background: #fff1f5;
-      font-family: 'Poppins', sans-serif;
-      padding: 60px 20px;
-      color: #444;
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { BotIcon, UserIcon, HeartIcon } from "lucide-react";
+
+const herbotReplies = (message) => {
+  const text = message.toLowerCase();
+  if (text.includes("sad") || text.includes("depressed")) {
+    return "Aww bby I'm here for you 😔 Wanna talk more about it?";
+  } else if (text.includes("anxious") || text.includes("anxiety")) {
+    return "Deep breaths, love 💗 Let's slow down. Can you name 3 things around you?";
+  } else if (text.includes("happy") || text.includes("excited")) {
+    return "Yasss queen 👑 Tell me all the juicy details!";
+  } else if (text.includes("alone") || text.includes("lonely")) {
+    return "You’re never alone when I’m around 💅 Wanna call it a virtual hug?";
+  } else if (text.includes("motivate") || text.includes("inspire")) {
+    return "You’re THAT girl 💖 Don’t forget it. Get up, fix your crown and SLAY today.";
+  } else if (text.includes("love") || text.includes("crush")) {
+    return "Ooo someone’s heart is racing 💘 Spicy! Tell me more!";
+  } else {
+    return "I hear you, babe 💬 Let’s figure this out together.";
+  }
+};
+
+export default function HerbotSupportChat() {
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([
+    {
+      sender: "herbot",
+      text: "Hey cutie 💕 I’m HerBot — your tiny free therapist and bff. Spill your heart out 💅"
     }
+  ]);
 
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 40px;
-      border-radius: 14px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+  const sendMessage = () => {
+    if (!input.trim()) return;
+    const userMessage = { sender: "user", text: input };
+    const botReply = { sender: "herbot", text: herbotReplies(input) };
+    setMessages([...messages, userMessage, botReply]);
+    setInput("");
+  };
 
-    h1 {
-      color: #c278b2;
-    }
-
-    textarea {
-      width: 100%;
-      height: 120px;
-      border-radius: 10px;
-      padding: 14px;
-      font-size: 1rem;
-      border: 1px solid #ddd;
-      resize: none;
-      margin-top: 20px;
-      font-family: 'Poppins';
-    }
-
-    button {
-      background: #c278b2;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-weight: bold;
-      margin-top: 20px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    #confirmMsg {
-      margin-top: 15px;
-      color: #555;
-      font-size: 0.95rem;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Ask HER 💌</h1>
-    <p>Your safe space to open up, reflect, and grow. HER is listening.</p>
-    <textarea id="userQuestion" placeholder="Type your question, doubt, or anything on your mind..."></textarea>
-    <br>
-    <button onclick="submitQuestion()">Send to HER</button>
-    <div id="confirmMsg"></div>
-  </div>
-
-  <script>
-    function submitQuestion() {
-      const input = document.getElementById("userQuestion").value.trim();
-      const confirmMsg = document.getElementById("confirmMsg");
-
-      if (!input) {
-        confirmMsg.textContent = "Please type something first ✨";
-        return;
-      }
-
-      let stored = JSON.parse(localStorage.getItem("userQuestions") || "[]");
-      stored.push({
-        question: input,
-        date: new Date().toLocaleString()
-      });
-      localStorage.setItem("userQuestions", JSON.stringify(stored));
-
-      confirmMsg.textContent = "Your question has been sent to HER. Expect a reply in 24–48 hrs 💌";
-      document.getElementById("userQuestion").value = "";
-    }
-  </script>
-</body>
-</html>
+  return (
+    <div className="max-w-xl mx-auto p-6 rounded-xl shadow-2xl bg-gradient-to-tr from-blue-100 to-purple-200">
+      <h1 className="text-2xl font-bold text-center text-pink-700 mb-4 flex items-center justify-center gap-2">
+        <HeartIcon className="w-6 h-6" /> Ask HerBot 💬
+      </h1>
+      <ScrollArea className="h-[300px] p-3 rounded-md bg-white mb-4">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`mb-2 p-2 rounded-md text-sm w-fit max-w-[80%] ${
+              msg.sender === "user"
+                ? "ml-auto bg-pink-200 text-right"
+                : "mr-auto bg-purple-100 text-left"
+            }`}
+          >
+            <span className="font-medium inline-flex gap-1 items-center">
+              {msg.sender === "user" ? <UserIcon className="w-4 h-4" /> : <BotIcon className="w-4 h-4" />}
+              {msg.text}
+            </span>
+          </div>
+        ))}
+      </ScrollArea>
+      <div className="flex items-center gap-2">
+        <Input
+          placeholder="Type your feelings bby..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          className="rounded-xl px-4 py-2"
+        />
+        <Button onClick={sendMessage} className="bg-pink-500 hover:bg-pink-600 text-white rounded-xl">
+          Send
+        </Button>
+      </div>
+    </div>
+  );
+}
