@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manifestation Journal</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      color: #333;
+    }
+    header {
+      padding: 2rem;
+      text-align: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: #273c75;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .intro {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .experience {
+      font-style: italic;
+      color: #57606f;
+      margin-top: 1rem;
+    }
+    .prompt-section {
+      margin-top: 3rem;
+    }
+    .prompt {
+      background-color: #f1f2f6;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .prompt:hover {
+      background-color: #dcdde1;
+    }
+    .response-box {
+      display: none;
+      margin-top: 1rem;
+    }
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    .subliminal {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .subliminal iframe {
+      border-radius: 20px;
+      width: 100%;
+      height: 120px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Becoming HER: Manifestation Journal ✨
+  </header>
+  <div class="container">
+    <div class="intro">
+      <h2>How Manifestation Works (for real, babe):</h2>
+      <p>
+        Manifestation isn't just daydreaming — it's about aligning your energy with the version of you who already has it. That means belief, clarity, and aligned action. Write it down like it's real. Feel it. Then act like the version of you who has it already.
+      </p>
+      <p>
+        Visualization helps. Picture your goals so clearly that they feel real in your bones. That's how your brain starts working *with* you instead of against you.
+      </p>
+      <div class="experience">
+        I personally manifested full A1 grades when no one believed in me. I visualized my name in the top list and studied with that belief. I also became the best player at the Cagers basketball tournament — because I saw myself making that final shot over and over again before I even stepped on the court. You’re more powerful than you think.
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <h2>Choose Your Journal Prompts</h2>
+      <div class="prompt" onclick="toggleResponse('r1')">💭 What does my dream life look like in detail?</div>
+      <div class="response-box" id="r1"><textarea rows="5"></textarea></div>
+
+      <div class="prompt" onclick="toggleResponse('r2')">🪄 What are 3 things I’m manifesting this month?</div>
+      <div class="response-box" id="r2"><textarea rows="5"></textarea></div>
+
+      <div class="prompt" onclick="toggleResponse('r3')">💌 A letter from my higher self to current me.</div>
+      <div class="response-box" id="r3"><textarea rows="5"></textarea></div>
+
+      <div class="prompt" onclick="toggleResponse('r4')">🌅 How would I start my day if I was already her?</div>
+      <div class="response-box" id="r4"><textarea rows="5"></textarea></div>
+
+      <div class="prompt" onclick="toggleResponse('r5')">🌟 Things I’m grateful for that haven’t happened yet (as if they did).</div>
+      <div class="response-box" id="r5"><textarea rows="5"></textarea></div>
+
+      <div class="prompt" onclick="toggleResponse('r6')">🎯 What action can I take today to feel closer to my manifestations?</div>
+      <div class="response-box" id="r6"><textarea rows="5"></textarea></div>
+
+    </div>
+
+    <div class="subliminal">
+      <h3>Play While You Write 💫</h3>
+      <iframe src="https://www.youtube.com/embed/Ks_mP4d-JQY?autoplay=1&loop=1&playlist=Ks_mP4d-JQY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <p style="font-size: 0.9rem; color: #718093;">Subliminal affirmations for self-worth and manifestation. Headphones on. Let it sink in.</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleResponse(id) {
+      const box = document.getElementById(id);
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>
