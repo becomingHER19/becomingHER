@@ -1,79 +1,160 @@
-import React, { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ask HerBot 🤖💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #d0e7f9, #f9d0f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-const herbotReplies = (message) => {
-  const txt = message.toLowerCase();
+    .chat-container {
+      background: white;
+      width: 380px;
+      height: 580px;
+      border-radius: 25px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
 
-  if (txt.includes("sad") || txt.includes("depressed")) {
-    return "Aww baby 💔 I'm here for you 🧸 Wanna talk more about it?";
-  } else if (txt.includes("alone")) {
-    return "Deep breaths, love 🤍 Let’s slow down. Can you name 3 things around you?";
-  } else if (txt.includes("happy") || txt.includes("excited")) {
-    return "Yasss queen 👑 Tell me all the juicy details!";
-  } else if (txt.includes("anxious") || txt.includes("motivate")) {
-    return "You're THAT girl 💅 Don’t forget it. Get up, fix your crown and SLAY today.";
-  } else if (txt.includes("love")) {
-    return "I'm around 💌 Wanna call it a virtual hug? 🤗";
-  } else if (txt.includes("inspire")) {
-    return "Tell me more!! ✨";
-  } else {
-    return "I hear you, babe 💗 Let’s figure this out together.";
+    .chat-header {
+      background: #aad8ff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #222;
+      font-size: 20px;
+      font-weight: bold;
+      border-bottom: 2px solid #eee;
+    }
+
+    .chat-header img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #fffdfd;
+    }
+
+    .message {
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .user {
+      text-align: right;
+      color: #6b5b95;
+    }
+
+    .herbot {
+      text-align: left;
+      color: #ff6f61;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 12px;
+      border-top: 1px solid #eee;
+      background: #fff;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      outline: none;
+    }
+
+    button {
+      background: #ff6f61;
+      color: white;
+      border: none;
+      margin-left: 10px;
+      padding: 12px 18px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease-in;
+    }
+
+    button:hover {
+      background: #e0584f;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">
+    <img src="https://i.imgur.com/lN5JuKN.png" alt="HerBot" />
+    Ask HerBot 💖
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Tell her what's up...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  function herbotReply(message) {
+    const msg = message.toLowerCase();
+
+    if (msg.includes("sad") || msg.includes("cry") || msg.includes("lonely")) {
+      return "Aww baby I'm here 💗 Wanna talk more about it?";
+    } else if (msg.includes("love") || msg.includes("heart")) {
+      return "You're THAT girl 💅 Don’t forget it. Fix your crown and SLAY today.";
+    } else if (msg.includes("anxious") || msg.includes("overthinking")) {
+      return "Breathe in... Breathe out 🫧 Count 5 things around you. Feel better?";
+    } else if (msg.includes("excited") || msg.includes("happy")) {
+      return "YASSSSS! I love that for you 🔥 Tell me everything!";
+    } else if (msg.includes("alone")) {
+      return "You're not alone 🌷 I’m right here. Virtual hug incoming 🤗";
+    } else if (msg.includes("ugly") || msg.includes("hate myself")) {
+      return "Hold up 💅 We don’t do self-hate here. You're gorgeous inside out 💖";
+    } else {
+      return "Tell me more 💬 I’m listening with my digital ears on 👂✨";
+    }
   }
-};
 
-export default function HerbotSupportChat() {
-  const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  function sendMessage() {
+    const input = document.getElementById("userInput");
+    const text = input.value.trim();
+    if (!text) return;
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
-    const userMsg = { sender: "user", text: input };
-    const botReply = { sender: "herbot", text: herbotReplies(input) };
+    const chat = document.getElementById("chatMessages");
 
-    setMessages((prev) => [...prev, userMsg, botReply]);
-    setInput("");
-  };
+    // Append user message
+    chat.innerHTML += `<div class="message user">${text}</div>`;
 
-  return (
-    <div className="min-h-screen bg-pink-50 flex items-center justify-center p-4 font-sans">
-      <Card className="w-full max-w-md shadow-xl border-2 border-pink-300">
-        <CardContent className="p-6">
-          <h1 className="text-3xl font-bold text-pink-700 mb-4 text-center">
-            💖 Ask HerBot 💬
-          </h1>
-          <ScrollArea className="h-80 border rounded-lg p-4 bg-white mb-4 space-y-2 overflow-y-auto">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`max-w-[75%] px-4 py-2 rounded-xl text-sm ${
-                  msg.sender === "user"
-                    ? "bg-pink-200 ml-auto text-right"
-                    : "bg-white border border-pink-300 text-left"
-                }`}
-              >
-                {msg.text}
-              </div>
-            ))}
-          </ScrollArea>
-          <div className="flex gap-2">
-            <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your heart out 💌"
-              className="flex-1 bg-pink-100 border-pink-300"
-            />
-            <Button
-              onClick={sendMessage}
-              className="bg-pink-500 text-white hover:bg-pink-600 rounded-xl"
-            >
-              Send
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
+    // Append HerBot's reply
+    const reply = herbotReply(text);
+    setTimeout(() => {
+      chat.innerHTML += `<div class="message herbot">${reply}</div>`;
+      chat.scrollTop = chat.scrollHeight;
+    }, 400);
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
