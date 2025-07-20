@@ -3,71 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glow Up Blog | Becoming HER</title>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="glowup.js"></script>
+  <title>Glow Up Blog</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom right, #ffe6f0, #f0faff);
+      color: #333;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #cc3366;
+      margin-bottom: 0.5rem;
+    }
+
+    header blockquote {
+      font-style: italic;
+      color: #555;
+      font-size: 1.2rem;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: #b30059;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 1rem;
+      color: #888;
+      font-style: italic;
+    }
+
+    .creator-section {
+      margin-top: 3rem;
+      padding: 1rem;
+      background: #ffe6f0;
+      border-left: 5px solid #cc3366;
+      border-radius: 8px;
+    }
+
+    .creator-section h3 {
+      margin-bottom: 1rem;
+      color: #b30059;
+    }
+  </style>
+  <script>
+    const quotes = [
+      "\"I am not afraid of storms, for I am learning how to sail my ship.\" – Louisa May Alcott",
+      "\"I figure, if a girl wants to be a legend, she should just go ahead and be one.\" – Calamity Jane",
+      "\"There is no limit to what we, as women, can accomplish.\" – Michelle Obama",
+      "\"Beneath every strong, independent woman lies a broken little girl who had to learn how to get back up and never depend on anyone.\"",
+      "\"The most alluring thing a woman can have is confidence.\" – Beyoncé"
+    ];
+    window.onload = function () {
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("inspiring-quote").innerText = quote;
+    };
+  </script>
 </head>
 <body>
-  <header class="header">
-    <h1 class="logo">Becoming HER</h1>
+  <header>
+    <h1>Glow Up Blog</h1>
+    <blockquote id="inspiring-quote"></blockquote>
   </header>
 
-  <!-- Inspiring Quote Section -->
-  <section class="quote-section">
-    <blockquote id="inspiringQuote">"You are your best thing." – Toni Morrison</blockquote>
+  <section>
+    <h2>WHY I Created This Website</h2>
+    <p>
+      It all began with a small anxiety and depression test conducted in school by the psychology department. When the results came out, a majority of us—including me—were silently suffering from anxiety. It made me realise how deeply our mental health is being ignored in our everyday lives.
+    </p>
+    <p>
+      I’ve always been a sensitive soul, deeply in tune with my emotions. This space was born from that feeling. A safe corner of the internet where women could come together, reflect, heal, and glow up—not just outside, but from within.
+    </p>
   </section>
 
-  <!-- About Section -->
-  <section class="about-glowup">
-    <div class="why-section">
-      <h2>WHY I CREATED THIS</h2>
-      <p>I started this website after an anxiety test at school revealed something surprising—so many of us are struggling quietly. Including me. That small realization led to a bigger purpose. I made this space because I deeply care about mental health, emotions, and growth. This is for the girls who overthink, who feel like they’re not enough, who want to love themselves but don’t know where to start. This is my love letter to healing.</p>
-    </div>
-
-    <div class="journey-section">
-      <h2>MY GLOW UP JOURNEY</h2>
-      <p>I used to call myself average. But that’s not true. I was just learning. I shifted my mindset from self-criticism to self-respect. I chose to show up for myself—day by day. I started journaling, waking up early, saying affirmations, studying smarter, and respecting my boundaries. I built HER—my higher version. The girl who’s healing and glowing from within. You can too.</p>
-    </div>
-
-    <div class="tips-section">
-      <h2>REALISTIC & SCIENTIFIC GLOW UP TIPS</h2>
-      <ul>
-        <li>🌿 Hydration and a consistent sleep schedule reset your skin, body, and mind.</li>
-        <li>🧠 Dopamine detox and digital boundaries give your brain clarity.</li>
-        <li>📓 Journaling helps process emotions and identify negative thought loops.</li>
-        <li>📚 Learning one new thing a day improves cognitive health and confidence.</li>
-        <li>🧘‍♀️ Daily 10-minute mindfulness or stretches can significantly reduce cortisol.</li>
-        <li>🌞 Get morning sunlight – your circadian rhythm will thank you.</li>
-      </ul>
-    </div>
+  <section>
+    <h2>My Glow Up Journey</h2>
+    <p>
+      I used to label myself as "average." I believed I wasn't special, wasn’t smart enough, not beautiful enough. But somewhere along the way, I shifted my mindset. I began saying, "I’m not average; I’m learning. I’m growing. I’m becoming HER."
+    </p>
+    <p>
+      My glow-up wasn’t overnight. It took tears, journaling, boundary setting, 4 AM wake-ups, and believing in myself when no one else did. This space exists because I know how lonely that journey can be, and I want to walk it with you.
+    </p>
   </section>
 
-  <!-- Glow Up Blog Submission Section -->
-  <section class="submit-blog">
-    <h2>Share Your Glow Up Story</h2>
-    <form id="blogForm">
-      <textarea placeholder="Write your experience here..." required></textarea><br>
-      <label><input type="checkbox" id="makePublic"> Make public</label><br>
-      <button type="submit">Submit</button>
-    </form>
+  <section>
+    <h2>Realistic & Scientific Glow Up Tips</h2>
+    <ul>
+      <li>🧠 Practice gratitude daily – proven to increase happiness.</li>
+      <li>🛏️ Sleep 7–9 hours – your brain and skin need it.</li>
+      <li>💧 Hydrate & eat whole foods – glowing starts from inside.</li>
+      <li>🧘‍♀️ Move your body – even 15 minutes a day makes a difference.</li>
+      <li>📖 Read, learn, evolve – become obsessed with your growth.</li>
+      <li>🚫 Avoid toxic comparison – social media isn't real life.</li>
+    </ul>
   </section>
 
-  <!-- Display Blog Posts -->
-  <section class="blog-posts">
-    <h2>Glow Up Stories</h2>
-    <div id="blogList"></div>
-  </section>
+  <div class="creator-section">
+    <h3>✨ From Me to You</h3>
+    <p>
+      I’ll be uploading more personal blogs, once a week. These will include mini self-discovery letters, lifestyle insights, and growth mindset updates. Stay with me as we grow together.
+    </p>
+    <p>
+      And yes, there’s a space just for me (the creator) to post blogs—because I’m walking this journey right beside you.
+    </p>
+  </div>
 
-  <!-- Self-Help Women’s Group CTA -->
-  <section class="self-help-cta">
-    <h2>Join Our Women’s Self-Growth Circle</h2>
-    <p>A private, supportive community for girls who want to grow, help each other, and heal together.</p>
-    <a href="/group.html" class="join-btn">Join Now</a>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>✨ Powered by Becoming HER | A space for HER to grow, glow and heal ✨</p>
-  </footer>
+  <p class="footer-note">Welcome to Becoming HER. This is more than a blog. It’s a movement. 💗</p>
 </body>
 </html>
