@@ -1,136 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ask HER</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask Her – becomingHER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #fceff9, #f9fcff);
-      color: #3e3e3e;
+    * {
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
-    .container {
-      max-width: 720px;
-      width: 90%;
-      padding: 40px 20px;
-      background-color: #fff;
-      margin: 50px auto;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      border-radius: 16px;
+    body {
+      background: linear-gradient(145deg, #fff0f5, #ffe4e1);
+      color: #4b2e2e;
+      padding: 2rem;
+      line-height: 1.6;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
-      margin-bottom: 10px;
+      text-align: center;
+      margin-bottom: 1rem;
       color: #b76e79;
     }
 
-    .bot-reply {
-      background-color: #ffe7f0;
-      padding: 18px;
-      border-radius: 14px;
-      margin: 20px 0;
-      font-size: 1rem;
-      line-height: 1.6;
+    p.description {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .input-section {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #fff9f9;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
 
-    textarea {
-      padding: 15px;
-      font-size: 1rem;
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 1rem;
       border-radius: 12px;
-      border: 1px solid #ddd;
+      border: 1px solid #eeced1;
+      background-color: #fffefc;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
       resize: vertical;
     }
 
     button {
-      background-color: #d67b93;
-      color: white;
-      padding: 12px 24px;
-      font-size: 1rem;
+      background-color: #eeced1;
+      color: #4b2e2e;
       border: none;
+      padding: 0.75rem 2rem;
       border-radius: 12px;
+      font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: background 0.3s ease;
     }
 
     button:hover {
-      background-color: #b56b7b;
+      background-color: #e6b7bc;
     }
 
-    .form-footer {
-      margin-top: 40px;
+    .response-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background-color: #fff3f3;
+      border-radius: 16px;
+      border: 1px solid #f2c2c5;
+      font-style: italic;
+    }
+
+    .thank-you {
       text-align: center;
-    }
-
-    input[type="text"],
-    input[type="email"] {
-      padding: 12px;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: 1px solid #ccc;
+      color: #b76e79;
+      margin-top: 1.5rem;
+      font-weight: 600;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Ask HER</h1>
-    <p class="bot-reply">Hey lovely 🌸 You're not alone — I'm here to listen like your soft-spoken, no-judgement girl bestie. Talk to me about anything — glow ups, heartbreaks, or big dreams. I'm listening 💗</p>
-    <div class="input-section">
-      <label for="userInput">What's on your mind today?</label>
-      <textarea id="userInput" rows="6" placeholder="Type your thoughts here..."></textarea>
-      <button onclick="generateResponse()">Talk to Her</button>
-    </div>
-    <div id="herResponse" class="bot-reply" style="display:none;"></div>
 
-    <div class="form-footer">
-      <h2>Want to talk directly to the creator?</h2>
-      <p>Send a personal message below and she’ll reply soon 💌</p>
-      <form action="https://formspree.io/f/xkndyykk" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required><br><br>
-        <input type="email" name="email" placeholder="Your Email" required><br><br>
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea><br><br>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
+<body>
+  <h1>Ask Her</h1>
+  <p class="description">She listens like your fav diary, responds like your soft girl bestie and holds space like HER. Pour it out angel 💌</p>
+
+  <div class="container">
+    <form id="askForm">
+      <label for="question">What’s on your mind today?</label>
+      <textarea id="question" name="question" rows="6" placeholder="Write it all here, babe... I'm listening 🕊️" required></textarea>
+
+      <button type="submit">Ask Her</button>
+    </form>
+
+    <div id="response" class="response-box" style="display:none;"></div>
+    <p id="thankYou" class="thank-you" style="display:none;">Message sent, babe 💌 I'll read it with care.</p>
   </div>
 
   <script>
-    function generateResponse() {
-      const input = document.getElementById('userInput').value;
-      const responseBox = document.getElementById('herResponse');
-      if (input.trim() === '') return;
+    const form = document.getElementById("askForm");
+    const responseBox = document.getElementById("response");
+    const thankYou = document.getElementById("thankYou");
 
-      const responses = [
-        "That sounds like a lot, girl. I'm so proud of you for opening up. 💕",
-        "You're doing better than you think. One breath, one step at a time. 💫",
-        "Every emotion you feel is valid. You're safe here. 💗",
-        "Just a reminder: You're powerful, soft, and worthy — all at once. 🌷",
-        "HER believes in you. And I do too. ✨"
-      ];
-
-      const random = responses[Math.floor(Math.random() * responses.length)];
-      responseBox.innerText = random;
-      responseBox.style.display = 'block';
+    function isGibberish(text) {
+      return text.length < 10 || /[a-zA-Z]/.test(text) === false;
     }
+
+    function generateResponse(message) {
+      if (isGibberish(message)) {
+        return "I love how your brain just did that 😵‍💫 Try telling me a lil more so I can give you my best advice 💗";
+      } else if (message.toLowerCase().includes("anxious") || message.toLowerCase().includes("overwhelmed")) {
+        return "Take a breath, angel 🕊️ You’re not alone in this. Let’s take it one soft step at a time, mmkay?";
+      } else if (message.toLowerCase().includes("love") || message.toLowerCase().includes("heartbreak")) {
+        return "Babygirl… love hits hard, I know. But you? You were built to bloom again 🌷 trust that.";
+      } else {
+        return "Okay queen, I hear you 👑 Let’s figure this out together. You got me now ✨";
+      }
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const question = document.getElementById("question").value;
+      const reply = generateResponse(question);
+      responseBox.innerText = reply;
+      responseBox.style.display = "block";
+      thankYou.style.display = "block";
+
+      // Email it to you
+      fetch("https://formspree.io/f/mzbngwzb", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: question,
+          email: "tssivapriya2@gmail.com"
+        })
+      });
+    });
   </script>
 </body>
+
 </html>
