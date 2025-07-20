@@ -1,160 +1,150 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ask HerBot 🤖💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask HER</title>
   <style>
     body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to right, #fff5f8, #fdf0f5);
+      color: #4d3c3c;
       margin: 0;
-      font-family: 'Nunito', sans-serif;
-      background: linear-gradient(135deg, #d0e7f9, #f9d0f7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      padding: 2rem;
     }
-
-    .chat-container {
-      background: white;
-      width: 380px;
-      height: 580px;
-      border-radius: 25px;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #ffffffb0;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(255, 179, 199, 0.3);
     }
-
-    .chat-header {
-      background: #aad8ff;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #222;
-      font-size: 20px;
-      font-weight: bold;
-      border-bottom: 2px solid #eee;
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      color: #d45c96;
     }
-
-    .chat-header img {
-      height: 40px;
-      margin-right: 10px;
-    }
-
-    .chat-messages {
-      flex: 1;
-      padding: 20px;
+    .chat-box {
+      background-color: #fff7fb;
+      border-radius: 15px;
+      padding: 1rem;
+      margin-top: 2rem;
+      height: 300px;
       overflow-y: auto;
-      background: #fffdfd;
+      border: 2px dashed #f7b6d2;
     }
-
-    .message {
-      margin-bottom: 16px;
-      line-height: 1.5;
+    .chat-bubble {
+      padding: 0.8rem 1.2rem;
+      background: #fbe4f0;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+      width: fit-content;
+      max-width: 80%;
     }
-
-    .user {
-      text-align: right;
-      color: #6b5b95;
-    }
-
-    .herbot {
-      text-align: left;
-      color: #ff6f61;
-    }
-
-    .chat-input {
+    .user-input {
+      margin-top: 1.5rem;
       display: flex;
-      padding: 12px;
-      border-top: 1px solid #eee;
-      background: #fff;
+      gap: 1rem;
     }
-
-    input {
+    input[type="text"] {
       flex: 1;
-      padding: 12px;
-      font-size: 14px;
-      border: 1px solid #ddd;
-      border-radius: 20px;
-      outline: none;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
     }
-
     button {
-      background: #ff6f61;
+      background-color: #d45c96;
       color: white;
+      padding: 0.8rem 1.5rem;
       border: none;
-      margin-left: 10px;
-      padding: 12px 18px;
-      border-radius: 20px;
-      font-weight: bold;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.2s ease-in;
     }
-
-    button:hover {
-      background: #e0584f;
+    .divider {
+      margin-top: 3rem;
+      height: 2px;
+      background-color: #f7b6d2;
+    }
+    .email-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: vertical;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Ask HER 🤍</h1>
+    <p style="text-align: center; font-style: italic; font-size: 1.1rem;">Welcome to your girl-coded safe space. Talk to HER like you would your best friend on a solo trip to Bali ✨</p>
 
-<div class="chat-container">
-  <div class="chat-header">
-    <img src="https://i.imgur.com/lN5JuKN.png" alt="HerBot" />
-    Ask HerBot 💖
+    <div class="chat-box" id="chatBox">
+      <div class="chat-bubble">Hey love, what's on your mind today? 🌸</div>
+    </div>
+
+    <div class="user-input">
+      <input type="text" id="userMessage" placeholder="Type your message here..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="email-section">
+      <h2>Need to talk to the real HER (aka me)? 💌</h2>
+      <p>If you'd like to share something deeper or personal, I’m always listening. Drop me a message below and it’ll go straight to my inbox 💖</p>
+      <form action="mailto:tssivapriya2@gmail.com" method="POST" enctype="text/plain">
+        <textarea name="message" placeholder="Your message to the creator..."></textarea>
+        <br /><br />
+        <button type="submit">Send to HER</button>
+      </form>
+    </div>
   </div>
-  <div class="chat-messages" id="chatMessages"></div>
-  <div class="chat-input">
-    <input type="text" id="userInput" placeholder="Tell her what's up...">
-    <button onclick="sendMessage()">Send</button>
-  </div>
-</div>
 
-<script>
-  function herbotReply(message) {
-    const msg = message.toLowerCase();
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userMessage");
+      const chatBox = document.getElementById("chatBox");
+      const message = input.value.trim();
+      if (!message) return;
 
-    if (msg.includes("sad") || msg.includes("cry") || msg.includes("lonely")) {
-      return "Aww baby I'm here 💗 Wanna talk more about it?";
-    } else if (msg.includes("love") || msg.includes("heart")) {
-      return "You're THAT girl 💅 Don’t forget it. Fix your crown and SLAY today.";
-    } else if (msg.includes("anxious") || msg.includes("overthinking")) {
-      return "Breathe in... Breathe out 🫧 Count 5 things around you. Feel better?";
-    } else if (msg.includes("excited") || msg.includes("happy")) {
-      return "YASSSSS! I love that for you 🔥 Tell me everything!";
-    } else if (msg.includes("alone")) {
-      return "You're not alone 🌷 I’m right here. Virtual hug incoming 🤗";
-    } else if (msg.includes("ugly") || msg.includes("hate myself")) {
-      return "Hold up 💅 We don’t do self-hate here. You're gorgeous inside out 💖";
-    } else {
-      return "Tell me more 💬 I’m listening with my digital ears on 👂✨";
+      const userBubble = document.createElement("div");
+      userBubble.className = "chat-bubble";
+      userBubble.style.background = "#ffe6f0";
+      userBubble.textContent = message;
+      chatBox.appendChild(userBubble);
+
+      const botBubble = document.createElement("div");
+      botBubble.className = "chat-bubble";
+      botBubble.textContent = getHERReply(message);
+      chatBox.appendChild(botBubble);
+
+      input.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
-  }
 
-  function sendMessage() {
-    const input = document.getElementById("userInput");
-    const text = input.value.trim();
-    if (!text) return;
-
-    const chat = document.getElementById("chatMessages");
-
-    // Append user message
-    chat.innerHTML += `<div class="message user">${text}</div>`;
-
-    // Append HerBot's reply
-    const reply = herbotReply(text);
-    setTimeout(() => {
-      chat.innerHTML += `<div class="message herbot">${reply}</div>`;
-      chat.scrollTop = chat.scrollHeight;
-    }, 400);
-
-    input.value = "";
-    chat.scrollTop = chat.scrollHeight;
-  }
-</script>
-
+    function getHERReply(message) {
+      message = message.toLowerCase();
+      if (message.includes("sad") || message.includes("anxious") || message.includes("stressed")) {
+        return "Take a deep breath babe 💗 You're not alone and your feelings are valid. Wanna talk more about it?";
+      } else if (message.includes("happy") || message.includes("good")) {
+        return "Yasss queen 👑 I'm so happy for you! Celebrate those wins, big or small 💃✨";
+      } else if (message.includes("love") || message.includes("heartbroken")) {
+        return "Oof love can be hard sometimes 💌 But remember, you're HER. He was lucky to know you 💅";
+      } else if (message.includes("glow up") || message.includes("self love")) {
+        return "That glow-up isn’t just on the outside – it’s in how you speak to yourself too 🌷Keep going, gorgeous!";
+      } else {
+        return "Tell me more bestie 💕 I’m here with my iced coffee, let’s chat ✨";
+      }
+    }
+  </script>
 </body>
 </html>
+```
