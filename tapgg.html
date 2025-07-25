@@ -1,75 +1,137 @@
-<!-- Add to your main HTML file -->
-<section class="glow-up-section">
-  <div class="container">
-    <h2 class="title">🌸 Tap to Grow & Glow Up</h2>
-    <p class="subtitle">Your journey to becoming *HER* starts here.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grow & Glow — becoming HER</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #2e003e, #610070);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
 
-    <a href="glow-up.html" class="glow-up-btn">Start Glow Up</a>
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+    }
 
-    <!-- Optional podcast embed -->
-    <div class="podcast-player">
-      <h3>🎧 Listen to our Glowcast</h3>
-      <iframe 
-        src="https://open.spotify.com/embed/episode/your-episode-id-here" 
-        width="100%" 
-        height="152" 
-        frameborder="0" 
-        allowtransparency="true" 
-        allow="encrypted-media">
-      </iframe>
+    header h1 {
+      font-size: 3rem;
+      color: #FFD700;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .section-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .section-box:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .section-box h2 {
+      color: #FFC0CB;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-box p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .cta-btn {
+      display: block;
+      width: fit-content;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #FFD700;
+      color: #2e003e;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #ffc800;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 1rem;
+      color: #bbb;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      .cta-btn {
+        padding: 0.8rem 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tap to Grow & Glow</h1>
+    <p>Read short blog entries, find resources, and start becoming HER.</p>
+  </header>
+
+  <section class="section-grid">
+    <div class="section-box">
+      <h2>🧠 Mindset</h2>
+      <p>Rewire your thoughts with powerful daily rituals, journaling prompts, and habits that align with the woman you’re becoming.</p>
     </div>
-  </div>
-</section>
+    <div class="section-box">
+      <h2>💪 Body</h2>
+      <p>Workout ideas, gentle morning stretches, and hormone-balancing lifestyle tips that make you feel strong and feminine.</p>
+    </div>
+    <div class="section-box">
+      <h2>💅 Your Aesthetic</h2>
+      <p>From Pinterest boards to real-life routines—curate your aesthetic with intention, beauty, and authenticity.</p>
+    </div>
+    <div class="section-box">
+      <h2>🎧 Podcast (Coming Soon)</h2>
+      <p>We’re working on conversations that heal, glow, and grow. Stay tuned for HER voices soon.</p>
+    </div>
+    <div class="section-box">
+      <h2>🎁 Freebies</h2>
+      <p>Download authentic printable templates—planners, glow-up checklists, journaling sheets & more. All curated for *you*.</p>
+    </div>
+  </section>
 
-<style>
-.glow-up-section {
-  background: linear-gradient(to bottom, #fffafc, #ffe0f0);
-  padding: 4rem 2rem;
-  text-align: center;
-  border-radius: 30px;
-  margin: 2rem auto;
-  max-width: 800px;
-  box-shadow: 0 8px 24px rgba(255, 182, 193, 0.2);
-  font-family: 'Poppins', sans-serif;
-}
+  <a href="21days.html" class="cta-btn">✨ 21 Days of Becoming HER ✨</a>
 
-.glow-up-section .title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #d63384;
-  margin-bottom: 0.5rem;
-}
+  <footer>
+    © 2025 becoming HER. Built with vision, ambition & sparkle ✨
+  </footer>
 
-.glow-up-section .subtitle {
-  font-size: 1rem;
-  color: #6c757d;
-  margin-bottom: 2rem;
-}
-
-.glow-up-btn {
-  display: inline-block;
-  padding: 0.9rem 2rem;
-  font-size: 1rem;
-  background-color: #d63384;
-  color: white;
-  border-radius: 40px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
-
-.glow-up-btn:hover {
-  background-color: #bf2a73;
-  transform: scale(1.05);
-}
-
-.podcast-player {
-  margin-top: 3rem;
-}
-
-.podcast-player h3 {
-  color: #d63384;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-</style>
+</body>
+</html>
