@@ -1,137 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Grow & Glow — becoming HER</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Becoming HER</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #2e003e, #610070);
-      color: #fff;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff8f0;
+      color: #2d2d2d;
     }
 
     header {
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      color: #FFD700;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.8;
-    }
-
-    .section-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-
-    .section-box {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .section-box:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-5px);
-    }
-
-    .section-box h2 {
-      color: #FFC0CB;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-box p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .cta-btn {
-      display: block;
-      width: fit-content;
-      margin: 2rem auto;
+      background-color: #f5e1a4;
       padding: 1rem 2rem;
-      font-size: 1rem;
-      font-weight: bold;
-      background-color: #FFD700;
-      color: #2e003e;
-      border: none;
-      border-radius: 2rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .cta-btn:hover {
-      background-color: #ffc800;
-      transform: scale(1.05);
-    }
-
-    footer {
       text-align: center;
-      font-size: 0.85rem;
-      padding: 1rem;
-      color: #bbb;
+      font-weight: bold;
+      font-size: 1.8rem;
+      color: #4b2e00;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(to right, #ffe9c3, #fff8f0);
+    }
 
-      .cta-btn {
-        padding: 0.8rem 1.6rem;
+    .hero h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #5c4d33;
+    }
+
+    .golden-button {
+      background: linear-gradient(to right, #d4af37, #e0c068);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+
+    .golden-button:hover {
+      background: linear-gradient(to right, #e0c068, #d4af37);
+    }
+
+    .section {
+      padding: 2rem 1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .section h2 {
+      font-size: 1.5rem;
+      color: #4b2e00;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      margin: 1rem 0;
+    }
+
+    .footer {
+      background: #f5e1a4;
+      text-align: center;
+      padding: 1rem;
+      color: #4b2e00;
+      margin-top: 3rem;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero p {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
+  <header>becoming HER</header>
+  <div class="hero">
+    <h1>Your Glow Up Journey Starts Here</h1>
+    <p>Mentally, Physically, Aesthetically – curated with care and intention.</p>
+    <a href="21days.html" class="golden-button">🎟 21 Days of Becoming HER</a>
+  </div>
 
-  <header>
-    <h1>Tap to Grow & Glow</h1>
-    <p>Read short blog entries, find resources, and start becoming HER.</p>
-  </header>
+  <div class="section">
+    <h2>✨ Tap to Grow & Glow Up</h2>
+    <div class="card">
+      <p>Ready to unlock your real transformation? Read short, powerful blog entries that shift your mindset, elevate your aesthetic, and help you step into your main character energy.</p>
+      <a href="glowup-blogs.html" class="golden-button">Read Blog Entries</a>
+    </div>
 
-  <section class="section-grid">
-    <div class="section-box">
-      <h2>🧠 Mindset</h2>
-      <p>Rewire your thoughts with powerful daily rituals, journaling prompts, and habits that align with the woman you’re becoming.</p>
+    <h2>💖 Mental Health is Priority</h2>
+    <div class="card">
+      <p>We believe becoming HER starts with healing HER. This space is also for understanding emotions, journaling, practicing gratitude, and owning your story.</p>
     </div>
-    <div class="section-box">
-      <h2>💪 Body</h2>
-      <p>Workout ideas, gentle morning stretches, and hormone-balancing lifestyle tips that make you feel strong and feminine.</p>
-    </div>
-    <div class="section-box">
-      <h2>💅 Your Aesthetic</h2>
-      <p>From Pinterest boards to real-life routines—curate your aesthetic with intention, beauty, and authenticity.</p>
-    </div>
-    <div class="section-box">
-      <h2>🎧 Podcast (Coming Soon)</h2>
-      <p>We’re working on conversations that heal, glow, and grow. Stay tuned for HER voices soon.</p>
-    </div>
-    <div class="section-box">
-      <h2>🎁 Freebies</h2>
-      <p>Download authentic printable templates—planners, glow-up checklists, journaling sheets & more. All curated for *you*.</p>
-    </div>
-  </section>
 
-  <a href="21days.html" class="cta-btn">✨ 21 Days of Becoming HER ✨</a>
+    <h2>🧠 Mindset. ✨ Aesthetic. 💪 Body.</h2>
+    <div class="card">
+      <p>Explore authentic advice, templates, and upcoming freebies crafted just for your elevation. We’re creating a community that cares about real self-love, not just surface level.</p>
+    </div>
 
-  <footer>
-    © 2025 becoming HER. Built with vision, ambition & sparkle ✨
-  </footer>
+    <div class="card">
+      <p>Coming Soon: Freebies + Podcast built for HER.</p>
+    </div>
+  </div>
 
+  <div class="footer">
+    Built with ambition and self-love 💌 From Kerala 💫
+  </div>
 </body>
 </html>
