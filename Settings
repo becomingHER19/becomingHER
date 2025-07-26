@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | Becoming HER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: #d76b9c;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .info {
+      background-color: #f2f2f2;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #d76b9c;
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c35989;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Settings</h1>
+
+    <section>
+      <h2>Account Information</h2>
+      <div class="info">
+        <label for="username">Username</label>
+        <input type="text" id="username" value="her_glowupqueen" readonly>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" value="her@email.com" readonly>
+
+        <label for="password">Password</label>
+        <input type="text" id="password" value="•••••••••••" readonly>
+      </div>
+    </section>
+
+    <section>
+      <h2>Activity Log</h2>
+      <div class="info">
+        <p>Last login: July 25, 2025</p>
+        <p>Posts shared: 12</p>
+        <p>Affirmations saved: 39</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Feedback</h2>
+      <textarea rows="4" placeholder="Tell us how we can make your HER journey even better..."></textarea>
+      <br /><br />
+      <button>Submit Feedback</button>
+    </section>
+
+    <section>
+      <h2>Our Services</h2>
+      <div class="info">
+        <p>✨ Personalized affirmations & glow-up challenges</p>
+        <p>✨ Journaling space & manifestation vault</p>
+        <p>✨ Study & self-love productivity tools</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Security & Account</h2>
+      <button>Logout</button>
+      <button style="background-color: #f44336; margin-left: 10px;">Delete Account</button>
+    </section>
+  </div>
+</body>
+
+</html>
