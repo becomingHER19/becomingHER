@@ -1,96 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Glow & Grow Blogs</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glow Up Blogs</title>
   <style>
+    :root {
+      --main-bg: linear-gradient(to right, #f5f7fa, #c3cfe2);
+      --card-bg: #ffffff;
+      --accent-color: #6c63ff;
+      --text-color: #333;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--main-bg);
+      color: var(--text-color);
       padding: 1rem;
-      background: #fffafc;
-      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #444;
     }
 
     .blog-container {
-      max-width: 600px;
-      margin: 0 auto;
+      max-width: 800px;
+      margin: auto;
     }
 
     .blog-card {
-      background: #fefefe;
-      border: 1px solid #e3e3e3;
+      background: var(--card-bg);
       border-radius: 12px;
-      margin-bottom: 15px;
-      padding: 15px 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
 
     .blog-card:hover {
-      background: #fdf6f8;
+      transform: translateY(-5px);
     }
 
     .blog-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0;
-      color: #b06f91;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
     }
 
     .blog-content {
       display: none;
-      margin-top: 10px;
-      font-size: 15px;
+      margin-top: 1rem;
+      font-size: 1rem;
       line-height: 1.6;
+    }
+
+    .stars {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.3rem;
+      cursor: pointer;
+    }
+
+    .star {
+      font-size: 1.3rem;
+      color: #ccc;
+      transition: color 0.2s;
+    }
+
+    .star.active {
+      color: gold;
+    }
+
+    .feedback {
+      margin-top: 0.5rem;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 6px;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      font-family: inherit;
     }
   </style>
 </head>
 <body>
+  <h1>✨ Grow & Glow Blog Series ✨</h1>
   <div class="blog-container">
-    
+
     <div class="blog-card" onclick="toggleBlog(this)">
-      <p class="blog-title">1. The Science of a Mindset Glow-Up 🌱</p>
+      <div class="blog-title">🧠 Mindset Shift: Scientific Ways to Rewire Your Brain</div>
       <div class="blog-content">
-        <p>
-          Studies show that neuroplasticity allows us to rewire our brain by repeating positive habits and thoughts. Your brain literally changes when you adopt a growth mindset. 
-          Instead of “I can’t do this,” think: “I can’t do this yet.” 
-          Track small wins, visualize success, and challenge limiting beliefs. Journaling rewires cognitive bias. Confidence isn’t a gift—it’s built like muscle. 
-          Your mind glows before your life does.
-        </p>
+        <p>Neuroscience tells us our brains have neuroplasticity — the ability to rewire itself based on thought patterns. Shifting from a fixed to growth mindset involves creating new synaptic connections by practicing gratitude, journaling progress, and visualizing success. Research shows that consistent affirmations, mindfulness, and learning from failure actually strengthen brain regions associated with resilience and motivation.</p>
+        <div class="stars" onclick="rateBlog(event, this)">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <div class="feedback">
+          <label>Share your thoughts:</label>
+          <textarea placeholder="Did this help you? We'd love to know."></textarea>
+        </div>
       </div>
     </div>
 
     <div class="blog-card" onclick="toggleBlog(this)">
-      <p class="blog-title">2. How I Elevated My Aesthetic on a Budget ✨</p>
+      <div class="blog-title">🎨 Aesthetic Elevation: Level Up Your Visual Identity</div>
       <div class="blog-content">
-        <p>
-          I didn’t suddenly become a Pinterest girl. I started with what I had. I chose 2 colors I loved and began curating clothes, notebooks, and decor around that theme. 
-          I deep-cleaned my room, added fairy lights, and started dressing like the version of me I admired. 
-          It’s not about money—it’s about alignment. Romanticizing everyday routines made me feel expensive, even in a thrifted outfit.
-        </p>
+        <p>Looking put-together isn't about expensive clothes—it's about consistency. Choose a color palette that flatters your skin tone, master clean girl makeup, and align your digital aesthetics (IG, Pinterest) with your personal vibe. Creating Pinterest boards to moodboard your dream self can even trigger subconscious action—this is backed by the psychology of vision boarding. Your aesthetic should reflect your values, not trends.</p>
+        <div class="stars" onclick="rateBlog(event, this)">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <div class="feedback">
+          <label>Share your thoughts:</label>
+          <textarea placeholder="Did this inspire you? Drop your thoughts."></textarea>
+        </div>
       </div>
     </div>
 
     <div class="blog-card" onclick="toggleBlog(this)">
-      <p class="blog-title">3. Mentally Healing When No One Notices 🧠</p>
+      <div class="blog-title">🧘 Mental Glow-Up: From Surviving to Thriving</div>
       <div class="blog-content">
-        <p>
-          Healing isn’t always aesthetic. It’s crying in silence, forgiving without apologies, and choosing peace even when you want closure. 
-          I began with 5-minute meditations, limiting social media, and writing one thing I was proud of daily. 
-          I didn’t magically become healed—but I became self-aware. That was enough to start again, softly and steadily.
-        </p>
+        <p>Most people underestimate how deeply mental health affects confidence. Studies show that routines, exercise, and even sunlight exposure improve serotonin and dopamine levels. Journaling your emotions, seeking therapy (even online), and having a digital detox once a week have proven long-term benefits. Mental glow-ups are the foundation of real transformation — not the highlight reel but the healing journey behind it.</p>
+        <div class="stars" onclick="rateBlog(event, this)">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <div class="feedback">
+          <label>Share your thoughts:</label>
+          <textarea placeholder="How did this resonate with you?"></textarea>
+        </div>
       </div>
     </div>
-
   </div>
 
   <script>
     function toggleBlog(card) {
       const content = card.querySelector(".blog-content");
+      const allCards = document.querySelectorAll(".blog-content");
+      allCards.forEach(c => {
+        if (c !== content) c.style.display = "none";
+      });
       content.style.display = content.style.display === "block" ? "none" : "block";
+    }
+
+    function rateBlog(e, starSet) {
+      e.stopPropagation();
+      const stars = starSet.querySelectorAll(".star");
+      const clickedIndex = Array.from(stars).indexOf(e.target);
+      stars.forEach((star, i) => {
+        star.classList.toggle("active", i <= clickedIndex);
+      });
     }
   </script>
 </body>
