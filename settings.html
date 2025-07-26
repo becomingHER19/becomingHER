@@ -1,116 +1,163 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Settings | Becoming HER</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff5f8;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
 
-  @override
-  _SettingsPageState createState() => _SettingsPageState();
-}
+    h2 {
+      text-align: center;
+      color: #d63384;
+    }
 
-class _SettingsPageState extends State<SettingsPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _user;
+    .info {
+      margin: 20px 0;
+      font-size: 16px;
+    }
 
-  @override
-  void initState() {
-    super.initState();
-    _user = _auth.currentUser;
-  }
+    .info label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      color: #444;
+    }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          'Settings',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Account Details',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 16),
-            _buildDetailRow('Username', _user?.displayName ?? 'Not set'),
-            _buildDetailRow('Email', _user?.email ?? 'Not available'),
-            const SizedBox(height: 32),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              ),
-              onPressed: () async {
-                await _auth.signOut();
-                Navigator.of(context).pushReplacementNamed('/login');
-              },
-              child: const Text(
-                'Sign Out',
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+    .btn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #ff8ab0;
+      color: white;
+      transition: background 0.3s;
+    }
 
-  Widget _buildDetailRow(String label, String value) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
-          ),
-          Flexible(
-            child: Text(
-              value,
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                color: Colors.black54,
-              ),
-              textAlign: TextAlign.right,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+    .btn:hover {
+      background-color: #e86a96;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 5px;
+      resize: none;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Settings</h2>
+
+    <div class="info">
+      <label>Name:</label>
+      <div id="name">Loading...</div>
+
+      <label>Username:</label>
+      <div id="username">Loading...</div>
+
+      <label>Email:</label>
+      <div id="email">Loading...</div>
+    </div>
+
+    <button class="btn" onclick="editProfile()">Edit Profile</button>
+    <button class="btn" onclick="changePassword()">Change Password</button>
+    <button class="btn" onclick="showFeedback()">Send Feedback</button>
+    <button class="btn" onclick="viewServices()">Our Services</button>
+    <button class="btn" onclick="logout()">Logout</button>
+    <button class="btn" onclick="deleteAccount()">Delete My Account</button>
+
+    <div id="feedbackForm" style="display:none; margin-top: 20px;">
+      <label for="feedback">Your Feedback:</label>
+      <textarea id="feedback" rows="4" placeholder="Share anything... We care 💖"></textarea>
+      <button class="btn" onclick="submitFeedback()">Submit Feedback</button>
+    </div>
+  </div>
+
+  <script>
+    // Simulate login data
+    const user = JSON.parse(localStorage.getItem('user')) || {
+      name: "Glow Up Queen",
+      username: "glowqueen",
+      email: "sivapriya@gmail.com"
+    };
+
+    document.getElementById("name").innerText = user.name;
+    document.getElementById("username").innerText = user.username;
+    document.getElementById("email").innerText = user.email;
+
+    function logout() {
+      localStorage.removeItem("user");
+      alert("Logged out successfully!");
+      window.location.href = "login.html"; // change based on your file
+    }
+
+    function deleteAccount() {
+      if (confirm("Are you sure you want to delete your account? This is permanent!")) {
+        localStorage.removeItem("user");
+        alert("Account deleted.");
+        window.location.href = "index.html";
+      }
+    }
+
+    function showFeedback() {
+      const form = document.getElementById("feedbackForm");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+    }
+
+    function submitFeedback() {
+      const text = document.getElementById("feedback").value;
+      if (text.trim()) {
+        alert("Thanks for your feedback! 💌");
+        document.getElementById("feedback").value = "";
+        showFeedback();
+      } else {
+        alert("Please write something 🥺");
+      }
+    }
+
+    function editProfile() {
+      alert("Edit Profile - Coming soon! 😉");
+    }
+
+    function changePassword() {
+      alert("Change Password - Feature coming soon!");
+    }
+
+    function viewServices() {
+      alert("Our services include study tools, productivity boosters, and glow-up content!");
+    }
+  </script>
+
+</body>
+</html>
