@@ -2,162 +2,132 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>User Settings | Becoming HER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | Becoming HER</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #fff5f8;
-      margin: 0;
-      padding: 0;
+      background: #f9f4ef;
       color: #333;
-    }
-
-    .container {
+      padding: 2rem;
       max-width: 500px;
-      margin: 40px auto;
-      padding: 30px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      margin: auto;
     }
-
-    h2 {
+    h1 {
       text-align: center;
-      color: #d63384;
+      margin-bottom: 1.5rem;
+      color: #4b2e83;
     }
-
-    .info {
-      margin: 20px 0;
-      font-size: 16px;
+    .setting-box {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-
-    .info label {
-      font-weight: bold;
+    .field {
+      margin-bottom: 1rem;
+    }
+    .field label {
+      font-weight: 600;
       display: block;
-      margin-top: 10px;
-      color: #444;
+      margin-bottom: 0.3rem;
     }
-
-    .btn {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      background-color: #ff8ab0;
-      color: white;
-      transition: background 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #e86a96;
-    }
-
-    textarea {
-      width: 100%;
+    .field span {
+      font-size: 0.95rem;
+      background: #f1f1f1;
+      padding: 0.5rem;
       border-radius: 8px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 5px;
-      resize: none;
+      display: block;
     }
-
-    @media (max-width: 600px) {
-      .container {
-        margin: 20px;
-        padding: 20px;
-      }
+    button {
+      background: #d4a373;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background: #bc8a5f;
+    }
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <h2>Settings</h2>
-
-    <div class="info">
-      <label>Name:</label>
-      <div id="name">Loading...</div>
-
+  <h1>⚙️ Settings</h1>
+  <div class="setting-box">
+    <div class="field">
       <label>Username:</label>
-      <div id="username">Loading...</div>
-
+      <span id="username">@glowupqueen</span>
+    </div>
+    <div class="field">
       <label>Email:</label>
-      <div id="email">Loading...</div>
+      <span id="email">sivapriya@example.com</span>
+    </div>
+    <div class="field">
+      <label>Display Name:</label>
+      <span id="displayName">Sivapriya</span>
     </div>
 
-    <button class="btn" onclick="editProfile()">Edit Profile</button>
-    <button class="btn" onclick="changePassword()">Change Password</button>
-    <button class="btn" onclick="showFeedback()">Send Feedback</button>
-    <button class="btn" onclick="viewServices()">Our Services</button>
-    <button class="btn" onclick="logout()">Logout</button>
-    <button class="btn" onclick="deleteAccount()">Delete My Account</button>
-
-    <div id="feedbackForm" style="display:none; margin-top: 20px;">
-      <label for="feedback">Your Feedback:</label>
-      <textarea id="feedback" rows="4" placeholder="Share anything... We care 💖"></textarea>
-      <button class="btn" onclick="submitFeedback()">Submit Feedback</button>
+    <div class="button-group">
+      <button onclick="editProfile()">Edit Profile</button>
+      <button onclick="feedback()">Give Feedback</button>
+      <button onclick="logout()">Logout</button>
+      <button onclick="deleteAccount()" style="background: #d9534f;">Delete Account</button>
     </div>
   </div>
 
   <script>
-    // Simulate login data
-    const user = JSON.parse(localStorage.getItem('user')) || {
-      name: "Glow Up Queen",
-      username: "glowqueen",
-      email: "sivapriya@gmail.com"
+    // Get user data from localStorage or use defaults
+    const user = {
+      username: localStorage.getItem("username") || "glowupqueen",
+      email: localStorage.getItem("email") || "sivapriya@example.com",
+      displayName: localStorage.getItem("displayName") || "Sivapriya"
     };
 
-    document.getElementById("name").innerText = user.name;
-    document.getElementById("username").innerText = user.username;
-    document.getElementById("email").innerText = user.email;
+    document.getElementById("username").textContent = "@" + user.username;
+    document.getElementById("email").textContent = user.email;
+    document.getElementById("displayName").textContent = user.displayName;
+
+    function editProfile() {
+      const newDisplayName = prompt("Enter new display name:", user.displayName);
+      const newUsername = prompt("Enter new username:", user.username);
+      const newEmail = prompt("Enter new email:", user.email);
+      
+      if (newDisplayName && newUsername && newEmail) {
+        localStorage.setItem("displayName", newDisplayName);
+        localStorage.setItem("username", newUsername);
+        localStorage.setItem("email", newEmail);
+        location.reload();
+      }
+    }
+
+    function feedback() {
+      window.location.href = "mailto:yourmail@example.com?subject=Feedback for Becoming HER";
+    }
 
     function logout() {
-      localStorage.removeItem("user");
-      alert("Logged out successfully!");
-      window.location.href = "login.html"; // change based on your file
+      alert("Logged out successfully.");
+      // You can redirect to login.html if you have one
+      window.location.href = "index.html";
     }
 
     function deleteAccount() {
-      if (confirm("Are you sure you want to delete your account? This is permanent!")) {
-        localStorage.removeItem("user");
+      const confirmDelete = confirm("Are you sure you want to delete your account?");
+      if (confirmDelete) {
+        localStorage.clear();
         alert("Account deleted.");
         window.location.href = "index.html";
       }
     }
-
-    function showFeedback() {
-      const form = document.getElementById("feedbackForm");
-      form.style.display = form.style.display === "none" ? "block" : "none";
-    }
-
-    function submitFeedback() {
-      const text = document.getElementById("feedback").value;
-      if (text.trim()) {
-        alert("Thanks for your feedback! 💌");
-        document.getElementById("feedback").value = "";
-        showFeedback();
-      } else {
-        alert("Please write something 🥺");
-      }
-    }
-
-    function editProfile() {
-      alert("Edit Profile - Coming soon! 😉");
-    }
-
-    function changePassword() {
-      alert("Change Password - Feature coming soon!");
-    }
-
-    function viewServices() {
-      alert("Our services include study tools, productivity boosters, and glow-up content!");
-    }
   </script>
-
 </body>
 </html>
