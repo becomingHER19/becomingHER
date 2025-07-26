@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glow & Grow Blogs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 1rem;
+      background: #fffafc;
+      color: #333;
+    }
+
+    .blog-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .blog-card {
+      background: #fefefe;
+      border: 1px solid #e3e3e3;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      padding: 15px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .blog-card:hover {
+      background: #fdf6f8;
+    }
+
+    .blog-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+      color: #b06f91;
+    }
+
+    .blog-content {
+      display: none;
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="blog-container">
+    
+    <div class="blog-card" onclick="toggleBlog(this)">
+      <p class="blog-title">1. The Science of a Mindset Glow-Up 🌱</p>
+      <div class="blog-content">
+        <p>
+          Studies show that neuroplasticity allows us to rewire our brain by repeating positive habits and thoughts. Your brain literally changes when you adopt a growth mindset. 
+          Instead of “I can’t do this,” think: “I can’t do this yet.” 
+          Track small wins, visualize success, and challenge limiting beliefs. Journaling rewires cognitive bias. Confidence isn’t a gift—it’s built like muscle. 
+          Your mind glows before your life does.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog-card" onclick="toggleBlog(this)">
+      <p class="blog-title">2. How I Elevated My Aesthetic on a Budget ✨</p>
+      <div class="blog-content">
+        <p>
+          I didn’t suddenly become a Pinterest girl. I started with what I had. I chose 2 colors I loved and began curating clothes, notebooks, and decor around that theme. 
+          I deep-cleaned my room, added fairy lights, and started dressing like the version of me I admired. 
+          It’s not about money—it’s about alignment. Romanticizing everyday routines made me feel expensive, even in a thrifted outfit.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog-card" onclick="toggleBlog(this)">
+      <p class="blog-title">3. Mentally Healing When No One Notices 🧠</p>
+      <div class="blog-content">
+        <p>
+          Healing isn’t always aesthetic. It’s crying in silence, forgiving without apologies, and choosing peace even when you want closure. 
+          I began with 5-minute meditations, limiting social media, and writing one thing I was proud of daily. 
+          I didn’t magically become healed—but I became self-aware. That was enough to start again, softly and steadily.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleBlog(card) {
+      const content = card.querySelector(".blog-content");
+      content.style.display = content.style.display === "block" ? "none" : "block";
+    }
+  </script>
+</body>
+</html>
