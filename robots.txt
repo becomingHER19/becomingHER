@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://becomingher19.github.io/becomingHER/sitemap.xml
