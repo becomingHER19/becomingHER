@@ -7,162 +7,177 @@
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: #fdf9f6;
+      background: linear-gradient(to right, #fffafc, #f9f2f7);
+      color: #444;
+    }
+
+    header {
       display: flex;
-      color: #333;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffeaf3;
+      padding: 15px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .menu-icon {
+      font-size: 26px;
+      cursor: pointer;
     }
 
     .sidebar {
-      width: 240px;
-      background: #fff;
-      border-right: 1px solid #eee;
-      padding: 30px 20px;
-      height: 100vh;
       position: fixed;
-    }
-
-    .sidebar h2 {
-      font-size: 1.5rem;
-      color: #c278b2;
-      margin-bottom: 40px;
-    }
-
-    .sidebar a {
-      display: block;
-      text-decoration: none;
-      color: #555;
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-
-    .sidebar a:hover {
-      color: #c278b2;
-    }
-
-    .main {
-      margin-left: 260px;
-      padding: 40px;
-      flex: 1;
-    }
-
-    .quote {
-      background: #fff0f5;
+      top: 0;
+      left: -250px;
+      width: 220px;
+      height: 100vh;
+      background-color: #f9f2f7;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      border-left: 6px solid #c278b2;
-      border-radius: 10px;
-      font-style: italic;
-      font-size: 1.1rem;
-      margin-bottom: 40px;
-      color: #555;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: left 0.3s ease;
+    }
+
+    .sidebar.show {
+      left: 0;
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+      color: #a65e90;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .container {
+      padding: 30px 20px;
+      max-width: 800px;
+      margin: auto;
     }
 
     h1 {
+      text-align: center;
       color: #c278b2;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    #quote {
+      text-align: center;
+      font-style: italic;
+      color: #888;
       margin-bottom: 30px;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
+    p.purpose {
       background: #fff;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
-      cursor: pointer;
-      border: 1px solid #f3f3f3;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
     }
 
-    .card:hover {
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-box {
+      background: #fff0f5;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .section-box:hover {
       transform: translateY(-5px);
     }
 
-    .card h3 {
-      color: #c278b2;
-      margin-bottom: 12px;
-    }
-
-    .coming-soon {
-      font-size: 0.9rem;
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.85rem;
       color: #999;
-      margin-top: 5px;
     }
 
+    @media (min-width: 600px) {
+      .sections {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .section-box {
+        flex: 1;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h2>becomingHER</h2>
-    <a href="#">🏠 Dashboard</a>
-    <a href="journaling-hub.html">📝 Journaling Prompts</a>
-    <a href="glowup-blog.html">✨ Glow-Up Blog</a>
-    <a href="share.html">📖 Share Your Journey</a>
-    <a href="ask-her.html">💬 Ask HER</a>
-    <a href="mood.html">🌈 Mood Tracker</a>
-    <a href="#">📊 HER Score <span class="coming-soon">(coming soon)</span></a>
-    <a href="tapgg.html">✨ tap to grow and glow up</a>
-    <a href="settings.html">⚙️ Settings</a>
+
+  <header>
+    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+    <strong>becoming HER ✨</strong>
+  </header>
+
+  <div class="sidebar" id="sidebar">
+    <h3>My Space</h3>
+    <ul>
+      <li>View Journal</li>
+      <li>Track Progress</li>
+      <li>Saved Challenges</li>
+      <li>Settings</li>
+      <li>Logout</li>
+    </ul>
   </div>
 
-  <div class="main">
-    <div class="quote" id="quote">
-      “You are becoming exactly who you are meant to be.”
+  <div class="container">
+    <h1>Welcome to Your HER Space</h1>
+    <p id="quote"></p>
+
+    <p class="purpose">
+      This is a safe and empowering space built for your healing, your growth, and your hustle. Whether you're here to reflect, glow up, or rise to your highest self — this dashboard is your mirror and your map.
+    </p>
+
+    <div class="sections">
+      <div class="section-box">🧘‍♀️ Healing Space</div>
+      <div class="section-box">📈 Self Growth</div>
+      <div class="section-box">📝 Productivity Hub</div>
     </div>
+  </div>
 
-    <h1>Welcome back, Beautiful 🩷</h1>
+  <footer>
+    Made with love for HER 💖 | All rights reserved.
+  </footer>
 
-    <div class="cards">
-      <div class="card" onclick="location.href='journaling-hub.html'">
-        <h3>📝 Journaling Prompts</h3>
-        <p>Write your thoughts, heal your soul.</p>
-      </div>
-
-      <div class="card" onclick="location.href='glowup-blog.html'">
-        <h3>✨ Glow-Up Blog</h3>
-        <p>Read tips & my journey to becoming HER.</p>
-      </div>
-
-      <div class="card" onclick="location.href='share.html'">
-        <h3>📖 Share Your Journey</h3>
-        <p>Your story deserves to be heard.</p>
-      </div>
-
-      <div class="card" onclick="location.href='ask.html'">
-        <h3>💬 Ask HER</h3>
-        <p>Feeling lost? I'm listening.</p>
-      </div>
-
-      <div class="card" onclick="location.href='mood.html'">
-        <h3>🌈 Mood Tracker</h3>
-        <p>Track how you feel. Every emotion matters.</p>
-      </div>
-
-      <div class="card" onclick="location.href='tapgg.html'">
-        <h3>✨ grow and glow</h3>
-        <p>tap to grow up and glow up.</p>
-      </div>
-      
-      <div class="card">
-        <h3>📊 HER Score</h3>
-        <p class="coming-soon">Coming soon – track your glow-up like a boss.</p>
-      </div>
-      
   <script>
     const quotes = [
-      "You are becoming exactly who you are meant to be.",
-      "Softness is not weakness. It is power, wrapped in grace.",
-      "You survived 100% of your worst days. That’s iconic.",
-      "There’s magic in healing. And darling, you’re glowing.",
-      "Being HER is not a goal—it’s a lifestyle.",
-      "Everything you're becoming is already inside you."
+      "Healing isn't linear, but it's beautiful.",
+      "Every small step is part of your glow-up.",
+      "You're not behind. You're becoming.",
+      "Rest is productive, too."
     ];
     document.getElementById("quote").textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+    }
   </script>
+
 </body>
 </html>
