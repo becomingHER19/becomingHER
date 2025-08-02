@@ -1,112 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Enter HER Space</title>
+  <meta charset="UTF-8">
+  <title>becoming HER | Login</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;600&display=swap');
+
     * {
       box-sizing: border-box;
-    }
-    body {
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #fdf6f0, #f9e6e6);
-      color: #4b2e2e;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
     }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f6f5f2, #eae7df);
+      color: #444;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
     .container {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(15px);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(150, 100, 100, 0.15);
-      max-width: 420px;
-      width: 90%;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      width: 100%;
+      max-width: 450px;
       text-align: center;
     }
+
     h1 {
-      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif;
       font-size: 2rem;
-      color: #cc7a7a;
+      margin-bottom: 10px;
+      color: #2f2f2f;
     }
-    p {
+
+    .quote {
+      font-style: italic;
       font-size: 1rem;
       margin-bottom: 25px;
-      color: #6a4e4e;
+      color: #888;
     }
-    input {
+
+    input, textarea {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
-      border: none;
+      margin-top: 12px;
+      border: 1px solid #ccc;
       border-radius: 10px;
-      font-size: 1rem;
-      background: #fff0f0;
-      color: #4b2e2e;
-      outline: none;
-      border: 1px solid #e4cfcf;
+      font-family: 'Poppins';
     }
+
     button {
-      width: 100%;
+      margin-top: 20px;
       padding: 12px;
-      background: #f8c8c8;
-      color: #4b2e2e;
-      font-weight: bold;
+      width: 100%;
       border: none;
       border-radius: 10px;
-      font-size: 1rem;
+      background-color: #847577;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
       transition: background 0.3s ease;
-      margin-top: 20px;
     }
+
     button:hover {
-      background: #fbdede;
+      background-color: #5d5052;
+    }
+
+    .welcome {
+      display: none;
+      text-align: center;
+    }
+
+    .highlight {
+      color: #847577;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to HER Space</h1>
-    <p>Your soft space to land, bloom & become ✨</p>
-    <input type="text" id="name" placeholder="Your Name, Dreamer..." />
-    <input type="email" id="email" placeholder="Your Email for HER updates 💌" />
-    <input type="password" id="passcode" placeholder="Create a Secret Passcode 🔐" />
-    <input type="text" id="passion" placeholder="What fuels your soul?" />
-    <input type="text" id="ambition" placeholder="Your biggest ambition?" />
-    <button id="letmein">Let Me In</button>
+
+  <div class="container" id="loginBox">
+    <h1>becoming HER</h1>
+    <p class="quote">"Growth begins the moment you step into your story."</p>
+
+    <input type="text" id="name" placeholder="Your Name ✨" />
+    <input type="email" id="email" placeholder="Email Address 📩" />
+    <textarea id="dream" placeholder="What do you want to become? 🎯"></textarea>
+
+    <button onclick="loginUser()">Enter HER Space</button>
+  </div>
+
+  <div class="container welcome" id="welcomeBox">
+    <h2>Welcome, <span id="userName"></span> 👋</h2>
+    <p class="quote">You said you want to become <span class="highlight" id="userDream"></span> — and we believe you will 💫</p>
   </div>
 
   <script>
-    // ✅ If already logged in, skip this page
-    if (localStorage.getItem("herName") && localStorage.getItem("herPasscode")) {
-      window.location.href = "dashboard.html";
-    }
-
-    // ✅ On button click, store data and redirect
-    document.getElementById("letmein").addEventListener("click", function () {
+    function loginUser() {
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
-      const passcode = document.getElementById("passcode").value.trim();
-      const passion = document.getElementById("passion").value.trim();
-      const ambition = document.getElementById("ambition").value.trim();
+      const dream = document.getElementById("dream").value.trim();
 
-      if (name && email && passcode && passion && ambition) {
-        localStorage.setItem("herName", name);
-        localStorage.setItem("herEmail", email);
-        localStorage.setItem("herPasscode", passcode);
-        localStorage.setItem("herPassion", passion);
-        localStorage.setItem("herAmbition", ambition);
-        window.location.href = "dashboard.html";
-      } else {
-        alert("Fill every box, babe ✨ You’re almost there.");
+      if (!name || !email || !dream) {
+        alert("Please fill in all fields ✨");
+        return;
       }
-    });
+
+      // Save user data
+      let users = JSON.parse(localStorage.getItem("herLogins") || "[]");
+      users.push({ name, email, dream, timestamp: new Date().toISOString() });
+      localStorage.setItem("herLogins", JSON.stringify(users));
+      sessionStorage.setItem("currentHERUser", JSON.stringify({ name, dream }));
+
+      // Show welcome
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("welcomeBox").style.display = "block";
+      document.getElementById("userName").textContent = name;
+      document.getElementById("userDream").textContent = dream;
+    }
+
+    // Auto-load session
+    const saved = JSON.parse(sessionStorage.getItem("currentHERUser") || null);
+    if (saved) {
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("welcomeBox").style.display = "block";
+      document.getElementById("userName").textContent = saved.name;
+      document.getElementById("userDream").textContent = saved.dream;
+    }
   </script>
+
 </body>
 </html>
