@@ -1,141 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>becoming HER | Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Becoming HER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;600&display=swap');
-
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #f6f5f2, #eae7df);
-      color: #444;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 30px;
+      background: linear-gradient(to right, #fdf0f3, #ffe6ec);
+      color: #333;
+      padding: 20px;
     }
 
     .container {
+      max-width: 400px;
+      margin: auto;
       background: white;
       padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-      width: 100%;
-      max-width: 450px;
-      text-align: center;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-top: 10vh;
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 1.8rem;
+      color: #d96c9b;
+      text-align: center;
       margin-bottom: 10px;
-      color: #2f2f2f;
     }
 
-    .quote {
-      font-style: italic;
-      font-size: 1rem;
-      margin-bottom: 25px;
-      color: #888;
+    p.quote {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #777;
+      margin-bottom: 30px;
     }
 
-    input, textarea {
+    label {
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
       width: 100%;
       padding: 12px;
-      margin-top: 12px;
+      margin-bottom: 20px;
       border: 1px solid #ccc;
       border-radius: 10px;
-      font-family: 'Poppins';
     }
 
     button {
-      margin-top: 20px;
-      padding: 12px;
       width: 100%;
+      padding: 12px;
+      background-color: #d96c9b;
+      color: white;
       border: none;
       border-radius: 10px;
-      background-color: #847577;
-      color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: 0.3s;
     }
 
     button:hover {
-      background-color: #5d5052;
+      background-color: #bf5c87;
     }
 
-    .welcome {
-      display: none;
-      text-align: center;
-    }
-
-    .highlight {
-      color: #847577;
-      font-weight: bold;
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Welcome to HER ✨</h1>
+    <p class="quote">"This is your space for healing, growth, and becoming."</p>
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Your name...">
 
-  <div class="container" id="loginBox">
-    <h1>becoming HER</h1>
-    <p class="quote">"Growth begins the moment you step into your story."</p>
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Your email...">
 
-    <input type="text" id="name" placeholder="Your Name ✨" />
-    <input type="email" id="email" placeholder="Email Address 📩" />
-    <textarea id="dream" placeholder="What do you want to become? 🎯"></textarea>
-
-    <button onclick="loginUser()">Enter HER Space</button>
-  </div>
-
-  <div class="container welcome" id="welcomeBox">
-    <h2>Welcome, <span id="userName"></span> 👋</h2>
-    <p class="quote">You said you want to become <span class="highlight" id="userDream"></span> — and we believe you will 💫</p>
+    <button onclick="saveAndRedirect()">Enter the Space</button>
   </div>
 
   <script>
-    function loginUser() {
+    function saveAndRedirect() {
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
-      const dream = document.getElementById("dream").value.trim();
 
-      if (!name || !email || !dream) {
-        alert("Please fill in all fields ✨");
+      if (!name || !email) {
+        alert("Please fill in all fields 🙏");
         return;
       }
 
-      // Save user data
-      let users = JSON.parse(localStorage.getItem("herLogins") || "[]");
-      users.push({ name, email, dream, timestamp: new Date().toISOString() });
-      localStorage.setItem("herLogins", JSON.stringify(users));
-      sessionStorage.setItem("currentHERUser", JSON.stringify({ name, dream }));
+      // Save in localStorage (permanent until manually cleared)
+      localStorage.setItem("herUserName", name);
+      localStorage.setItem("herUserEmail", email);
 
-      // Show welcome
-      document.getElementById("loginBox").style.display = "none";
-      document.getElementById("welcomeBox").style.display = "block";
-      document.getElementById("userName").textContent = name;
-      document.getElementById("userDream").textContent = dream;
+      // Redirect to dashboard
+      window.location.href = "dashboard.html";
     }
 
-    // Auto-load session
-    const saved = JSON.parse(sessionStorage.getItem("currentHERUser") || null);
-    if (saved) {
-      document.getElementById("loginBox").style.display = "none";
-      document.getElementById("welcomeBox").style.display = "block";
-      document.getElementById("userName").textContent = saved.name;
-      document.getElementById("userDream").textContent = saved.dream;
-    }
+    // Auto-redirect if already logged in
+    window.onload = () => {
+      const savedName = localStorage.getItem("herUserName");
+      const savedEmail = localStorage.getItem("herUserEmail");
+
+      if (savedName && savedEmail) {
+        window.location.href = "dashboard.html";
+      }
+    };
   </script>
-
 </body>
 </html>
