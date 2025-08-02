@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healing Space | HER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #cce5f8, #e3f0ff);
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #3a6f8f;
+    }
+    header p {
+      font-size: 1rem;
+      color: #5f7f91;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .tile {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .tile:hover {
+      transform: scale(1.01);
+    }
+    .prompt-box button {
+      background-color: #478ac9;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .quote-note {
+      font-size: 0.9rem;
+      color: #7a9eb1;
+      margin-top: 0.6rem;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      padding: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Healing Space</h1>
+    <p>Welcome to your sanctuary. Breathe. Heal. Grow. This space is built for your inner calm.</p>
+  </header>
+
+  <div class="section">
+    <div class="tile" onclick="window.location.href='mood-tracker.html'">
+      <h3>🌈 Mood Tracker</h3>
+      <p class="quote-note">Daily tracking helps build emotional awareness and resilience — APA 2023</p>
+    </div>
+
+    <div class="tile">
+      <h3>💬 HER Prompt</h3>
+      <div class="prompt-box">
+        <p id="promptText">What did you learn about yourself this week?</p>
+        <button onclick="newPrompt()">Need another prompt?</button>
+      </div>
+    </div>
+
+    <div class="tile" onclick="window.location.href='therapy-ai.html'">
+      <h3>🧠 AI Therapy</h3>
+      <p>Talk to our gentle AI therapist trained for self-doubt, anxiety, overthinking and burnout.</p>
+    </div>
+
+    <div class="tile" onclick="window.location.href='her-stories.html'">
+      <h3>📖 Read HER Stories</h3>
+      <p>Real journeys from girls healing, glowing, and growing. You can share your own too — anonymously or proudly public.</p>
+    </div>
+  </div>
+
+  <footer>
+    HER Project © 2025 — Built with courage, compassion, and caffeine ☕
+  </footer>
+
+  <script>
+    const prompts = [
+      "What part of yourself are you learning to love more?",
+      "Describe a time you survived something you thought you couldn't.",
+      "What does emotional safety look like to you?",
+      "What’s something your younger self would be proud of today?",
+      "What are you learning to let go of, and why?"
+    ];
+
+    function newPrompt() {
+      const promptBox = document.getElementById("promptText");
+      const index = Math.floor(Math.random() * prompts.length);
+      promptBox.textContent = prompts[index];
+    }
+  </script>
+</body>
+</html>
