@@ -2,119 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Healing Space | HER</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healing Space | Becoming HER</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #cce5f8, #e3f0ff);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #e0f7ff, #ffffff);
       color: #333;
+      padding: 20px;
     }
+
     header {
       text-align: center;
-      padding: 2rem;
+      margin-bottom: 40px;
     }
+
     header h1 {
-      font-size: 2.5rem;
-      color: #3a6f8f;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #4c82af;
     }
+
     header p {
       font-size: 1rem;
-      color: #5f7f91;
-      max-width: 600px;
-      margin: 0 auto;
+      color: #6c7f99;
     }
+
     .section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: 0 auto;
+      background: #ffffffcc;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
-    .tile {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.06);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      cursor: pointer;
-      transition: 0.3s ease;
+
+    .section h2 {
+      color: #4c82af;
+      margin-bottom: 10px;
     }
-    .tile:hover {
-      transform: scale(1.01);
+
+    .section p {
+      color: #555;
     }
-    .prompt-box button {
-      background-color: #478ac9;
+
+    .button-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #4c82af;
       color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
+      text-decoration: none;
       border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
+      transition: background-color 0.3s ease;
     }
-    .quote-note {
-      font-size: 0.9rem;
-      color: #7a9eb1;
-      margin-top: 0.6rem;
+
+    .button-link:hover {
+      background-color: #3a6a8f;
     }
+
+    .prompt-box {
+      background: #eef7fb;
+      padding: 15px;
+      border-radius: 8px;
+      font-style: italic;
+      color: #3a546d;
+      margin-top: 15px;
+    }
+
     footer {
       text-align: center;
       font-size: 0.9rem;
-      color: #666;
-      padding: 1rem 0;
+      color: #999;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .section h2 {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>Healing Space</h1>
-    <p>Welcome to your sanctuary. Breathe. Heal. Grow. This space is built for your inner calm.</p>
+    <p>A calm space for self-awareness, reflection, and growth 🌿</p>
   </header>
 
-  <div class="section">
-    <a href="mood.html" class="title">
-      <h3>🌈 Mood Tracker</h3>
-      <p class="quote-note">Daily tracking helps build emotional awareness and resilience — APA 2023</p>
-    </div>
+  <section class="section">
+    <h2>Mood Tracker</h2>
+    <p>Tracking your mood helps you understand emotional patterns and improve your overall mental health. Let’s keep track and grow consciously.</p>
+    <a class="button-link" href="#" onclick="alert('Mood Tracker Coming Soon!')">Launch Mood Tracker</a>
+  </section>
 
-    <div class="tile">
-      <h3>💬 HER Prompt</h3>
-      <div class="prompt-box">
-        <p id="promptText">What did you learn about yourself this week?</p>
-        <button onclick="newPrompt()">Need another prompt?</button>
-      </div>
-    </div>
+  <section class="section">
+    <h2>AI Therapy Companion</h2>
+    <p>A gentle AI tool to talk through your thoughts whenever you need a moment of clarity or calm. (Coming soon 💬)</p>
+  </section>
 
-    <div class="tile" onclick="window.location.href='therapy-ai.html'">
-      <h3>🧠 AI Therapy</h3>
-      <p>Talk to our gentle AI therapist trained for self-doubt, anxiety, overthinking and burnout.</p>
-    </div>
-
-    <div class="tile" onclick="window.location.href='her-stories.html'">
-      <h3>📖 Read HER Stories</h3>
-      <p>Real journeys from girls healing, glowing, and growing. You can share your own too — anonymously or proudly public.</p>
-    </div>
-  </div>
+  <section class="section">
+    <h2>Daily Reflection Prompt</h2>
+    <p id="prompt">"What made you feel genuinely proud of yourself this week?"</p>
+    <a class="button-link" href="#" onclick="generatePrompt()">Need another prompt?</a>
+  </section>
 
   <footer>
-    HER Project © 2025 — Built with courage, compassion, and caffeine ☕
+    ✨ Built with care for your healing journey ✨
   </footer>
 
   <script>
     const prompts = [
-      "What part of yourself are you learning to love more?",
-      "Describe a time you survived something you thought you couldn't.",
-      "What does emotional safety look like to you?",
-      "What’s something your younger self would be proud of today?",
-      "What are you learning to let go of, and why?"
+      "What made you feel genuinely proud of yourself this week?",
+      "Describe a small moment today that brought you peace.",
+      "What emotion do you need to process right now?",
+      "What is one belief about yourself you're ready to let go?",
+      "If you could give your younger self a message, what would it be?"
     ];
 
-    function newPrompt() {
-      const promptBox = document.getElementById("promptText");
-      const index = Math.floor(Math.random() * prompts.length);
-      promptBox.textContent = prompts[index];
+    function generatePrompt() {
+      const promptEl = document.getElementById("prompt");
+      const random = Math.floor(Math.random() * prompts.length);
+      promptEl.textContent = `"${prompts[random]}"`;
     }
   </script>
 </body>
