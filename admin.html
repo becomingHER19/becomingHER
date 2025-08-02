@@ -1,177 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>HER Admin Panel</title>
+  <meta charset="UTF-8">
+  <title>becoming HER | Login</title>
   <style>
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 40px 20px;
+      padding: 0;
+    }
+
+    body {
       font-family: 'Poppins', sans-serif;
-      background: #fffafc;
+      background: linear-gradient(to right, #f6f5f2, #eae7df);
       color: #444;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
-      color: #c278b2;
-      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #2f2f2f;
     }
 
-    .login-box, .dashboard {
-      max-width: 600px;
-      margin: 0 auto;
-      background: white;
-      padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+    .quote {
+      font-style: italic;
+      font-size: 1rem;
+      margin-bottom: 25px;
+      color: #888;
     }
 
-    input[type="password"] {
+    input, textarea {
       width: 100%;
       padding: 12px;
-      margin-top: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-
-    button {
-      margin-top: 15px;
-      background-color: #c278b2;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .question {
-      background: #f9f2f7;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      position: relative;
-    }
-
-    .question p {
-      margin: 4px 0;
-    }
-
-    .reply-box {
-      margin-top: 10px;
-    }
-
-    .reply-box textarea {
-      width: 100%;
-      height: 80px;
-      border-radius: 8px;
+      margin-top: 12px;
       border: 1px solid #ccc;
-      padding: 10px;
-      resize: none;
+      border-radius: 10px;
       font-family: 'Poppins';
     }
 
-    .reply-box button {
-      margin-top: 8px;
-      padding: 8px 14px;
-      background-color: #a65e90;
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      background-color: #847577;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    .replied {
-      background-color: #e0ffe4;
-      border-left: 4px solid #47b963;
-      padding: 10px;
-      border-radius: 6px;
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #2e6633;
+    button:hover {
+      background-color: #5d5052;
+    }
+
+    .welcome {
+      display: none;
+      text-align: center;
+    }
+
+    .highlight {
+      color: #847577;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome, CEO of HER 💼✨</h1>
+  <div class="container" id="loginBox">
+    <h1>becoming HER</h1>
+    <p class="quote">"Growth begins the moment you step into your story."</p>
 
-  <div class="login-box" id="loginBox">
-    <p>Enter your secret HER admin passcode:</p>
-    <input type="password" id="adminPass" placeholder="e.g. pinkqueen@her" />
-    <button onclick="validateAdmin()">Log In</button>
-    <p id="loginError" style="color:red; font-size:0.9rem;"></p>
+    <input type="text" id="name" placeholder="Your Name ✨" />
+    <input type="email" id="email" placeholder="Email Address 📩" />
+    <textarea id="dream" placeholder="What do you want to become? 🎯"></textarea>
+
+    <button onclick="loginUser()">Enter HER Space</button>
   </div>
 
-  <div class="dashboard" id="dashboard" style="display:none;">
-    <h2>User Questions 💬</h2>
-    <div id="questionsList"></div>
+  <div class="container welcome" id="welcomeBox">
+    <h2>Welcome, <span id="userName"></span> 👋</h2>
+    <p class="quote">You said you want to become <span class="highlight" id="userDream"></span> — and we believe you will 💫</p>
   </div>
 
   <script>
-    const ADMIN_PASS = "pinkqueen@her";
+    function loginUser() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const dream = document.getElementById("dream").value.trim();
 
-    function validateAdmin() {
-      const input = document.getElementById("adminPass").value;
-      if (input === ADMIN_PASS) {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-        loadQuestions();
-      } else {
-        document.getElementById("loginError").textContent = "Wrong passcode 💔";
-      }
-    }
-
-    function loadQuestions() {
-      const list = document.getElementById("questionsList");
-      const data = JSON.parse(localStorage.getItem("userQuestions") || "[]");
-      const replies = JSON.parse(localStorage.getItem("herReplies") || "{}");
-
-      list.innerHTML = "";
-
-      if (data.length === 0) {
-        list.innerHTML = "<p>No one has asked anything yet 💔</p>";
+      if (!name || !email || !dream) {
+        alert("Please fill in all fields ✨");
         return;
       }
 
-      data.reverse().forEach((q, idx) => {
-        const box = document.createElement("div");
-        box.className = "question";
+      // Save user data
+      let users = JSON.parse(localStorage.getItem("herLogins") || "[]");
+      users.push({ name, email, dream, timestamp: new Date().toISOString() });
+      localStorage.setItem("herLogins", JSON.stringify(users));
+      sessionStorage.setItem("currentHERUser", JSON.stringify({ name, dream }));
 
-        const msg = document.createElement("p");
-        msg.innerHTML = `<strong>Q:</strong> ${q.question}`;
-
-        const date = document.createElement("p");
-        date.innerHTML = `<small>${q.date}</small>`;
-
-        box.appendChild(msg);
-        box.appendChild(date);
-
-        const replyId = `reply-${idx}`;
-        if (replies[q.question]) {
-          const replied = document.createElement("div");
-          replied.className = "replied";
-          replied.textContent = "Your reply: " + replies[q.question];
-          box.appendChild(replied);
-        } else {
-          const replyBox = document.createElement("div");
-          replyBox.className = "reply-box";
-          replyBox.innerHTML = `
-            <textarea id="${replyId}" placeholder="Write your reply..."></textarea>
-            <button onclick="saveReply('${q.question}', '${replyId}')">Reply</button>
-          `;
-          box.appendChild(replyBox);
-        }
-
-        list.appendChild(box);
-      });
+      // Show welcome
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("welcomeBox").style.display = "block";
+      document.getElementById("userName").textContent = name;
+      document.getElementById("userDream").textContent = dream;
     }
 
-    function saveReply(question, textareaId) {
-      const replyText = document.getElementById(textareaId).value.trim();
-      if (!replyText) return;
-
-      let replies = JSON.parse(localStorage.getItem("herReplies") || "{}");
-      replies[question] = replyText;
-      localStorage.setItem("herReplies", JSON.stringify(replies));
-      loadQuestions();
+    // Auto-load session
+    const saved = JSON.parse(sessionStorage.getItem("currentHERUser") || null);
+    if (saved) {
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("welcomeBox").style.display = "block";
+      document.getElementById("userName").textContent = saved.name;
+      document.getElementById("userDream").textContent = saved.dream;
     }
   </script>
 
