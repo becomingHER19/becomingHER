@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 Days of Becoming HER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #fceff9, #f9f9ff);
+            color: #333;
+            padding: 0 1rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem 0.5rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #d63384;
+            margin-bottom: 0.5rem;
+        }
+
+        blockquote {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        label, input, textarea, select {
+            display: block;
+            width: 100%;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        input, textarea, select {
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            background-color: #d63384;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #b92d72;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .calendar input[type="text"] {
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .plan-output {
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            background: #f9f9ff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>21 Days of Becoming HER</h1>
+        <blockquote>“You don’t become HER overnight. You become her by deciding every day that you already are.”</blockquote>
+    </header>
+
+    <section>
+        <h2>Custom Glow Up Plan Creator</h2>
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" placeholder="Enter your email">
+
+        <label for="goals">Top 3 Goals for this Challenge:</label>
+        <textarea id="goals" rows="3" placeholder="E.g., Workout daily, Ace my SATs, Post on YouTube every day..."></textarea>
+
+        <label for="journey">Describe Your Glow-Up Journey Type:</label>
+        <select id="journey">
+            <option value="mindset">Mindset Reset</option>
+            <option value="body">Body Transformation</option>
+            <option value="glow">Full Aesthetic + Discipline Glow-Up</option>
+        </select>
+
+        <button onclick="generatePlan()">Generate My Custom Plan</button>
+        <div id="output" class="plan-output"></div>
+    </section>
+
+    <section>
+        <h2>Interactive 21-Day Habit Tracker</h2>
+        <div class="calendar" id="habitCalendar"></div>
+    </section>
+
+    <section>
+        <h2>Feedback & Reflections</h2>
+        <textarea rows="4" placeholder="How do you feel about your journey? Share your HER energy..."></textarea>
+        <button>Submit Feedback</button>
+    </section>
+
+    <script>
+        function generatePlan() {
+            const name = document.getElementById('name').value || 'Glow Up Star';
+            const goals = document.getElementById('goals').value;
+            const journey = document.getElementById('journey').value;
+            let journeyFocus = "";
+
+            if (journey === "mindset") {
+                journeyFocus = `• Daily gratitude & manifestation journaling\n• Rewire limiting beliefs with affirmations\n• Study motivational psychology`;
+            } else if (journey === "body") {
+                journeyFocus = `• 30-min Pilates or walk every day\n• Drink 2-3L water\n• Glow-up meal prep Sundays`;
+            } else {
+                journeyFocus = `• Curate your Pinterest aesthetic\n• Dress up for yourself\n• Discipline + Digital detox Sundays`;
+            }
+
+            const plan = `Hey ${name},\n\nWelcome to the 21-day journey of Becoming HER.\n\nYour 3 main goals: ${goals}\n\nYour Glow-Up Type: ${journey}\n\nHere's your starter guide:\n\n✨ WEEK 1: Awareness\n• Reflect on where you are.\n• Clean your space.\n• Schedule your 21 days.\n\n✨ WEEK 2: Alignment\n${journeyFocus}\n\n✨ WEEK 3: Becoming\n• Focus on confidence routines\n• Track your growth\n• Celebrate your wins\n\nQuotes to carry: “Discipline is the real self-love.”\n\nYou got this queen.`;
+
+            document.getElementById('output').innerText = plan;
+        }
+
+        const calendarContainer = document.getElementById('habitCalendar');
+        for (let i = 1; i <= 21; i++) {
+            const dayBlock = document.createElement('div');
+            dayBlock.className = 'calendar-day';
+            dayBlock.innerHTML = `
+                <label>Day ${i}</label>
+                <input type="text" placeholder="✅ or Goal"/>
+            `;
+            calendarContainer.appendChild(dayBlock);
+        }
+    </script>
+
+</body>
+
+</html>
