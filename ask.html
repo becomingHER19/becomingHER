@@ -1,161 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
+  <title>HER ✨ AI Therapist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ask Her – becomingHER</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
     }
 
-    body {
-      background: linear-gradient(145deg, #fff0f5, #ffe4e1);
-      color: #4b2e2e;
-      padding: 2rem;
-      line-height: 1.6;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+    header {
       text-align: center;
-      margin-bottom: 1rem;
-      color: #b76e79;
+      padding: 20px;
+      background: #c2e9fb;
+      color: #333;
+      font-size: 1.3rem;
+      font-weight: bold;
     }
 
-    p.description {
-      text-align: center;
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      max-width: 600px;
+    .chat-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      border-radius: 16px;
+      font-size: 1rem;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .user {
+      background: #dbeafe;
+      align-self: flex-end;
+      text-align: right;
       margin-left: auto;
+    }
+
+    .bot {
+      background: #f0fdf4;
+      align-self: flex-start;
       margin-right: auto;
     }
 
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-      background-color: #fff9f9;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    .input-area {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+      background: white;
     }
 
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    textarea, input[type="text"] {
-      width: 100%;
-      padding: 1rem;
-      border-radius: 12px;
-      border: 1px solid #eeced1;
-      background-color: #fffefc;
-      margin-bottom: 1.5rem;
+    .input-area input {
+      flex: 1;
+      padding: 10px 14px;
       font-size: 1rem;
-      resize: vertical;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
     }
 
-    button {
-      background-color: #eeced1;
-      color: #4b2e2e;
-      border: none;
-      padding: 0.75rem 2rem;
-      border-radius: 12px;
+    .input-area button {
+      padding: 10px 16px;
+      margin-left: 10px;
       font-weight: bold;
-      font-size: 1rem;
+      background: #a5d8ff;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
 
-    button:hover {
-      background-color: #e6b7bc;
-    }
-
-    .response-box {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background-color: #fff3f3;
-      border-radius: 16px;
-      border: 1px solid #f2c2c5;
-      font-style: italic;
-    }
-
-    .thank-you {
-      text-align: center;
-      color: #b76e79;
-      margin-top: 1.5rem;
-      font-weight: 600;
+    .top-button {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: #ffdfdf;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
-
 <body>
-  <h1>Ask Her</h1>
-  <p class="description">She listens like your fav diary, responds like your soft girl bestie and holds space like HER. Pour it out angel 💌</p>
-
-  <div class="container">
-    <form id="askForm">
-      <label for="question">What’s on your mind today?</label>
-      <textarea id="question" name="question" rows="6" placeholder="Write it all here, babe... I'm listening 🕊️" required></textarea>
-
-      <button type="submit">Ask Her</button>
-    </form>
-
-    <div id="response" class="response-box" style="display:none;"></div>
-    <p id="thankYou" class="thank-you" style="display:none;">Message sent, babe 💌 I'll read it with care.</p>
+  <header>HER ✨ AI Therapist</header>
+  <div class="chat-container" id="chatContainer"></div>
+  <button class="top-button" onclick="showHelp()">I need help now 💡</button>
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Talk to me... I'm listening 💬" />
+    <button onclick="sendMessage()">Send</button>
   </div>
 
   <script>
-    const form = document.getElementById("askForm");
-    const responseBox = document.getElementById("response");
-    const thankYou = document.getElementById("thankYou");
+    const chat = document.getElementById("chatContainer");
+    let history = [];
 
-    function isGibberish(text) {
-      return text.length < 10 || /[a-zA-Z]/.test(text) === false;
+    window.onload = function () {
+      const affirmations = [
+        "You are worthy of love and understanding 💫",
+        "This moment is temporary. Breathe through it.",
+        "Healing is not linear — and that’s okay 💗",
+        "Your thoughts matter. Your feelings are valid 🦋"
+      ];
+      alert(affirmations[Math.floor(Math.random() * affirmations.length)]);
+
+      // Load old chats if available
+      const savedChats = JSON.parse(localStorage.getItem("herChats") || "[]");
+      savedChats.forEach(({ sender, text }) => createMessage(text, sender));
+    };
+
+    function createMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.className = `message ${sender}`;
+      msg.textContent = text;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+
+      const savedChats = JSON.parse(localStorage.getItem("herChats") || "[]");
+      savedChats.push({ sender, text });
+      localStorage.setItem("herChats", JSON.stringify(savedChats));
     }
 
-    function generateResponse(message) {
-      if (isGibberish(message)) {
-        return "I love how your brain just did that 😵‍💫 Try telling me a lil more so I can give you my best advice 💗";
-      } else if (message.toLowerCase().includes("anxious") || message.toLowerCase().includes("overwhelmed")) {
-        return "Take a breath, angel 🕊️ You’re not alone in this. Let’s take it one soft step at a time, mmkay?";
-      } else if (message.toLowerCase().includes("love") || message.toLowerCase().includes("heartbreak")) {
-        return "Babygirl… love hits hard, I know. But you? You were built to bloom again 🌷 trust that.";
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      createMessage(userText, "user");
+      input.value = "";
+
+      history.push(userText);
+      if (history.length > 3) history.shift();
+
+      setTimeout(() => {
+        const botResponse = getAdvancedResponse(userText);
+        createMessage(botResponse, "bot");
+      }, 700);
+    }
+
+    function getAdvancedResponse(text) {
+      const lower = text.toLowerCase();
+
+      if (lower.includes("overwhelmed") || lower.includes("school")) {
+        return "It's totally okay to feel overwhelmed by school 🧠. Want me to help you create a small plan together?";
+      } else if (lower.includes("friend") && lower.includes("fight")) {
+        return "Friendships can be hard 💔. Do you want to talk about what happened?";
+      } else if (lower.includes("compare") || lower.includes("not enough")) {
+        return "You are *more* than enough — just as you are 🫶. Can I help you reflect on your strengths?";
+      } else if (lower.includes("panic") || lower.includes("breathing")) {
+        return "Let’s try a grounding technique. Inhale slowly for 4 seconds… hold… and exhale for 4. You’ve got this.";
+      } else if (lower.includes("sad") || lower.includes("down")) {
+        return "I'm really sorry you're feeling this way 💙. Do you want to talk more about what happened?";
+      } else if (lower.includes("anxious") || lower.includes("nervous")) {
+        return "Try taking a deep breath. You're safe here 🤍. What's been on your mind lately?";
+      } else if (lower.includes("alone") || lower.includes("lonely")) {
+        return "You're not alone in this. I'm here for you 💌. Would talking more help?";
       } else {
-        return "Okay queen, I hear you 👑 Let’s figure this out together. You got me now ✨";
+        return "I'm listening... Tell me more about how you're feeling 🫶";
       }
     }
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const question = document.getElementById("question").value;
-      const reply = generateResponse(question);
-      responseBox.innerText = reply;
-      responseBox.style.display = "block";
-      thankYou.style.display = "block";
-
-      // Email it to you
-      fetch("https://formspree.io/f/mzbngwzb", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          message: question,
-          email: "tssivapriya2@gmail.com"
-        })
-      });
-    });
+    function showHelp() {
+      alert("If you’re in crisis or need immediate help, please contact a local mental health hotline or professional. You’re not alone 💛");
+    }
   </script>
 </body>
-
 </html>
