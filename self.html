@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Self Growth - Becoming HER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #fefefe, #eaf6ff);
+      color: #333;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #3f51b5;
+    }
+    section {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 16px;
+      max-width: 800px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #607d8b;
+    }
+    button {
+      background: #3f51b5;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .quote {
+      font-style: italic;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .prompt-box, .calendar-box, .challenge-box, .resource-box, .vision-box {
+      margin-top: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Poppins';
+      margin-top: 10px;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .calendar-day {
+      background: #dceefb;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .calendar-day.completed {
+      background: #a0e3b2;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌱 Self Growth Zone</h1>
+
+  <section>
+    <div class="quote">"You don't become HER in a day — but you do grow every single one."</div>
+  </section>
+
+  <section class="prompt-box">
+    <h2>📝 Daily Growth Prompt</h2>
+    <div id="prompt">When do I feel most like my best self?</div>
+    <button onclick="nextPrompt()">I want another one 🔁</button>
+    <textarea placeholder="Write your thoughts here..."></textarea>
+  </section>
+
+  <section class="calendar-box">
+    <h2>📅 Progress Tracker</h2>
+    <p>Mark each day you show up for your goals ✨</p>
+    <div class="calendar-grid" id="calendar"></div>
+  </section>
+
+  <section class="challenge-box">
+    <h2>🔥 Mini Self-Growth Challenges</h2>
+    <ul>
+      <li><strong>7-Day Confidence Boost</strong>: Daily affirmations + bold action tasks</li>
+      <li><strong>21-Day Glow-Up Reset</strong>: Habits, workouts, mindset prompts</li>
+      <li><strong>5-Day Focus Sprint</strong>: Daily deep work challenges</li>
+    </ul>
+  </section>
+
+  <section class="resource-box">
+    <h2>📚 Curated Self-Growth Resources</h2>
+    <ul>
+      <li><a href="#">Video: How to Build Self-Discipline</a></li>
+      <li><a href="#">Article: The Psychology of Confidence</a></li>
+      <li><a href="#">Quote Pack: HER Mindset Reset</a></li>
+    </ul>
+  </section>
+
+  <section class="vision-box">
+    <h2>🎯 Glow-Up Vision Board</h2>
+    <p>(Coming soon) Upload inspiring images + goals and create your own board</p>
+  </section>
+
+  <script>
+    const prompts = [
+      "What belief about myself do I want to rewrite today?",
+      "What does success *feel* like to me?",
+      "Who is HER to me — what are her habits and mindsets?",
+      "When do I feel most creative and alive?",
+      "What would I do today if I wasn’t afraid of failing?"
+    ];
+
+    let promptIndex = 0;
+    function nextPrompt() {
+      promptIndex = (promptIndex + 1) % prompts.length;
+      document.getElementById("prompt").textContent = prompts[promptIndex];
+    }
+
+    const calendar = document.getElementById("calendar");
+    for (let i = 1; i <= 21; i++) {
+      const day = document.createElement("div");
+      day.className = "calendar-day";
+      day.textContent = i;
+      day.onclick = () => day.classList.toggle("completed");
+      calendar.appendChild(day);
+    }
+  </script>
+</body>
+</html>
