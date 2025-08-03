@@ -3,95 +3,152 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HER ✨ AI Therapist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <title>HER AI Therapist</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #edf6ff, #ffffff);
-      color: #333;
+      background: linear-gradient(to bottom right, #d4f4f4, #ffffff);
       display: flex;
       flex-direction: column;
       height: 100vh;
     }
 
     header {
-      text-align: center;
+      background: transparent;
       padding: 20px;
-      background: #b2d7f3;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #2a2a2a;
+      text-align: center;
+      font-size: 1.4rem;
+      color: #0a4f5c;
+      font-weight: 600;
+    }
+
+    .quote {
+      text-align: center;
+      font-style: italic;
+      color: #347d8d;
+      margin-top: -10px;
+      font-size: 1rem;
     }
 
     .chat-container {
       flex: 1;
-      padding: 16px;
+      padding: 20px;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column;
     }
 
     .message {
       max-width: 80%;
-      margin-bottom: 10px;
       padding: 12px 16px;
-      border-radius: 18px;
+      margin-bottom: 12px;
+      border-radius: 16px;
       font-size: 1rem;
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
     .user {
+      background: #b0e0e6;
       align-self: flex-end;
-      background: #dbeafe;
       text-align: right;
+      margin-left: auto;
     }
 
     .bot {
+      background: #f0fdf4;
       align-self: flex-start;
-      background: #e0f7ec;
+      margin-right: auto;
     }
 
     .input-area {
       display: flex;
       padding: 10px;
       background: white;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid #ddd;
     }
 
     .input-area input {
       flex: 1;
-      padding: 10px;
+      padding: 10px 14px;
       font-size: 1rem;
       border: 1px solid #ccc;
-      border-radius: 12px;
+      border-radius: 10px;
       outline: none;
     }
 
     .input-area button {
+      padding: 10px 16px;
       margin-left: 10px;
-      padding: 10px 18px;
-      font-size: 1rem;
-      background-color: #96c7ff;
-      border: none;
-      border-radius: 12px;
       font-weight: bold;
-      cursor: pointer;
+      background: #4ecdc4;
+      border: none;
+      border-radius: 10px;
       color: white;
+      cursor: pointer;
+    }
+
+    .robot {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: url('https://cdn-icons-png.flaticon.com/512/4712/4712033.png') no-repeat center/contain;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
   </style>
 </head>
 <body>
-  <header>HER ✨ AI Therapist</header>
+  <header>HER AI Therapist 🤖</header>
+  <div class="quote">"You're safe here. Let's talk about what's on your mind. 💙"</div>
+
   <div class="chat-container" id="chatContainer"></div>
+
   <div class="input-area">
-    <input type="text" id="userInput" placeholder="Tell me what you're feeling..." />
+    <input type="text" id="userInput" placeholder="Tell me how you're feeling today..." />
     <button onclick="sendMessage()">Send</button>
   </div>
 
+  <div class="robot"></div>
+
   <script>
     const chat = document.getElementById("chatContainer");
+
+    const smartReplies = {
+      sad: [
+        "I'm here with you. It's okay to feel sad sometimes. Wanna talk more about it?",
+        "Sadness isn't weakness—it's just a message your heart is sending. Let's explore it together."
+      ],
+      anxious: [
+        "You're doing better than you think. What’s making you feel anxious right now?",
+        "It’s okay to feel nervous. What’s on your mind, love?"
+      ],
+      lonely: [
+        "You're not alone anymore. I'm right here with you. 🤍",
+        "Feeling lonely can hurt, but you're seen and valued here. Let’s talk it out."
+      ],
+      default: [
+        "I'm listening, take your time. What's going on in your world today?",
+        "Tell me more. I'm here to support you with no judgment 💌",
+        "You're safe. You matter. Let’s figure things out together. 🫂"
+      ],
+      gibberish: [
+        "Hmm, I couldn't quite catch that. Can you try saying it in a different way? 🤔"
+      ]
+    };
+
+    let usedReplies = {
+      sad: [],
+      anxious: [],
+      lonely: [],
+      default: [],
+      gibberish: []
+    };
 
     function createMessage(text, sender) {
       const msg = document.createElement("div");
@@ -110,36 +167,36 @@
       input.value = "";
 
       setTimeout(() => {
-        const botResponse = generateResponse(userText);
+        const botResponse = getSmartResponse(userText);
         createMessage(botResponse, "bot");
-      }, 800);
+      }, 600);
     }
 
-    function generateResponse(text) {
-      const msg = text.toLowerCase();
+    function getSmartResponse(text) {
+      const cleaned = text.toLowerCase().replace(/[^a-zA-Z\s]/g, "").trim();
+      const gibberish = cleaned.length < 3 || /[bcdfghjklmnpqrstvwxyz]{4,}/.test(cleaned);
 
-      if (msg.includes("sad") || msg.includes("depressed")) {
-        return "I'm really sorry you're feeling this way 💙. It's okay to not be okay. Want to talk about what triggered this today?";
+      let category = "default";
+      if (gibberish) {
+        category = "gibberish";
+      } else if (cleaned.includes("sad") || cleaned.includes("upset")) {
+        category = "sad";
+      } else if (cleaned.includes("anxious") || cleaned.includes("nervous") || cleaned.includes("panic")) {
+        category = "anxious";
+      } else if (cleaned.includes("alone") || cleaned.includes("lonely")) {
+        category = "lonely";
       }
-      if (msg.includes("anxious") || msg.includes("anxiety") || msg.includes("nervous")) {
-        return "Let’s try something together. Can you name 5 things you can see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste? This helps ground your thoughts. 🧘‍♀️";
+
+      const options = smartReplies[category];
+      const used = usedReplies[category];
+
+      let response = options.find(r => !used.includes(r));
+      if (!response) {
+        usedReplies[category] = [];
+        response = options[Math.floor(Math.random() * options.length)];
       }
-      if (msg.includes("self doubt") || msg.includes("insecure")) {
-        return "Even diamonds are made under pressure 💎. What would you say to your younger self right now? You deserve that same kindness.";
-      }
-      if (msg.includes("burnout") || msg.includes("tired") || msg.includes("exhausted")) {
-        return "Let’s pause. Rest doesn’t mean failure — it’s fuel for your next move. What’s one small way you can care for yourself today?";
-      }
-      if (msg.includes("ugly") || msg.includes("hate my body")) {
-        return "You are so much more than your reflection 💗. Would you let me help you reframe how you see yourself today?";
-      }
-      if (msg.includes("lonely") || msg.includes("alone")) {
-        return "You’re not alone here. I’m here for you 🤍. Want to journal something together?";
-      }
-      if (msg.includes("happy") || msg.includes("good")) {
-        return "I love that for you! 🌸 What made today a little better? Let’s celebrate that win.";
-      }
-      return "I'm here for you. Talk to me more about what you're feeling right now 💌";
+      used.push(response);
+      return response;
     }
   </script>
 </body>
