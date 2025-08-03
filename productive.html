@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SLAY | Becoming HER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fff3f8, #fce8ef);
+      color: #333;
+    }
+
+    header {
+      background: #f8d2dc;
+      padding: 30px 20px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #5c2c39;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    section {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: #c06b94;
+    }
+
+    .questionnaire input, .questionnaire select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    button {
+      background: #c06b94;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .card {
+      background: #f9f0f7;
+      border-left: 4px solid #c06b94;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .mirror input {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .rituals ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .rituals li {
+      padding: 6px 0;
+    }
+
+    .score-tracker {
+      background: #f0fdf4;
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    .progress-bar {
+      height: 12px;
+      width: 100%;
+      background: #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 60%; /* Example value */
+      background: #a7e6b2;
+    }
+  </style>
+</head>
+<body>
+  <header>SLAY 💅 | Becoming HER</header>
+
+  <div class="container">
+    <section>
+      <h2>🔮 Power Persona Builder</h2>
+      <div class="questionnaire">
+        <input type="text" placeholder="Who inspires you?">
+        <input type="text" placeholder="3 adjectives for your dream self">
+        <input type="text" placeholder="What makes you feel most powerful?">
+        <input type="text" placeholder="What’s your dream role/job?">
+        <input type="text" placeholder="A song that makes you feel HER">
+        <button onclick="generatePersona()">Generate Persona ✨</button>
+        <div class="card" id="personaCard" style="display:none;"></div>
+      </div>
+    </section>
+
+    <section class="glowup">
+      <h2>🎓 Glow Up Academy</h2>
+      <p>Mini courses:</p>
+      <ul>
+        <li>✅ Speak like a leader</li>
+        <li>✅ Dress like the version of you that has already made it</li>
+        <li>✅ Write that college essay (and own it)</li>
+        <li>✅ Ace interviews & public speaking</li>
+      </ul>
+    </section>
+
+    <section class="mirror">
+      <h2>🪞 Daily HER Challenge</h2>
+      <p>Upload or write one thing about yourself daily:</p>
+      <input type="text" placeholder="e.g. I felt proud when I...">
+    </section>
+
+    <section class="rituals">
+      <h2>💖 Rich Girl Rituals</h2>
+      <ul>
+        <li>🎶 Spotify Playlist</li>
+        <li>🛏 Morning Routine ideas</li>
+        <li>📚 Favorite books/podcasts</li>
+        <li>👗 Wardrobe Inspiration</li>
+      </ul>
+    </section>
+
+    <section class="score-tracker">
+      <h2>📈 Slay Score Tracker</h2>
+      <p>Did you slay today? +1 each:</p>
+      <ul>
+        <li>☑ Dressed like a queen</li>
+        <li>☑ Took a bold step</li>
+        <li>☑ Spoke your mind</li>
+      </ul>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function generatePersona() {
+      const card = document.getElementById("personaCard");
+      card.innerHTML = `
+        <strong>Your Power Persona:</strong><br>
+        💫 Name: The Icon<br>
+        ✨ Affirmations: "I am bold. I am beauty. I am built for greatness."<br>
+        🎀 Style Vibe: Power Pink + Luxe Beige<br>
+        💼 Strength: You command every room you enter.<br>
+        🌅 Morning Routine: Wake. Journal. Slay.
+      `;
+      card.style.display = "block";
+    }
+  </script>
+</body>
+</html>
