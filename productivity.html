@@ -141,7 +141,7 @@
     </section>
 
     <section class="rituals">
-      <h2>💖 Rich Girl Rituals</h2>
+      <h2>💖 That Girl Rituals</h2>
       <ul>
         <li>🎶 Spotify Playlist</li>
         <li>🛏 Morning Routine ideas</li>
@@ -150,19 +150,17 @@
       </ul>
     </section>
 
-    <section class="score-tracker">
-      <h2>📈 Slay Score Tracker</h2>
-      <p>Did you slay today? +1 each:</p>
-      <ul>
-        <li>☑ Dressed like a queen</li>
-        <li>☑ Took a bold step</li>
-        <li>☑ Spoke your mind</li>
-      </ul>
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
-      </div>
-    </section>
+     <div class="section">
+    <h2>📈 Slay Score Tracker</h2>
+    <div class="slay-tracker">
+      <label for="slayRange">How much are you slaying today?</label>
+      <input type="range" id="slayRange" min="0" max="100" value="50" oninput="updateSlayScore(this.value)" />
+    </div>
+    <div class="value-display">
+      Slay Level: <span id="slayValue">50</span>/100 💅
+    </div>
   </div>
+    </section>
 
   <script>
     function generatePersona() {
