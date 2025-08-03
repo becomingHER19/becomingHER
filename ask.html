@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>HER ✨ AI Therapist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HER ✨ AI Therapist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      background: linear-gradient(to bottom right, #edf6ff, #ffffff);
+      color: #333;
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -18,111 +19,79 @@
     header {
       text-align: center;
       padding: 20px;
-      background: #c2e9fb;
-      color: #333;
-      font-size: 1.3rem;
+      background: #b2d7f3;
+      font-size: 1.5rem;
       font-weight: bold;
+      color: #2a2a2a;
     }
 
     .chat-container {
       flex: 1;
-      padding: 20px;
+      padding: 16px;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .message {
       max-width: 80%;
+      margin-bottom: 10px;
       padding: 12px 16px;
-      margin-bottom: 12px;
-      border-radius: 16px;
+      border-radius: 18px;
       font-size: 1rem;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      line-height: 1.5;
     }
 
     .user {
-      background: #dbeafe;
       align-self: flex-end;
+      background: #dbeafe;
       text-align: right;
-      margin-left: auto;
     }
 
     .bot {
-      background: #f0fdf4;
       align-self: flex-start;
-      margin-right: auto;
+      background: #e0f7ec;
     }
 
     .input-area {
       display: flex;
       padding: 10px;
-      border-top: 1px solid #ddd;
       background: white;
+      border-top: 1px solid #ccc;
     }
 
     .input-area input {
       flex: 1;
-      padding: 10px 14px;
+      padding: 10px;
       font-size: 1rem;
       border: 1px solid #ccc;
-      border-radius: 10px;
+      border-radius: 12px;
       outline: none;
     }
 
     .input-area button {
-      padding: 10px 16px;
       margin-left: 10px;
-      font-weight: bold;
-      background: #a5d8ff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .top-button {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      background: #ffdfdf;
-      padding: 10px 14px;
+      padding: 10px 18px;
+      font-size: 1rem;
+      background-color: #96c7ff;
       border: none;
       border-radius: 12px;
-      font-size: 0.9rem;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      color: white;
     }
   </style>
 </head>
 <body>
   <header>HER ✨ AI Therapist</header>
   <div class="chat-container" id="chatContainer"></div>
-  <button class="top-button" onclick="showHelp()">I need help now 💡</button>
   <div class="input-area">
-    <input type="text" id="userInput" placeholder="Talk to me... I'm listening 💬" />
+    <input type="text" id="userInput" placeholder="Tell me what you're feeling..." />
     <button onclick="sendMessage()">Send</button>
   </div>
 
   <script>
     const chat = document.getElementById("chatContainer");
-    let history = [];
-
-    window.onload = function () {
-      const affirmations = [
-        "You are worthy of love and understanding 💫",
-        "This moment is temporary. Breathe through it.",
-        "Healing is not linear — and that’s okay 💗",
-        "Your thoughts matter. Your feelings are valid 🦋"
-      ];
-      alert(affirmations[Math.floor(Math.random() * affirmations.length)]);
-
-      // Load old chats if available
-      const savedChats = JSON.parse(localStorage.getItem("herChats") || "[]");
-      savedChats.forEach(({ sender, text }) => createMessage(text, sender));
-    };
 
     function createMessage(text, sender) {
       const msg = document.createElement("div");
@@ -130,10 +99,6 @@
       msg.textContent = text;
       chat.appendChild(msg);
       chat.scrollTop = chat.scrollHeight;
-
-      const savedChats = JSON.parse(localStorage.getItem("herChats") || "[]");
-      savedChats.push({ sender, text });
-      localStorage.setItem("herChats", JSON.stringify(savedChats));
     }
 
     function sendMessage() {
@@ -144,39 +109,37 @@
       createMessage(userText, "user");
       input.value = "";
 
-      history.push(userText);
-      if (history.length > 3) history.shift();
-
       setTimeout(() => {
-        const botResponse = getAdvancedResponse(userText);
+        const botResponse = generateResponse(userText);
         createMessage(botResponse, "bot");
-      }, 700);
+      }, 800);
     }
 
-    function getAdvancedResponse(text) {
-      const lower = text.toLowerCase();
+    function generateResponse(text) {
+      const msg = text.toLowerCase();
 
-      if (lower.includes("overwhelmed") || lower.includes("school")) {
-        return "It's totally okay to feel overwhelmed by school 🧠. Want me to help you create a small plan together?";
-      } else if (lower.includes("friend") && lower.includes("fight")) {
-        return "Friendships can be hard 💔. Do you want to talk about what happened?";
-      } else if (lower.includes("compare") || lower.includes("not enough")) {
-        return "You are *more* than enough — just as you are 🫶. Can I help you reflect on your strengths?";
-      } else if (lower.includes("panic") || lower.includes("breathing")) {
-        return "Let’s try a grounding technique. Inhale slowly for 4 seconds… hold… and exhale for 4. You’ve got this.";
-      } else if (lower.includes("sad") || lower.includes("down")) {
-        return "I'm really sorry you're feeling this way 💙. Do you want to talk more about what happened?";
-      } else if (lower.includes("anxious") || lower.includes("nervous")) {
-        return "Try taking a deep breath. You're safe here 🤍. What's been on your mind lately?";
-      } else if (lower.includes("alone") || lower.includes("lonely")) {
-        return "You're not alone in this. I'm here for you 💌. Would talking more help?";
-      } else {
-        return "I'm listening... Tell me more about how you're feeling 🫶";
+      if (msg.includes("sad") || msg.includes("depressed")) {
+        return "I'm really sorry you're feeling this way 💙. It's okay to not be okay. Want to talk about what triggered this today?";
       }
-    }
-
-    function showHelp() {
-      alert("If you’re in crisis or need immediate help, please contact a local mental health hotline or professional. You’re not alone 💛");
+      if (msg.includes("anxious") || msg.includes("anxiety") || msg.includes("nervous")) {
+        return "Let’s try something together. Can you name 5 things you can see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste? This helps ground your thoughts. 🧘‍♀️";
+      }
+      if (msg.includes("self doubt") || msg.includes("insecure")) {
+        return "Even diamonds are made under pressure 💎. What would you say to your younger self right now? You deserve that same kindness.";
+      }
+      if (msg.includes("burnout") || msg.includes("tired") || msg.includes("exhausted")) {
+        return "Let’s pause. Rest doesn’t mean failure — it’s fuel for your next move. What’s one small way you can care for yourself today?";
+      }
+      if (msg.includes("ugly") || msg.includes("hate my body")) {
+        return "You are so much more than your reflection 💗. Would you let me help you reframe how you see yourself today?";
+      }
+      if (msg.includes("lonely") || msg.includes("alone")) {
+        return "You’re not alone here. I’m here for you 🤍. Want to journal something together?";
+      }
+      if (msg.includes("happy") || msg.includes("good")) {
+        return "I love that for you! 🌸 What made today a little better? Let’s celebrate that win.";
+      }
+      return "I'm here for you. Talk to me more about what you're feeling right now 💌";
     }
   </script>
 </body>
