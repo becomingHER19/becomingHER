@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7-Day Productivity Challenge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #eaffea, #f9fff9);
+      color: #333;
+    }
+
+    header {
+      padding: 30px;
+      text-align: center;
+      background-color: #d4f8d4;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #2e7d32;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cfe9cf;
+      border-radius: 10px;
+      margin-top: 8px;
+      font-family: 'Poppins';
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #66bb6a;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #4caf50;
+    }
+
+    .plan-box {
+      margin-top: 40px;
+      background-color: #f1fff1;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>✨ 7-Day Productivity Challenge ✨</h1>
+    <p>Let's create the perfect plan to help you thrive.</p>
+  </header>
+
+  <div class="container">
+    <form id="challengeForm">
+      <label for="goal">What do you want to achieve in 7 days?</label>
+      <input type="text" id="goal" required>
+
+      <label for="schedule">Describe your daily schedule (wake/sleep, study/work hours, breaks, etc.):</label>
+      <textarea id="schedule" rows="4" required></textarea>
+
+      <label for="style">Your ideal productivity style:</label>
+      <select id="style">
+        <option>Structured + Timed (Pomodoro)</option>
+        <option>Flexible Flow-Based</option>
+        <option>Early Bird Hustle</option>
+        <option>Night Owl Focus</option>
+      </select>
+
+      <button type="submit">Generate My 7-Day Plan</button>
+    </form>
+
+    <div class="plan-box" id="planBox">
+      <h2>Your 7-Day Productivity Plan 🌿</h2>
+      <div id="generatedPlan"></div>
+      <button onclick="regeneratePlan()">Regenerate Plan 🔁</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("challengeForm");
+    const planBox = document.getElementById("planBox");
+    const planOutput = document.getElementById("generatedPlan");
+
+    const plans = [
+      "Day 1: Focus on clarity. Define your exact goals and list priorities.\nDay 2: Deep work session (2 hrs) on your top goal. Use Pomodoro.\nDay 3: Focus + reflection journal. 30 min walk.\nDay 4: Create something - build, write, or solve.\nDay 5: Rest + Reset. Light review of your progress.\nDay 6: Push yourself today! Finish a major task.\nDay 7: Recap your success, express gratitude, and plan your next week. 💪",
+      "Day 1: Morning affirmations + goal writing.\nDay 2: 1.5 hr power session + evening wind-down meditation.\nDay 3: Build a habit tracker and use it.\nDay 4: Learn something new.\nDay 5: Tidy your space and clear your mind.\nDay 6: Work on your stretch goal.\nDay 7: Self-reflect, journal and celebrate wins. 🎉",
+      "Day 1: 7AM wakeup, healthy breakfast, set intentions.\nDay 2: Time block your day.\nDay 3: Avoid distractions + single-task.\nDay 4: Do something outside your comfort zone.\nDay 5: Learn from a mentor or TED talk.\nDay 6: Execute like never before.\nDay 7: Full digital detox + vision board update." 
+    ];
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const randomPlan = plans[Math.floor(Math.random() * plans.length)];
+      planOutput.textContent = randomPlan;
+      planBox.style.display = "block";
+    });
+
+    function regeneratePlan() {
+      const randomPlan = plans[Math.floor(Math.random() * plans.length)];
+      planOutput.textContent = randomPlan;
+    }
+  </script>
+</body>
+</html>
