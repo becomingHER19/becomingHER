@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5-Day Sprint Focus Challenge</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #fffde7, #fffff0);
+      color: #444;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #fff59d;
+      color: #333;
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    label, p {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #fdd835;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .plan-box {
+      margin-top: 20px;
+      background: #fff9c4;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    }
+
+    .cat {
+      width: 100px;
+      height: 100px;
+      background: url('https://cdn-icons-png.flaticon.com/512/616/616408.png') no-repeat center/contain;
+      margin: 0 auto;
+      animation: grow 0.5s ease-in-out;
+    }
+
+    @keyframes grow {
+      from { transform: scale(0.8); }
+      to { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    5-Day Sprint Focus Challenge 🧠✨
+  </header>
+
+  <div class="container">
+    <p>What do you want to focus on for the next 5 days?</p>
+    <input type="text" id="focusInput" placeholder="e.g., Finish chemistry notes, Prepare for SAT..." />
+
+    <p>Choose a focus method:</p>
+    <select id="method">
+      <option value="pomodoro">Pomodoro (45min work / 15min break)</option>
+      <option value="deepwork">Deep Work (2 hours no break)</option>
+      <option value="flow">Flexible Flow Session</option>
+    </select>
+
+    <button onclick="generateFocusPlan()">Generate My Plan</button>
+
+    <div class="plan-box" id="focusPlan" style="display:none;"></div>
+  </div>
+
+  <script>
+    let hoursFocused = 0;
+
+    function generateFocusPlan() {
+      const focus = document.getElementById('focusInput').value;
+      const method = document.getElementById('method').value;
+      const planBox = document.getElementById('focusPlan');
+
+      let methodDesc = '';
+      if (method === 'pomodoro') {
+        methodDesc = "We'll use Pomodoro: 45 minutes focused work, 15 minutes break. Let's maintain your energy!";
+      } else if (method === 'deepwork') {
+        methodDesc = "We'll use Deep Work method: 2 hours undisturbed focus blocks. Maximum productivity!";
+      } else {
+        methodDesc = "We'll use a Flexible Flow session style: You work in bursts when you're most inspired.";
+      }
+
+      const cat = `<div class='cat' title='Focus Cat grows with each hour you focus!'></div>`;
+
+      planBox.style.display = 'block';
+      planBox.innerHTML = `
+        <h3>📝 Your Focus Plan</h3>
+        <p><strong>Focus Topic:</strong> ${focus}</p>
+        <p>${methodDesc}</p>
+        <p>Each hour of focus will help your Focus Cat grow 🐱</p>
+        ${cat}
+        <button onclick="growCat()">I focused 1 hour</button>
+      `;
+    }
+
+    function growCat() {
+      hoursFocused++;
+      const cat = document.querySelector('.cat');
+      cat.style.transform = `scale(${1 + hoursFocused * 0.05})`;
+      alert(`Yay! You've focused for ${hoursFocused} hour(s). Your cat is proud 🐾`);
+    }
+  </script>
+</body>
+</html>
